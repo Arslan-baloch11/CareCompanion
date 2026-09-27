@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | CareCompanion</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #0f766e;
+            --green-dark: #115e59;
+            --green-light: #14b8a6;
+            --mint: #ecfdf5;
+            --text: #17332f;
+            --muted: #6b7f7b;
+            --white: #ffffff;
+            --border: #dce9e6;
+            --danger: #dc2626;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(20, 184, 166, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f0fdfa 0%,
+                    #f8fffd 45%,
+                    #eefaf7 100%
+                );
+
+            color: var(--text);
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 76px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(15, 118, 110, 0.08);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                var(--green),
+                var(--green-light)
+            );
+
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 22px rgba(15, 118, 110, 0.20);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+        }
+
+        .brand-subtitle {
+            font-size: 11px;
+            color: var(--green);
+            font-weight: 700;
+            margin-top: 4px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .back-home {
+            text-decoration: none;
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 700;
+
+            padding: 10px 16px;
+            border-radius: 10px;
+
+            transition: 0.25s;
+        }
+
+        .back-home:hover {
+            background: var(--mint);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .page {
+            min-height: calc(100vh - 76px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 1120px;
+
+            min-height: 650px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+
+            box-shadow:
+                0 30px 80px rgba(15, 118, 110, 0.14),
+                0 8px 30px rgba(0, 0, 0, 0.04);
+
+            border: 1px solid rgba(15, 118, 110, 0.08);
+        }
+
+        /* =========================
+           LEFT PANEL
+        ========================= */
+
+        .left-panel {
+            position: relative;
+            overflow: hidden;
+
+            padding: 60px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0f766e 0%,
+                    #0d9488 50%,
+                    #14b8a6 100%
+                );
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .left-panel::before {
+            content: "";
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            top: -100px;
+            right: -100px;
+        }
+
+        .left-panel::after {
+            content: "";
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            bottom: -120px;
+            left: -80px;
+        }
+
+        .left-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .admin-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+
+            padding: 9px 14px;
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            margin-bottom: 28px;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #a7f3d0;
+            box-shadow: 0 0 10px rgba(167, 243, 208, 0.8);
+        }
+
+        .left-panel h1 {
+            font-size: 48px;
+            line-height: 1.08;
+
+            letter-spacing: -1.5px;
+
+            max-width: 470px;
+
+            margin-bottom: 22px;
+        }
+
+        .left-panel h1 span {
+            color: #ccfbf1;
+        }
+
+        .left-panel p {
+            max-width: 450px;
+
+            font-size: 16px;
+            line-height: 1.75;
+
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+            display: grid;
+            gap: 15px;
+
+            margin-top: 38px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .feature-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            font-size: 18px;
+        }
+
+        .feature-text strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .feature-text small {
+            color: rgba(255, 255, 255, 0.70);
+            font-size: 12px;
+        }
+
+        .security-footer {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: rgba(255, 255, 255, 0.72);
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           RIGHT PANEL
+        ========================= */
+
+        .right-panel {
+            padding: 60px 58px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-header {
+            margin-bottom: 34px;
+        }
+
+        .small-title {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+
+            margin-bottom: 10px;
+        }
+
+        .login-header h2 {
+            font-size: 34px;
+            letter-spacing: -1px;
+            margin-bottom: 9px;
+        }
+
+        .login-header p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            color: #304945;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #8aa19c;
+            font-size: 17px;
+
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+
+            height: 52px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            padding: 0 16px 0 46px;
+
+            font-size: 14px;
+            color: var(--text);
+
+            outline: none;
+
+            background: #fbfefd;
+
+            transition: 0.25s;
+        }
+
+        .form-input:focus {
+            border-color: var(--green-light);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(20, 184, 166, 0.10);
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #78918b;
+
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .password-input {
+            padding-right: 70px;
+        }
+
+        /* =========================
+           REMEMBER
+        ========================= */
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 4px 0 25px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #647873;
+
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--green);
+            cursor: pointer;
+        }
+
+        .forgot {
+            color: var(--green);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+            width: 100%;
+            height: 54px;
+
+            border: none;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--green),
+                    var(--green-light)
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 25px rgba(15, 118, 110, 0.20);
+
+            transition: 0.25s;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 30px rgba(15, 118, 110, 0.25);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================
+           SECURITY NOTE
+        ========================= */
+
+        .security-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            margin-top: 25px;
+
+            padding: 13px 14px;
+
+            background: #f0fdfa;
+
+            border: 1px solid #ccfbf1;
+
+            border-radius: 12px;
+
+            color: #49716b;
+
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .security-note strong {
+            color: var(--green-dark);
+        }
+
+        /* =========================
+           ALERT
+        ========================= */
+
+        .alert {
+            display: none;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+            line-height: 1.5;
+
+            font-weight: 600;
+        }
+
+        .alert.error {
+            display: block;
+
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+
+            color: var(--danger);
+        }
+
+        .alert.success {
+            display: block;
+
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+
+            color: #047857;
+        }
+
+        /* =========================
+           BOTTOM
+        ========================= */
+
+        .bottom-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 12px;
+            color: #81938f;
+        }
+
+        .bottom-text a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+
+            display: inline-block;
+
+            vertical-align: middle;
+
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+            .login-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .left-panel {
+                min-height: 390px;
+                padding: 42px;
+            }
+
+            .left-panel h1 {
+                font-size: 38px;
+            }
+
+            .security-footer {
+                margin-top: 35px;
+            }
+
+            .right-panel {
+                padding: 45px 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0 20px;
+                height: 68px;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+
+            .brand-subtitle {
+                font-size: 9px;
+            }
+
+            .brand-icon {
+                width: 39px;
+                height: 39px;
+                font-size: 19px;
+            }
+
+            .back-home {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            .page {
+                padding: 20px 12px;
+            }
+
+            .login-wrapper {
+                border-radius: 22px;
+            }
+
+            .left-panel {
+                padding: 32px 25px;
+                min-height: 400px;
+            }
+
+            .left-panel h1 {
+                font-size: 32px;
+            }
+
+            .left-panel p {
+                font-size: 14px;
+            }
+
+            .right-panel {
+                padding: 35px 25px;
+            }
+
+            .login-header h2 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="brand">
+
+            <div class="brand-icon">
+                +
+            </div>
+
+            <div class="brand-text">
+                <div class="brand-name">
+                    CareCompanion
+                </div>
+
+                <div class="brand-subtitle">
+                    Admin Portal
+                </div>
+            </div>
+
+        </a>
+
+        <a href="index.html" class="back-home">
+            ← Back to Website
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="page">
+
+        <div class="login-wrapper">
+
+
+            <!-- =========================
+                 LEFT SIDE
+            ========================== -->
+
+            <section class="left-panel">
+
+                <div class="left-content">
+
+                    <div class="admin-badge">
+                        <span class="admin-dot"></span>
+                        Secure Admin Access
+                    </div>
+
+                    <h1>
+                        Manage Care.
+                        <span>Make an Impact.</span>
+                    </h1>
+
+                    <p>
+                        Welcome to the CareCompanion administration
+                        portal. Manage caregivers, customers, bookings,
+                        reviews and platform activity from one secure
+                        workspace.
+                    </p>
+
+
+                    <div class="features">
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                ✓
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Secure Management
+                                </strong>
+
+                                <small>
+                                    Protected administrator access
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                ♡
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Caregiver Oversight
+                                </strong>
+
+                                <small>
+                                    Verify and manage caregivers
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                ◈
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Platform Analytics
+                                </strong>
+
+                                <small>
+                                    Monitor bookings and performance
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-footer">
+
+                    <span>🔒</span>
+
+                    <span>
+                        Your administrator session is protected
+                        by secure authentication.
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 RIGHT SIDE
+            ========================== -->
+
+            <section class="right-panel">
+
+                <div class="login-header">
+
+                    <div class="small-title">
+                        Administrator Portal
+                    </div>
+
+                    <h2>
+                        Welcome Back
+                    </h2>
+
+                    <p>
+                        Sign in to access your CareCompanion
+                        administration dashboard.
+                    </p>
+
+                </div>
+
+
+                <!-- ALERT -->
+
+                <div id="alertBox" class="alert"></div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="adminLoginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Admin Email
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-input"
+                                placeholder="admin@carecompanion.com"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-input password-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="form-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+                        <a
+                            href="forgot-password.html"
+                            class="forgot"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="loginBtn"
+                    >
+                        Sign In to Admin Panel
+                    </button>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="security-note">
+
+                        <span>🛡️</span>
+
+                        <div>
+                            <strong>Administrator access only.</strong>
+                            This area is restricted to authorized
+                            CareCompanion administrators.
+                        </div>
+
+                    </div>
+
+                </form>
+
+
+                <div class="bottom-text">
+
+                    Need to access the main website?
+
+                    <a href="index.html">
+                        Return to CareCompanion
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const API_BASE_URL =
+            "http://localhost:5000/api";
+
+
+        const form =
+            document.getElementById("adminLoginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const alertBox =
+            document.getElementById("alertBox");
+
+
+        /* =========================
+           ALERT
+        ========================== */
+
+        function showAlert(message, type = "error") {
+
+            alertBox.textContent = message;
+
+            alertBox.className =
+                "alert " + type;
+
+        }
+
+
+        function hideAlert() {
+
+            alertBox.style.display = "none";
+
+            alertBox.className = "alert";
+
+        }
+
+
+        /* =========================
+           PASSWORD SHOW / HIDE
+        ========================== */
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "Hide";
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "Show";
+                }
+
+            }
+        );
+
+
+        /* =========================
+           ADMIN LOGIN
+        ========================== */
+
+        form.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideAlert();
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email || !password) {
+
+                    showAlert(
+                        "Please enter your email and password."
+                    );
+
+                    return;
+                }
+
+
+                /* Loading */
+
+                loginBtn.disabled = true;
+
+                loginBtn.innerHTML =
+                    '<span class="spinner"></span> Signing In...';
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_BASE_URL}/auth/login`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            "Login failed. Please check your credentials."
+                        );
+
+                    }
+
+
+                    /*
+                     * Check admin role
+                     */
+
+                    if (
+                        !data.user ||
+                        data.user.role !== "admin"
+                    ) {
+
+                        throw new Error(
+                            "This login is only for administrators."
+                        );
+
+                    }
+
+
+                    /*
+                     * Check active status
+                     */
+
+                    if (
+                        data.user.isActive === false
+                    ) {
+
+                        throw new Error(
+                            "Your admin account has been deactivated."
+                        );
+
+                    }
+
+
+                    /*
+                     * Save admin session
+                     */
+
+                    localStorage.setItem(
+                        "carecompanion_admin_token",
+                        data.token
+                    );
+
+                    localStorage.setItem(
+                        "carecompanion_admin_user",
+                        JSON.stringify(data.user)
+                    );
+
+
+                    /*
+                     * Optional general session
+                     */
+
+                    localStorage.setItem(
+                        "carecompanion_token",
+                        data.token
+                    );
+
+                    localStorage.setItem(
+                        "carecompanion_user",
+                        JSON.stringify(data.user)
+                    );
+
+
+                    showAlert(
+                        "Login successful. Opening admin dashboard...",
+                        "success"
+                    );
+
+
+                    /*
+                     * Redirect
+                     */
+
+                    setTimeout(function () {
+
+                        window.location.replace(
+                            "admin-dashboard.html"
+                        );
+
+                    }, 500);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Admin login error:",
+                        error
+                    );
+
+                    showAlert(
+                        error.message ||
+                        "Unable to connect to the server."
+                    );
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.textContent =
+                        "Sign In to Admin Panel";
+                }
+
+            }
+        );
+
+
+        /* =========================
+           ENTER KEY SUPPORT
+        ========================== */
+
+        passwordInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    form.requestSubmit();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

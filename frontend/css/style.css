@@ -1,0 +1,3506 @@
+/* =====================================================
+   CARECOMPANION
+   COMPLETE STYLE SHEET
+===================================================== */
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f7faf9;
+
+    color: #1d2939;
+
+    line-height: 1.5;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.navbar {
+
+    width: 100%;
+
+    height: 75px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 7%;
+
+    background: white;
+
+    box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.05);
+
+    position: relative;
+
+    z-index: 100;
+
+}
+
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #1d2939;
+
+}
+
+
+.logo span {
+
+    color: #16a085;
+
+}
+
+
+nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+
+nav a {
+
+    text-decoration: none;
+
+    color: #344054;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition: 0.2s;
+
+}
+
+
+nav a:hover {
+
+    color: #16a085;
+
+}
+
+
+.signup {
+
+    background: #16a085;
+
+    color: white !important;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+}
+
+
+.signup:hover {
+
+    background: #12806b;
+
+}
+
+
+/* =====================================================
+   HOME HERO
+===================================================== */
+
+.hero {
+
+    min-height: 550px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 80px 7%;
+
+    background:
+        linear-gradient(
+            120deg,
+            #e8f8f5,
+            #ffffff
+        );
+
+}
+
+
+.hero-content {
+
+    max-width: 680px;
+
+}
+
+
+.tagline {
+
+    color: #16a085;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero h1 {
+
+    font-size: 60px;
+
+    line-height: 1.1;
+
+    margin-bottom: 25px;
+
+    color: #172b2a;
+
+}
+
+
+.hero p {
+
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    color: #667085;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =====================================================
+   HOME BUTTONS
+===================================================== */
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.primary-btn {
+
+    display: inline-block;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 15px 25px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+
+}
+
+
+.primary-btn:hover {
+
+    background: #12806b;
+
+    transform: translateY(-2px);
+
+}
+
+
+.secondary-btn {
+
+    display: inline-block;
+
+    border: 2px solid #16a085;
+
+    color: #16a085;
+
+    background: white;
+
+    padding: 13px 25px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+
+}
+
+
+.secondary-btn:hover {
+
+    background: #e8f8f5;
+
+}
+
+
+/* =====================================================
+   SERVICES SECTION
+===================================================== */
+
+.services {
+
+    padding: 75px 7%;
+
+    text-align: center;
+
+    background: #f7faf9;
+
+}
+
+
+.services h2 {
+
+    font-size: 35px;
+
+    margin-bottom: 40px;
+
+    color: #172b2a;
+
+}
+
+
+.service-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.service-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+
+    transition: 0.2s;
+
+}
+
+
+.service-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.10);
+
+}
+
+
+.service-card h3 {
+
+    margin-bottom: 15px;
+
+    font-size: 19px;
+
+}
+
+
+.service-card p {
+
+    color: #667085;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   CAREGIVER PAGE HEADER
+===================================================== */
+
+.caregiver-header {
+
+    padding: 75px 7% 65px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f8f5,
+            #ffffff
+        );
+
+}
+
+
+.caregiver-header-content {
+
+    max-width: 750px;
+
+}
+
+
+.caregiver-header h1 {
+
+    font-size: 50px;
+
+    line-height: 1.15;
+
+    margin: 12px 0 18px;
+
+    color: #172b2a;
+
+}
+
+
+.caregiver-header p {
+
+    color: #667085;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   SMALL TITLE
+===================================================== */
+
+.small-title {
+
+    color: #16a085 !important;
+
+    font-size: 13px !important;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 7px;
+
+}
+
+
+/* =====================================================
+   SEARCH SECTION
+===================================================== */
+
+.search-section {
+
+    padding: 25px 7%;
+
+    background: white;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.search-box {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr auto;
+
+    gap: 12px;
+
+}
+
+
+/* =====================================================
+   SEARCH INPUT
+===================================================== */
+
+.search-input-wrapper {
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    padding: 0 14px;
+
+    background: white;
+
+    transition: 0.2s;
+
+}
+
+
+.search-input-wrapper:focus-within {
+
+    border-color: #16a085;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22, 160, 133, 0.10);
+
+}
+
+
+.search-input-wrapper span {
+
+    margin-right: 8px;
+
+}
+
+
+.search-input-wrapper input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    padding: 15px 5px;
+
+    font-size: 15px;
+
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.search-box select {
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    font-size: 15px;
+
+    background: white;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+
+.search-box select:focus {
+
+    border-color: #16a085;
+
+}
+
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+
+.search-box button {
+
+    border: none;
+
+    border-radius: 9px;
+
+    padding: 15px 28px;
+
+    background: #16a085;
+
+    color: white;
+
+    font-weight: 700;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.search-box button:hover {
+
+    background: #12806b;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   CAREGIVER SECTION
+===================================================== */
+
+.caregiver-section {
+
+    padding: 65px 7%;
+
+    background: #f7faf9;
+
+}
+
+
+.section-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 30px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 31px;
+
+    margin: 0;
+
+    color: #172b2a;
+
+}
+
+
+#resultCount {
+
+    color: #667085;
+
+    font-size: 15px;
+
+}
+
+
+/* =====================================================
+   CAREGIVER GRID
+===================================================== */
+
+.caregiver-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    max-width: 1300px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   CAREGIVER CARD
+===================================================== */
+
+.caregiver-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.caregiver-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.10);
+
+}
+
+
+/* =====================================================
+   CAREGIVER IMAGE
+===================================================== */
+
+.caregiver-image {
+
+    height: 240px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.caregiver-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   VERIFIED BADGE
+===================================================== */
+
+.verified-badge {
+
+    position: absolute;
+
+    top: 14px;
+
+    left: 14px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #16a085;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   AVAILABILITY BADGE
+===================================================== */
+
+.availability-badge {
+
+    position: absolute;
+
+    bottom: 14px;
+
+    left: 14px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #16a085;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.availability-badge.unavailable {
+
+    color: #d92d20;
+
+}
+
+
+/* =====================================================
+   CAREGIVER INFORMATION
+===================================================== */
+
+.caregiver-info {
+
+    padding: 22px;
+
+}
+
+
+.caregiver-info h3 {
+
+    font-size: 21px;
+
+    margin: 0 0 6px;
+
+    color: #172b2a;
+
+}
+
+
+.location {
+
+    color: #667085;
+
+    margin: 5px 0;
+
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.rating-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin: 12px 0;
+
+}
+
+
+.stars {
+
+    color: #f79009;
+
+    font-size: 18px;
+
+}
+
+
+.review-count {
+
+    color: #667085;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   EXPERIENCE
+===================================================== */
+
+.experience {
+
+    color: #667085;
+
+    font-size: 14px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.experience strong {
+
+    color: #1d2939;
+
+}
+
+
+/* =====================================================
+   SERVICE TAGS
+===================================================== */
+
+.services-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.services-tags span {
+
+    background: #e8f8f5;
+
+    color: #147d68;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   CARD BOTTOM
+===================================================== */
+
+.card-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-top:
+        1px solid #eaecf0;
+
+    padding-top: 18px;
+
+}
+
+
+.price strong {
+
+    color: #16a085;
+
+    font-size: 18px;
+
+}
+
+
+.price span {
+
+    color: #667085;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   PROFILE BUTTON
+===================================================== */
+
+.profile-btn {
+
+    border: none;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 11px 15px;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.profile-btn:hover {
+
+    background: #12806b;
+
+}
+
+
+/* =====================================================
+   NO RESULTS
+===================================================== */
+
+.no-results {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 70px 30px;
+
+    background: white;
+
+    border-radius: 16px;
+
+}
+
+
+.no-results-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.no-results h3 {
+
+    font-size: 24px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.no-results p {
+
+    color: #667085;
+
+    margin-bottom: 20px;
+
+}
+
+
+.no-results button {
+
+    border: none;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   CAREGIVER PROFILE PAGE
+===================================================== */
+
+.profile-page {
+
+    padding: 60px 7%;
+
+    background: #f7faf9;
+
+    min-height: 700px;
+
+}
+
+
+.profile-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   PROFILE MAIN CARD
+===================================================== */
+
+.profile-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        380px 1fr;
+
+    gap: 40px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* =====================================================
+   PROFILE PHOTO
+===================================================== */
+
+.profile-photo-section {
+
+    position: relative;
+
+}
+
+
+.profile-photo {
+
+    width: 100%;
+
+    height: 420px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    display: block;
+
+}
+
+
+.profile-verified {
+
+    position: absolute;
+
+    left: 15px;
+
+    bottom: 15px;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   PROFILE INFORMATION
+===================================================== */
+
+.profile-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+.profile-information h1 {
+
+    font-size: 42px;
+
+    margin: 5px 0 10px;
+
+    color: #172b2a;
+
+}
+
+
+.profile-location {
+
+    color: #667085;
+
+    font-size: 17px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.profile-rating {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.profile-rating .stars {
+
+    color: #f79009;
+
+    font-size: 21px;
+
+}
+
+
+.profile-rating span:last-child {
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   PROFILE DETAILS
+===================================================== */
+
+.profile-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.profile-details div {
+
+    background: #f7faf9;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+}
+
+
+.profile-details strong {
+
+    display: block;
+
+    color: #16a085;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.profile-details span {
+
+    color: #667085;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   PROFILE ACTIONS
+===================================================== */
+
+.profile-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+
+.book-now-btn,
+.message-btn {
+
+    padding: 15px 25px;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.book-now-btn {
+
+    border: none;
+
+    background: #16a085;
+
+    color: white;
+
+    flex: 1;
+
+}
+
+
+.book-now-btn:hover {
+
+    background: #12806b;
+
+}
+
+
+.message-btn {
+
+    background: white;
+
+    border: 2px solid #16a085;
+
+    color: #16a085;
+
+    flex: 1;
+
+}
+
+
+.message-btn:hover {
+
+    background: #e8f8f5;
+
+}
+
+
+/* =====================================================
+   PROFILE CONTENT
+===================================================== */
+
+.profile-content-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+
+    margin-top: 25px;
+
+}
+
+
+.about-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.05);
+
+}
+
+
+.about-card h2 {
+
+    font-size: 23px;
+
+    margin-bottom: 15px;
+
+    color: #172b2a;
+
+}
+
+
+.about-card p {
+
+    color: #667085;
+
+    line-height: 1.7;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =====================================================
+   PROFILE SERVICES
+===================================================== */
+
+.profile-services {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.profile-service {
+
+    background: #e8f8f5;
+
+    color: #147d68;
+
+    padding: 13px 15px;
+
+    border-radius: 9px;
+
+    font-weight: 600;
+
+}
+
+
+.profile-service span {
+
+    margin-right: 8px;
+
+}
+
+
+/* =====================================================
+   SAFETY CARD
+===================================================== */
+
+.safety-card {
+
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: #fff8e7;
+
+    border-radius: 15px;
+
+}
+
+
+.safety-icon {
+
+    font-size: 30px;
+
+}
+
+
+.safety-card h3 {
+
+    margin-bottom: 7px;
+
+}
+
+
+.safety-card p {
+
+    color: #667085;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-button-container {
+
+    margin-top: 30px;
+
+}
+
+
+.back-button {
+
+    text-decoration: none;
+
+    color: #16a085;
+
+    font-weight: 700;
+
+}
+
+
+.back-button:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    padding: 40px 7%;
+
+    text-align: center;
+
+    background: #172b2a;
+
+    color: white;
+
+}
+
+
+footer .logo {
+
+    color: white;
+
+    margin-bottom: 10px;
+
+}
+
+
+footer p {
+
+    color: #d0d5dd;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .service-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .caregiver-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .search-box {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .profile-card {
+
+        grid-template-columns:
+            320px 1fr;
+
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .navbar {
+
+        padding: 0 5%;
+
+    }
+
+
+    nav {
+
+        gap: 10px;
+
+    }
+
+
+    nav a:not(.signup) {
+
+        display: none;
+
+    }
+
+
+    .hero {
+
+        padding: 60px 6%;
+
+        min-height: 500px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 40px;
+
+    }
+
+
+    .hero p {
+
+        font-size: 17px;
+
+    }
+
+
+    .service-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .caregiver-header {
+
+        padding: 55px 6%;
+
+    }
+
+
+    .caregiver-header h1 {
+
+        font-size: 36px;
+
+    }
+
+
+    .caregiver-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .search-box {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .section-title {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+
+    .profile-page {
+
+        padding: 30px 5%;
+
+    }
+
+
+    .profile-card {
+
+        grid-template-columns:
+            1fr;
+
+        padding: 18px;
+
+    }
+
+
+    .profile-photo {
+
+        height: 350px;
+
+    }
+
+
+    .profile-information h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .profile-details {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .profile-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .profile-content-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .safety-card {
+
+        flex-direction: column;
+
+    }
+
+}
+/* =====================================================
+   BOOKING PAGE
+===================================================== */
+
+.booking-page {
+    padding: 60px 7%;
+    background: #f7faf9;
+    min-height: 750px;
+}
+
+
+.booking-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+.booking-title {
+    margin-bottom: 35px;
+}
+
+
+.booking-title h1 {
+    font-size: 42px;
+    color: #172b2a;
+    margin: 5px 0 10px;
+}
+
+
+.booking-title p:last-child {
+    color: #667085;
+    font-size: 17px;
+}
+
+
+.booking-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 0.9fr;
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+
+/* FORM CARD */
+
+.booking-form-card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+.booking-form-card h2 {
+    font-size: 25px;
+
+    margin-bottom: 25px;
+
+    color: #172b2a;
+}
+
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    color: #344054;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    padding: 14px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: white;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #16a085;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22, 160, 133, 0.10);
+}
+
+
+/* TWO COLUMNS */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+
+/* PRICE */
+
+.price-summary {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: #f7faf9;
+
+    border:
+        1px solid #eaecf0;
+}
+
+
+.price-summary > div {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 9px 0;
+
+}
+
+
+.price-summary span {
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+.price-summary strong {
+
+    color: #344054;
+
+}
+
+
+.price-summary .total-price {
+
+    border-top:
+        1px solid #d0d5dd;
+
+    margin-top: 8px;
+
+    padding-top: 15px;
+}
+
+
+.total-price strong {
+
+    color: #16a085;
+
+    font-size: 22px;
+}
+
+
+/* CONFIRM BUTTON */
+
+.confirm-booking-btn {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #16a085;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.confirm-booking-btn:hover {
+
+    background: #12806b;
+
+    transform: translateY(-1px);
+}
+
+
+/* CAREGIVER SUMMARY */
+
+.booking-caregiver-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 25px rgba(0, 0, 0, 0.06);
+
+    position: sticky;
+
+    top: 20px;
+}
+
+
+.booking-summary-image {
+
+    height: 280px;
+
+    position: relative;
+}
+
+
+.booking-summary-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.booking-summary-image span {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    left: 15px;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.booking-summary-info {
+
+    padding: 25px;
+}
+
+
+.booking-summary-info h2 {
+
+    font-size: 26px;
+
+    margin: 5px 0 8px;
+
+    color: #172b2a;
+}
+
+
+.booking-location {
+
+    color: #667085;
+
+    margin-bottom: 12px;
+}
+
+
+.booking-rating {
+
+    margin-bottom: 20px;
+
+    font-weight: 700;
+}
+
+
+.booking-rating span {
+
+    color: #667085;
+
+    font-weight: normal;
+
+    font-size: 13px;
+}
+
+
+.booking-experience {
+
+    color: #667085;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+}
+
+
+.booking-rate {
+
+    border-top:
+        1px solid #eaecf0;
+
+    padding-top: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.booking-rate span {
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+.booking-rate strong {
+
+    color: #16a085;
+
+    font-size: 20px;
+}
+
+
+/* BOOKING MOBILE */
+
+@media (max-width: 850px) {
+
+    .booking-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .booking-caregiver-card {
+
+        position: static;
+
+        order: -1;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .booking-page {
+
+        padding: 35px 5%;
+
+    }
+
+
+    .booking-title h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .booking-form-card {
+
+        padding: 20px;
+
+    }
+
+
+    .form-row {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 0;
+
+    }
+
+}
+/* =====================================================
+   LOGIN & REGISTER
+===================================================== */
+
+.auth-page {
+
+    min-height: 750px;
+
+    padding: 70px 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f8f5,
+            #ffffff
+        );
+
+}
+
+
+.auth-card {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.08);
+
+}
+
+
+.auth-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.auth-header h1 {
+
+    font-size: 32px;
+
+    color: #172b2a;
+
+    margin: 7px 0 12px;
+
+}
+
+
+.auth-header p:last-child {
+
+    color: #667085;
+
+    font-size: 15px;
+
+}
+
+
+.auth-btn {
+
+    width: 100%;
+
+    border: none;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 15px;
+
+    border-radius: 9px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+
+}
+
+
+.auth-btn:hover {
+
+    background: #12806b;
+
+}
+
+
+.auth-footer {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+.auth-footer a {
+
+    color: #16a085;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+.auth-footer a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+@media (max-width: 550px) {
+
+    .auth-page {
+
+        padding: 40px 15px;
+
+    }
+
+    .auth-card {
+
+        padding: 25px 20px;
+
+    }
+
+    .auth-header h1 {
+
+        font-size: 27px;
+
+    }
+
+}
+/* =====================================================
+   USER DASHBOARD
+===================================================== */
+
+.dashboard-page {
+
+    min-height: 800px;
+
+    padding: 60px 7%;
+
+    background: #f7faf9;
+
+}
+
+
+.dashboard-container {
+
+    max-width: 1250px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.dashboard-welcome {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.dashboard-welcome h1 {
+
+    font-size: 35px;
+
+    color: #172b2a;
+
+    margin: 5px 0 8px;
+
+}
+
+
+.dashboard-welcome p:last-child {
+
+    color: #667085;
+
+}
+
+
+.dashboard-book-btn {
+
+    text-decoration: none;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+
+}
+
+
+.dashboard-book-btn:hover {
+
+    background: #12806b;
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.dashboard-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.stat-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e8f8f5;
+
+    border-radius: 12px;
+
+    font-size: 22px;
+
+}
+
+
+.stat-card span {
+
+    display: block;
+
+    color: #667085;
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    color: #172b2a;
+
+    font-size: 25px;
+
+}
+
+
+/* =====================================================
+   DASHBOARD SECTION
+===================================================== */
+
+.dashboard-section {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.dashboard-section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.dashboard-section-header h2 {
+
+    font-size: 24px;
+
+    color: #172b2a;
+
+}
+
+
+/* =====================================================
+   BOOKING LIST
+===================================================== */
+
+.booking-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.dashboard-booking-card {
+
+    display: grid;
+
+    grid-template-columns:
+        55px 1fr auto;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 18px;
+
+    border: 1px solid #eaecf0;
+
+    border-radius: 12px;
+
+    transition: 0.2s;
+
+}
+
+
+.dashboard-booking-card:hover {
+
+    border-color: #16a085;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.05);
+
+}
+
+
+.booking-card-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #e8f8f5;
+
+    color: #16a085;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+
+}
+
+
+.dashboard-booking-info h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 4px;
+
+}
+
+
+.dashboard-booking-info p {
+
+    color: #667085;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.booking-meta {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.booking-meta span {
+
+    color: #667085;
+
+    font-size: 12px;
+
+}
+
+
+.dashboard-booking-price {
+
+    text-align: right;
+
+}
+
+
+.dashboard-booking-price strong {
+
+    display: block;
+
+    color: #16a085;
+
+    font-size: 18px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.booking-status {
+
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    background: #fff8e7;
+
+    color: #b54708;
+
+    border-radius: 15px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   EMPTY BOOKINGS
+===================================================== */
+
+.empty-bookings {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+}
+
+
+.empty-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.empty-bookings h3 {
+
+    font-size: 20px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.empty-bookings p {
+
+    color: #667085;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+.account-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 30px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.account-card h2 {
+
+    font-size: 24px;
+
+    margin: 5px 0 8px;
+
+}
+
+
+.account-card > div:first-child p:last-child {
+
+    color: #667085;
+
+}
+
+
+.account-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.account-information p {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.account-information strong {
+
+    color: #344054;
+
+}
+
+
+.account-information span {
+
+    color: #667085;
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+.logout-btn {
+
+    border: none;
+
+    background: transparent;
+
+    color: #d92d20;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.logout-btn:hover {
+
+    color: #b42318;
+
+}
+
+
+/* =====================================================
+   DASHBOARD MOBILE
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-page {
+
+        padding: 35px 5%;
+
+    }
+
+
+    .dashboard-welcome {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .dashboard-welcome h1 {
+
+        font-size: 29px;
+
+    }
+
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .dashboard-section {
+
+        padding: 20px;
+
+    }
+
+
+    .dashboard-booking-card {
+
+        grid-template-columns:
+            45px 1fr;
+
+    }
+
+
+    .dashboard-booking-price {
+
+        grid-column: 2;
+
+        text-align: left;
+
+    }
+
+
+    .account-card {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .account-information p {
+
+        flex-direction: column;
+
+        gap: 3px;
+
+    }
+
+}
+/* =====================================================
+   CAREGIVER DASHBOARD
+===================================================== */
+
+.caregiver-dashboard-page {
+
+    min-height: 800px;
+
+    padding: 60px 7%;
+
+    background: #f7faf9;
+
+}
+
+
+.caregiver-dashboard-container {
+
+    max-width: 1250px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.caregiver-dashboard-welcome {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 25px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.caregiver-dashboard-welcome h1 {
+
+    font-size: 35px;
+
+    color: #172b2a;
+
+    margin: 5px 0 8px;
+
+}
+
+
+.caregiver-dashboard-welcome p:last-child {
+
+    color: #667085;
+
+}
+
+
+/* =====================================================
+   AVAILABILITY
+===================================================== */
+
+.availability-control {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.availability-control > span {
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+.availability-toggle {
+
+    border: none;
+
+    background: #16a085;
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 20px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.availability-toggle:hover {
+
+    background: #12806b;
+
+}
+
+
+.availability-toggle.unavailable {
+
+    background: #d92d20;
+
+}
+
+
+/* =====================================================
+   REQUESTS
+===================================================== */
+
+.caregiver-request-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+.caregiver-request-card {
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 25px;
+
+    align-items: center;
+
+    padding: 22px;
+
+    border: 1px solid #eaecf0;
+
+    border-radius: 14px;
+
+    background: white;
+
+}
+
+
+.caregiver-request-card:hover {
+
+    border-color: #16a085;
+
+}
+
+
+.request-main {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+}
+
+
+.request-icon {
+
+    width: 50px;
+
+    height: 50px;
+
+    min-width: 50px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #e8f8f5;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+
+}
+
+
+.request-main h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 3px;
+
+}
+
+
+.request-main p {
+
+    color: #667085;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.request-details {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+.request-details span {
+
+    color: #667085;
+
+    font-size: 12px;
+
+}
+
+
+.request-right {
+
+    text-align: right;
+
+    min-width: 180px;
+
+}
+
+
+.request-right > strong {
+
+    display: block;
+
+    color: #16a085;
+
+    font-size: 19px;
+
+    margin-bottom: 7px;
+
+}
+
+
+/* =====================================================
+   REQUEST STATUS
+===================================================== */
+
+.request-status {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.status-pending {
+
+    background: #fff8e7;
+
+    color: #b54708;
+
+}
+
+
+.status-accepted {
+
+    background: #e8f8f5;
+
+    color: #147d68;
+
+}
+
+
+.status-rejected {
+
+    background: #fee4e2;
+
+    color: #b42318;
+
+}
+
+
+/* =====================================================
+   REQUEST ACTIONS
+===================================================== */
+
+.request-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 7px;
+
+    margin-top: 12px;
+
+}
+
+
+.accept-btn,
+.reject-btn {
+
+    border: none;
+
+    padding: 9px 13px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.accept-btn {
+
+    background: #16a085;
+
+    color: white;
+
+}
+
+
+.accept-btn:hover {
+
+    background: #12806b;
+
+}
+
+
+.reject-btn {
+
+    background: #fee4e2;
+
+    color: #b42318;
+
+}
+
+
+.reject-btn:hover {
+
+    background: #fecdca;
+
+}
+
+
+/* =====================================================
+   CAREGIVER INFORMATION
+===================================================== */
+
+.caregiver-profile-settings {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 35px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.05);
+
+}
+
+
+.caregiver-profile-settings h2 {
+
+    font-size: 24px;
+
+    color: #172b2a;
+
+    margin: 5px 0 8px;
+
+}
+
+
+.caregiver-profile-settings > div:first-child p:last-child {
+
+    color: #667085;
+
+}
+
+
+.caregiver-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+.caregiver-info-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 11px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.caregiver-info-row strong {
+
+    color: #344054;
+
+}
+
+
+.caregiver-info-row span {
+
+    color: #667085;
+
+    text-align: right;
+
+}
+
+
+/* =====================================================
+   CAREGIVER DASHBOARD MOBILE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .caregiver-dashboard-page {
+
+        padding: 35px 5%;
+
+    }
+
+
+    .caregiver-dashboard-welcome {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .caregiver-request-card {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .request-right {
+
+        text-align: left;
+
+        min-width: auto;
+
+    }
+
+
+    .request-actions {
+
+        justify-content: flex-start;
+
+    }
+
+
+    .caregiver-profile-settings {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .caregiver-dashboard-welcome h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    .caregiver-request-card {
+
+        padding: 17px;
+
+    }
+
+
+    .request-main {
+
+        flex-direction: column;
+
+    }
+
+
+    .request-details {
+
+        flex-direction: column;
+
+        gap: 5px;
+
+    }
+
+
+    .caregiver-info-row {
+
+        flex-direction: column;
+
+        gap: 3px;
+
+    }
+
+
+    .caregiver-info-row span {
+
+        text-align: left;
+
+    }
+
+}

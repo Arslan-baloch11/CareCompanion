@@ -1,0 +1,4548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | CareCompanion</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        body {
+            background: #f4f7fb;
+        }
+
+        .admin-page {
+            padding: 35px 20px 60px;
+        }
+
+        .admin-container {
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .admin-welcome {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-welcome h1 {
+            margin: 0 0 7px;
+            color: #222;
+        }
+
+        .admin-welcome p {
+            margin: 0;
+            color: #777;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .refresh-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .refresh-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .logout-btn-admin {
+            background: #dc3545;
+            color: white;
+        }
+
+        .logout-btn-admin:hover {
+            background: #b42318;
+        }
+
+        .session-check-btn {
+            background: #0f766e;
+            color: #ffffff;
+        }
+
+        .session-check-btn:hover {
+            background: #0b5f59;
+        }
+
+        .admin-message {
+            display: none;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .admin-message.success {
+            display: block;
+            background: #e8f8ef;
+            color: #147a43;
+            border: 1px solid #b8e6ca;
+        }
+
+        .admin-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+            border: 1px solid #f2b8b5;
+        }
+
+        /* =========================================
+           STATISTICS
+        ========================================= */
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .admin-stat-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .admin-stat-icon {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .admin-stat-card span {
+            display: block;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .admin-stat-card strong {
+            font-size: 25px;
+            color: #222;
+        }
+
+        /* =========================================
+           SECTION
+        ========================================= */
+
+        .admin-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .admin-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .admin-section-header h2 {
+            margin: 0;
+            color: #222;
+        }
+
+        .admin-section-header p {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* =========================================
+           TABS
+        ========================================= */
+
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .admin-tab {
+            border: 1px solid #d5d9df;
+            background: #ffffff;
+            color: #555;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .admin-tab.active {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #2563eb;
+        }
+
+        .admin-tab:hover {
+            background: #f0f5ff;
+        }
+
+        .admin-tab.active:hover {
+            background: #1d4ed8;
+        }
+
+        /* =========================================
+           SEARCH
+        ========================================= */
+
+        .admin-search-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .admin-search {
+            flex: 1;
+            min-width: 230px;
+            padding: 11px 13px;
+            border: 1px solid #d5d9df;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .admin-search:focus {
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .admin-filter {
+            padding: 11px 13px;
+            border: 1px solid #d5d9df;
+            border-radius: 8px;
+            background: white;
+        }
+
+        /* =========================================
+           TABLE
+        ========================================= */
+
+        .admin-table-wrapper {
+            overflow-x: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .admin-table th {
+            background: #f8f9fb;
+            color: #555;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .admin-table td {
+            padding: 13px;
+            border-bottom: 1px solid #eeeeee;
+            vertical-align: middle;
+            font-size: 13px;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table tr:hover {
+            background: #fafcff;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .status-active,
+        .status-verified,
+        .status-accepted,
+        .status-completed {
+            background: #e8f8ef;
+            color: #147a43;
+        }
+
+        .status-inactive,
+        .status-unverified,
+        .status-rejected,
+        .status-cancelled {
+            background: #fff0f0;
+            color: #b42318;
+        }
+
+        .status-pending {
+            background: #fff4d6;
+            color: #946200;
+        }
+
+        .table-btn {
+            border: none;
+            border-radius: 6px;
+            padding: 7px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            margin: 2px;
+        }
+
+        .verify-btn {
+            background: #198754;
+            color: white;
+        }
+
+        .unverify-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .activate-btn {
+            background: #198754;
+            color: white;
+        }
+
+        .deactivate-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .booking-status-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .booking-status-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .admin-inline-select {
+            padding: 7px 9px;
+            border: 1px solid #d5d9df;
+            border-radius: 6px;
+            font-size: 12px;
+            background: #ffffff;
+            font-weight: 600;
+        }
+
+        .action-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .table-btn:hover {
+            opacity: 0.85;
+        }
+
+        .loading-cell,
+        .empty-cell {
+            text-align: center;
+            padding: 35px !important;
+            color: #777;
+        }
+
+        .admin-tab.loading {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        .rating-stars {
+            color: #d89b00;
+            letter-spacing: 1px;
+        }
+
+        .review-comment {
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           ADVANCED ANALYTICS
+        ========================================= */
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .analytics-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .analytics-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .analytics-card-header h3 {
+            margin: 0;
+            color: #222;
+        }
+
+        .analytics-card-header span {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 220px;
+            gap: 14px;
+            padding: 10px 5px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .chart-bar-group {
+            height: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            min-width: 45px;
+        }
+
+        .chart-bar-value {
+            font-size: 11px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .chart-bar {
+            width: min(42px, 75%);
+            min-height: 3px;
+            border-radius: 7px 7px 0 0;
+            background: #2563eb;
+            transition: height .3s ease;
+        }
+
+        .chart-bar-label {
+            margin-top: 8px;
+            font-size: 11px;
+            color: #777;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .analytics-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .analytics-list-row {
+            display: grid;
+            grid-template-columns: 105px 1fr 45px;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .analytics-list-label {
+            color: #555;
+            font-weight: 600;
+        }
+
+        .analytics-progress {
+            height: 9px;
+            background: #edf0f4;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .analytics-progress span {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: #2563eb;
+            transition: width .35s ease;
+        }
+
+        .analytics-list-value {
+            text-align: right;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .analytics-revenue-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .analytics-mini-card {
+            background: #f8f9fb;
+            border: 1px solid #e9edf2;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .analytics-mini-card span {
+            display: block;
+            color: #777;
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .analytics-mini-card strong {
+            display: block;
+            color: #222;
+            font-size: 17px;
+        }
+
+        .analytics-empty {
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .analytics-revenue-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-bars {
+                gap: 6px;
+            }
+
+            .chart-bar-label {
+                font-size: 9px;
+                white-space: normal;
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 950px) {
+
+            .admin-stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .admin-page {
+                padding: 20px 12px 40px;
+            }
+
+            .admin-welcome {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .admin-actions {
+                width: 100%;
+            }
+
+            .admin-actions .admin-btn {
+                flex: 1;
+            }
+
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-section {
+                padding: 16px;
+            }
+
+        }
+
+
+        /* =========================================
+           ADMIN NOTIFICATIONS
+        ========================================= */
+
+        .admin-notification-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 7px;
+            margin-left: 7px;
+            border-radius: 20px;
+            background: #dc3545;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .notification-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .notification-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .notification-item.unread {
+            background: #f4f8ff;
+            border-left: 4px solid #2563eb;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef4ff;
+            font-size: 19px;
+        }
+
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notification-content strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #222;
+        }
+
+        .notification-content p {
+            margin: 0 0 6px;
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .notification-time {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .notification-empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            border: 1px dashed #d5d9df;
+            border-radius: 10px;
+        }
+
+    
+
+    /* =========================================
+       REPORTS & EARNINGS
+    ========================================= */
+
+    .reports-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 24px;
+    }
+
+    .report-card {
+        background: #fff;
+        border: 1px solid #e8edf5;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    }
+
+    .report-card span {
+        display: block;
+        color: #64748b;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .report-card strong {
+        display: block;
+        font-size: 24px;
+        color: #0f172a;
+    }
+
+    .reports-panel {
+        background: #fff;
+        border: 1px solid #e8edf5;
+        border-radius: 16px;
+        padding: 22px;
+        margin-bottom: 24px;
+        box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    }
+
+    .reports-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
+
+    .reports-panel-header h3 {
+        margin: 0;
+    }
+
+    .report-refresh-btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 9px 14px;
+        cursor: pointer;
+        font-weight: 600;
+        background: #eef4ff;
+        color: #2563eb;
+    }
+
+    .monthly-report-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .monthly-report-row {
+        display: grid;
+        grid-template-columns: 120px 1fr 140px;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .monthly-report-bar-wrap {
+        height: 14px;
+        background: #edf2f7;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .monthly-report-bar {
+        height: 100%;
+        background: #2563eb;
+        border-radius: 20px;
+        min-width: 2px;
+    }
+
+    .report-table-wrap {
+        overflow-x: auto;
+    }
+
+    .report-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .report-table th,
+    .report-table td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #edf0f5;
+        text-align: left;
+    }
+
+    .report-table th {
+        color: #475569;
+        font-size: 13px;
+    }
+
+    .report-empty {
+        text-align: center;
+        padding: 30px;
+        color: #94a3b8;
+    }
+
+    @media (max-width: 1100px) {
+        .reports-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 650px) {
+        .reports-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .monthly-report-row {
+            grid-template-columns: 90px 1fr;
+        }
+
+        .monthly-report-value {
+            grid-column: 2;
+        }
+    }
+</style>
+
+
+<style id="modern-admin-theme">
+:root{--cc-green:#12a889;--cc-dark:#102a43;--cc-bg:#f4f8f7;--cc-border:#e3ece9;--cc-muted:#6b7f8f}
+body{background:linear-gradient(135deg,#f6faf9,#eef7f5)!important;color:var(--cc-dark)!important;font-family:Inter,Segoe UI,Arial,sans-serif!important}
+.admin-header,.navbar{background:rgba(255,255,255,.96)!important;border-bottom:1px solid var(--cc-border)!important;box-shadow:0 4px 18px rgba(16,42,67,.04)!important}
+.logo,.admin-logo{font-weight:850!important;letter-spacing:-.7px!important}.logo span,.admin-logo span{color:var(--cc-green)!important}
+.admin-container,.admin-main,.dashboard-container{max-width:1500px!important;margin:auto!important}
+.admin-hero,.admin-welcome{background:linear-gradient(135deg,#103b38,#116d61 58%,#13a889)!important;color:#fff!important;border:none!important;border-radius:24px!important;box-shadow:0 18px 45px rgba(17,109,97,.18)!important}
+.admin-hero h1,.admin-welcome h1,.admin-hero h2,.admin-welcome h2{color:#fff!important}.admin-hero p,.admin-welcome p{color:rgba(255,255,255,.78)!important}
+.admin-stat-card,.analytics-card,.admin-section,.report-card,.notification-list,.management-tab{border:1px solid var(--cc-border)!important;border-radius:20px!important;box-shadow:0 10px 30px rgba(16,42,67,.055)!important;background:#fff!important}
+.admin-stat-card{transition:.2s ease!important;position:relative!important;overflow:hidden!important}.admin-stat-card:hover{transform:translateY(-4px)!important;box-shadow:0 16px 36px rgba(16,42,67,.09)!important}.admin-stat-card:before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--cc-green)}
+.admin-stat-icon{background:#e5f7f3!important;color:var(--cc-green)!important;border-radius:14px!important}
+.admin-stat-card strong,.analytics-mini-card strong{color:var(--cc-dark)!important;font-weight:850!important}.admin-stat-card span,.analytics-card-header span{color:var(--cc-muted)!important}
+.admin-section-header h2,.analytics-card-header h3{color:var(--cc-dark)!important;letter-spacing:-.4px!important}.admin-section-header p{color:var(--cc-muted)!important}
+.admin-tabs{background:#edf6f3!important;padding:6px!important;border-radius:14px!important;gap:5px!important}.admin-tab{border:none!important;border-radius:10px!important;color:#526779!important;background:transparent!important}.admin-tab.active{background:#fff!important;color:var(--cc-green)!important;box-shadow:0 5px 15px rgba(16,42,67,.08)!important}
+.admin-search,.admin-filter,input[type=search],select{border:1px solid var(--cc-border)!important;border-radius:11px!important;background:#fbfdfd!important;outline:none!important}.admin-search:focus,.admin-filter:focus,input[type=search]:focus,select:focus{border-color:var(--cc-green)!important;box-shadow:0 0 0 3px rgba(18,168,137,.1)!important}
+table{border-collapse:separate!important;border-spacing:0!important}thead th{background:#f3f8f6!important;color:#496174!important;font-size:12px!important;text-transform:uppercase!important;letter-spacing:.5px!important}tbody tr{transition:.15s ease!important}tbody tr:hover{background:#f8fcfb!important}
+.admin-btn,.refresh-btn,.primary-btn{border-radius:10px!important;font-weight:700!important}.admin-btn:not(.danger-btn),.refresh-btn,.primary-btn{background:var(--cc-green)!important;color:#fff!important;border:1px solid var(--cc-green)!important}.admin-btn:hover,.refresh-btn:hover,.primary-btn:hover{filter:brightness(.94)!important;transform:translateY(-1px)!important}
+.status-badge,.badge{border-radius:999px!important;font-weight:700!important;padding:6px 10px!important}
+.notification-item{border-radius:14px!important;border:1px solid #edf2f1!important;margin-bottom:9px!important;transition:.2s ease!important}.notification-item:hover{transform:translateX(3px)!important;border-color:#cde8e1!important}.notification-item.unread{background:#f1fbf8!important;border-left:4px solid var(--cc-green)!important}
+.analytics-mini-card{background:#f7fbfa!important;border:1px solid var(--cc-border)!important;border-radius:14px!important}.chart-bar-fill,.bar-fill{background:linear-gradient(90deg,#12a889,#34c3a7)!important;border-radius:999px!important}
+.admin-message{border-radius:12px!important}
+button{transition:.18s ease!important}a{transition:.18s ease!important}
+@media(max-width:800px){.admin-stat-card,.analytics-card,.admin-section{border-radius:16px!important}.admin-tabs{overflow-x:auto!important;display:flex!important}.admin-tab{min-width:max-content!important}}
+</style>
+
+
+<style id="carecompanion-professional-admin">
+:root{
+ --cc-green:#12a889;
+ --cc-green-2:#0d8f78;
+ --cc-dark:#102a43;
+ --cc-text:#40566b;
+ --cc-muted:#718096;
+ --cc-bg:#f4f9f8;
+ --cc-card:#ffffff;
+ --cc-border:#e1ece9;
+ --cc-soft:#e8f7f3;
+}
+*{box-sizing:border-box}
+body{
+ background:radial-gradient(circle at 8% 0%,rgba(18,168,137,.10),transparent 28%),linear-gradient(135deg,#f7fbfa 0%,#eef7f5 100%)!important;
+ color:var(--cc-dark)!important;
+ font-family:Inter,"Segoe UI",Arial,sans-serif!important;
+}
+.navbar{
+ position:sticky!important;top:0;z-index:1000;
+ min-height:72px!important;
+ padding:0 4%!important;
+ background:rgba(255,255,255,.92)!important;
+ backdrop-filter:blur(18px)!important;
+ border-bottom:1px solid rgba(225,236,233,.9)!important;
+ box-shadow:0 6px 24px rgba(16,42,67,.055)!important;
+}
+.logo{font-size:25px!important;font-weight:850!important;letter-spacing:-.8px!important;color:var(--cc-dark)!important}
+.logo span{color:var(--cc-green)!important}
+.navbar nav{display:flex;align-items:center;gap:24px!important}
+.navbar nav a,.navbar nav span{color:var(--cc-text)!important;font-size:14px!important}
+.navbar nav a:hover{color:var(--cc-green)!important}
+.navbar nav span{background:var(--cc-soft);color:var(--cc-green)!important;padding:9px 13px;border-radius:10px}
+.admin-page{padding:38px 22px 70px!important}
+.admin-container{max-width:1450px!important}
+.admin-welcome{
+ position:relative;overflow:hidden;
+ padding:30px 32px!important;
+ border:0!important;border-radius:26px!important;
+ background:linear-gradient(120deg,#103b38,#116d61 55%,#12a889)!important;
+ box-shadow:0 22px 55px rgba(17,109,97,.18)!important;
+}
+.admin-welcome:after{
+ content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-90px;top:-120px;
+ background:rgba(255,255,255,.09);box-shadow:-90px 160px 0 20px rgba(255,255,255,.045)
+}
+.admin-welcome h1{font-size:31px!important;letter-spacing:-1px!important;color:#fff!important;position:relative;z-index:1}
+.admin-welcome p{color:rgba(255,255,255,.78)!important;position:relative;z-index:1}
+.admin-actions{position:relative;z-index:2}
+.admin-btn{border-radius:11px!important;padding:11px 16px!important;border:1px solid transparent!important;box-shadow:none!important}
+.refresh-btn{background:#fff!important;color:var(--cc-green)!important;border-color:#fff!important}
+.refresh-btn:hover{background:#eefbf8!important}
+.logout-btn-admin{background:rgba(255,255,255,.12)!important;color:#fff!important;border-color:rgba(255,255,255,.35)!important}
+.logout-btn-admin:hover{background:rgba(220,53,69,.9)!important;border-color:rgba(220,53,69,.9)!important}
+.admin-stats{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:17px!important;margin-top:24px!important}
+.admin-stat-card{
+ position:relative;overflow:hidden;padding:22px!important;border:1px solid var(--cc-border)!important;border-radius:19px!important;
+ background:rgba(255,255,255,.94)!important;box-shadow:0 10px 30px rgba(16,42,67,.055)!important;
+ transition:transform .2s ease,box-shadow .2s ease!important;
+}
+.admin-stat-card:hover{transform:translateY(-4px);box-shadow:0 17px 38px rgba(16,42,67,.10)!important}
+.admin-stat-card:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:linear-gradient(#12a889,#67d6c0)}
+.admin-stat-icon{width:45px;height:45px;display:flex;align-items:center;justify-content:center;background:var(--cc-soft)!important;color:var(--cc-green)!important;border-radius:13px!important;font-size:21px!important;margin-bottom:14px!important}
+.admin-stat-card span{color:var(--cc-muted)!important;font-size:12px!important;font-weight:650!important}
+.admin-stat-card strong{font-size:27px!important;color:var(--cc-dark)!important;font-weight:850!important}
+.admin-section,.analytics-card,.reports-panel,.report-card{
+ border:1px solid var(--cc-border)!important;border-radius:20px!important;background:rgba(255,255,255,.96)!important;
+ box-shadow:0 10px 30px rgba(16,42,67,.055)!important;
+}
+.admin-section{padding:24px!important}
+.admin-section-header h2,.analytics-card-header h3{color:var(--cc-dark)!important;font-weight:800!important}
+.admin-section-header p,.analytics-card-header span{color:var(--cc-muted)!important}
+.admin-tabs{background:#e9f6f2!important;padding:6px!important;border:1px solid #d7eee8!important;border-radius:14px!important}
+.admin-tab{border:0!important;border-radius:10px!important;background:transparent!important;color:#526779!important;padding:11px 17px!important}
+.admin-tab.active{background:#fff!important;color:var(--cc-green)!important;box-shadow:0 5px 16px rgba(16,42,67,.09)!important}
+.admin-search,.admin-filter{border:1px solid var(--cc-border)!important;border-radius:11px!important;background:#fbfdfd!important;padding:12px 14px!important}
+.admin-search:focus,.admin-filter:focus{border-color:var(--cc-green)!important;box-shadow:0 0 0 4px rgba(18,168,137,.10)!important}
+.admin-table-wrapper{border:1px solid var(--cc-border)!important;border-radius:14px!important;background:#fff!important}
+.admin-table th{background:#f1f8f6!important;color:#526779!important;letter-spacing:.55px!important}
+.admin-table td{color:#40566b!important}
+.admin-table tr:hover{background:#f7fcfa!important}
+.table-btn{border-radius:8px!important}
+.verify-btn,.activate-btn{background:#12a889!important}
+.delete-btn,.deactivate-btn{background:#dc5b68!important}
+.booking-status-btn{background:#12a889!important}
+.admin-inline-select{border-radius:8px!important;border-color:var(--cc-border)!important}
+.status-badge{border-radius:999px!important;padding:6px 10px!important}
+.analytics-card{padding:23px!important}
+.analytics-mini-card{border:1px solid var(--cc-border)!important;background:#f7fbfa!important;border-radius:14px!important}
+.chart-bar{background:linear-gradient(180deg,#12a889,#67d6c0)!important}
+.analytics-progress span{background:linear-gradient(90deg,#12a889,#67d6c0)!important}
+.notification-item{border:1px solid var(--cc-border)!important;border-radius:14px!important;box-shadow:0 4px 14px rgba(16,42,67,.03)!important}
+.notification-item.unread{background:#effaf7!important;border-left-color:var(--cc-green)!important}
+.notification-icon{background:var(--cc-soft)!important}
+.reports-grid{gap:17px!important}
+.report-card{padding:21px!important}
+.report-card strong{color:var(--cc-dark)!important;font-weight:850!important}
+.report-refresh-btn{background:var(--cc-soft)!important;color:var(--cc-green)!important;border:1px solid #cde9e1!important}
+.report-refresh-btn:hover{background:#d9f2ec!important}
+.monthly-report-bar{background:linear-gradient(90deg,#12a889,#67d6c0)!important}
+.report-table th{background:#f1f8f6!important;color:#526779!important}
+.admin-message{border-radius:12px!important;box-shadow:0 5px 16px rgba(16,42,67,.05)!important}
+button{transition:all .18s ease!important}
+@media(max-width:1150px){.admin-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(max-width:800px){.admin-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}.navbar{padding:0 18px!important}.navbar nav{gap:10px!important}.navbar nav a:nth-child(2){display:none}.admin-welcome{padding:25px!important}}
+@media(max-width:520px){.admin-stats{grid-template-columns:1fr!important}.admin-page{padding:22px 12px 45px!important}.navbar nav a{display:none}.admin-welcome h1{font-size:25px!important}.admin-actions .admin-btn{flex:1}.admin-section{padding:17px!important}}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="caregivers.html">
+            Find Caregiver
+        </a>
+
+        <span style="font-weight:700;">
+            Admin Panel
+        </span>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="admin-page">
+
+    <div class="admin-container">
+
+
+        <!-- =====================================
+             WELCOME
+        ====================================== -->
+
+        <div class="admin-welcome">
+
+            <div>
+
+                <h1>
+                    Admin Dashboard 🛡️
+                </h1>
+
+                <p id="adminWelcomeText">
+                    Manage CareCompanion from one place.
+                </p>
+
+            </div>
+
+
+            <div class="admin-actions">
+
+                <button
+                    id="refreshDashboard"
+                    class="admin-btn refresh-btn"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+                <button
+                    id="checkAdminSession"
+                    class="admin-btn session-check-btn"
+                    type="button"
+                >
+                    ✓ Check Session
+                </button>
+
+                <button
+                    id="adminLogout"
+                    class="admin-btn logout-btn-admin"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             MESSAGE
+        ====================================== -->
+
+        <div
+            id="adminMessage"
+            class="admin-message"
+        ></div>
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <section class="admin-stats">
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    👥
+                </div>
+
+                <span>
+                    Total Users
+                </span>
+
+                <strong id="totalUsers">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    👨‍⚕️
+                </div>
+
+                <span>
+                    Caregivers
+                </span>
+
+                <strong id="totalCaregivers">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    📅
+                </div>
+
+                <span>
+                    Total Bookings
+                </span>
+
+                <strong id="totalBookings">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    ⭐
+                </div>
+
+                <span>
+                    Total Reviews
+                </span>
+
+                <strong id="totalReviews">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    ⏳
+                </div>
+
+                <span>
+                    Pending Bookings
+                </span>
+
+                <strong id="pendingBookings">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    ✓
+                </div>
+
+                <span>
+                    Verified Caregivers
+                </span>
+
+                <strong id="verifiedCaregivers">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    💰
+                </div>
+
+                <span>
+                    Booking Value
+                </span>
+
+                <strong id="bookingValue">
+                    Rs. 0
+                </strong>
+
+            </div>
+
+
+            <div class="admin-stat-card">
+
+                <div class="admin-stat-icon">
+                    ✓
+                </div>
+
+                <span>
+                    Completed
+                </span>
+
+                <strong id="completedBookings">
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ADVANCED ANALYTICS
+        ====================================== -->
+
+        <section class="analytics-grid">
+
+            <div class="analytics-card">
+
+                <div class="analytics-card-header">
+                    <div>
+                        <h3>Booking Overview</h3>
+                        <span>Current booking status distribution</span>
+                    </div>
+                </div>
+
+                <div id="bookingChart" class="chart-bars">
+                    <div class="analytics-empty">
+                        Loading analytics...
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <div class="analytics-card-header">
+                    <div>
+                        <h3>User Distribution</h3>
+                        <span>Registered platform accounts</span>
+                    </div>
+                </div>
+
+                <div id="userAnalytics" class="analytics-list">
+                    <div class="analytics-empty">
+                        Loading analytics...
+                    </div>
+                </div>
+
+                <div class="analytics-revenue-grid">
+
+                    <div class="analytics-mini-card">
+                        <span>Total Booking Value</span>
+                        <strong id="analyticsTotalValue">Rs. 0</strong>
+                    </div>
+
+                    <div class="analytics-mini-card">
+                        <span>Completed Value</span>
+                        <strong id="analyticsCompletedValue">Rs. 0</strong>
+                    </div>
+
+                    <div class="analytics-mini-card">
+                        <span>Verified Caregivers</span>
+                        <strong id="analyticsVerified">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             NOTIFICATIONS
+        ====================================== -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <div>
+                    <h2>
+                        🔔 Notifications
+                        <span
+                            id="adminNotificationCount"
+                            class="admin-notification-count"
+                            style="display:none;"
+                        >0</span>
+                    </h2>
+
+                    <p>
+                        Recent bookings and CareCompanion activity.
+                    </p>
+                </div>
+
+                <div class="notification-actions">
+                    <button
+                        type="button"
+                        class="admin-btn refresh-btn"
+                        id="refreshNotifications"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                    <button
+                        type="button"
+                        class="admin-btn"
+                        id="markAllNotificationsRead"
+                    >
+                        ✓ Mark All Read
+                    </button>
+                </div>
+
+            </div>
+
+            <div
+                id="adminNotificationList"
+                class="notification-list"
+            >
+                <div class="notification-empty">
+                    Loading notifications...
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             MANAGEMENT
+        ====================================== -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <div>
+
+                    <h2>
+                        Management
+                    </h2>
+
+                    <p>
+                        Manage users, caregivers,
+                        bookings and reviews.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABS -->
+
+            <div class="admin-tabs">
+
+                <button
+                    class="admin-tab active"
+                    data-tab="users"
+                    type="button"
+                >
+                    👥 Users
+                </button>
+
+                <button
+                    class="admin-tab"
+                    data-tab="caregivers"
+                    type="button"
+                >
+                    👨‍⚕️ Caregivers
+                </button>
+
+                <button
+                    class="admin-tab"
+                    data-tab="bookings"
+                    type="button"
+                >
+                    📅 Bookings
+                </button>
+
+                <button
+                    class="admin-tab"
+                    data-tab="reviews"
+                    type="button"
+                >
+                    ⭐ Reviews
+                </button>
+
+                <button
+                    class="admin-tab"
+                    data-tab="reports"
+                    type="button"
+                >
+                    📊 Reports & Earnings
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                 USERS
+            ================================== -->
+
+            <div
+                id="usersTab"
+                class="management-tab"
+            >
+
+                <div class="admin-search-row">
+
+                    <input
+                        type="search"
+                        id="userSearch"
+                        class="admin-search"
+                        placeholder="🔎 Search users by name or email..."
+                    >
+
+                    <select
+                        id="userRoleFilter"
+                        class="admin-filter"
+                    >
+
+                        <option value="all">
+                            All Roles
+                        </option>
+
+                        <option value="customer">
+                            Customers
+                        </option>
+
+                        <option value="caregiver">
+                            Caregivers
+                        </option>
+
+                        <option value="admin">
+                            Admins
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    Role
+                                </th>
+
+                                <th>
+                                    City
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Created
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="usersTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="loading-cell"
+                                >
+                                    Loading users...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 CAREGIVERS
+            ================================== -->
+
+            <div
+                id="caregiversTab"
+                class="management-tab"
+                style="display:none;"
+            >
+
+                <div class="admin-search-row">
+
+                    <input
+                        type="search"
+                        id="caregiverSearch"
+                        class="admin-search"
+                        placeholder="🔎 Search caregivers..."
+                    >
+
+                    <select
+                        id="caregiverVerificationFilter"
+                        class="admin-filter"
+                    >
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="verified">
+                            Verified
+                        </option>
+
+                        <option value="unverified">
+                            Unverified
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    City
+                                </th>
+
+                                <th>
+                                    Experience
+                                </th>
+
+                                <th>
+                                    Rate
+                                </th>
+
+                                <th>
+                                    Rating
+                                </th>
+
+                                <th>
+                                    Verification
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="caregiversTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="8"
+                                    class="loading-cell"
+                                >
+                                    Loading caregivers...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 BOOKINGS
+            ================================== -->
+
+            <div
+                id="bookingsTab"
+                class="management-tab"
+                style="display:none;"
+            >
+
+                <div class="admin-search-row">
+
+                    <input
+                        type="search"
+                        id="bookingSearch"
+                        class="admin-search"
+                        placeholder="🔎 Search customer, caregiver or service..."
+                    >
+
+                    <select
+                        id="bookingStatusFilter"
+                        class="admin-filter"
+                    >
+
+                        <option value="all">
+                            All Statuses
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="accepted">
+                            Accepted
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                        <option value="rejected">
+                            Rejected
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="admin-table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Caregiver
+                                </th>
+
+                                <th>
+                                    Service
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Hours
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="bookingsTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="8"
+                                    class="loading-cell"
+                                >
+                                    Loading bookings...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 REVIEWS
+            ================================== -->
+
+            <div
+                id="reviewsTab"
+                class="management-tab"
+                style="display:none;"
+            >
+
+                <div class="admin-search-row">
+
+                    <input
+                        type="search"
+                        id="reviewSearch"
+                        class="admin-search"
+                        placeholder="🔎 Search customer or caregiver..."
+                    >
+
+                </div>
+
+
+                <div class="admin-table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Caregiver
+                                </th>
+
+                                <th>
+                                    Rating
+                                </th>
+
+                                <th>
+                                    Comment
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="reviewsTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="loading-cell"
+                                >
+                                    Loading reviews...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <p>
+        Trusted care and companionship for families.
+    </p>
+
+    <p>
+        © 2026 CareCompanion.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+            <!-- =================================
+                 REPORTS & EARNINGS
+            ================================== -->
+
+            <div
+                id="reportsTab"
+                class="management-tab"
+                style="display:none;"
+            >
+
+                <div class="reports-panel">
+
+                    <div class="reports-panel-header">
+                        <div>
+                            <h3>📊 Reports & Earnings</h3>
+                            <p>Overview of bookings, revenue and caregiver performance.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="report-refresh-btn"
+                            onclick="loadReports(true)"
+                        >
+                            ↻ Refresh Reports
+                        </button>
+                    </div>
+
+                    <div class="reports-grid">
+
+                        <div class="report-card">
+                            <span>Total Revenue</span>
+                            <strong id="reportTotalRevenue">Rs. 0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Completed Revenue</span>
+                            <strong id="reportCompletedRevenue">Rs. 0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Total Bookings</span>
+                            <strong id="reportTotalBookings">0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Completed Bookings</span>
+                            <strong id="reportCompletedBookings">0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Customers</span>
+                            <strong id="reportCustomers">0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Caregivers</span>
+                            <strong id="reportCaregivers">0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Verified Caregivers</span>
+                            <strong id="reportVerifiedCaregivers">0</strong>
+                        </div>
+
+                        <div class="report-card">
+                            <span>Total Reviews</span>
+                            <strong id="reportTotalReviews">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reports-panel">
+
+                    <div class="reports-panel-header">
+                        <h3>📅 Monthly Bookings & Revenue</h3>
+                    </div>
+
+                    <div id="monthlyReportList" class="monthly-report-list">
+                        <div class="report-empty">
+                            Open Reports to load monthly data.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="reports-panel">
+
+                    <div class="reports-panel-header">
+                        <h3>🏆 Top Caregivers</h3>
+                    </div>
+
+                    <div class="report-table-wrap">
+
+                        <table class="report-table">
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Caregiver</th>
+                                    <th>City</th>
+                                    <th>Rating</th>
+                                    <th>Bookings</th>
+                                    <th>Revenue</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="topCaregiversReportBody">
+                                <tr>
+                                    <td colspan="6" class="report-empty">
+                                        Open Reports to load caregiver data.
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+<script>
+
+const API_BASE_URL =
+    "http://localhost:5000/api";
+
+
+/* =========================================
+   ADMIN AUTH
+========================================= */
+
+const adminToken =
+    localStorage.getItem(
+        "carecompanion_admin_token"
+    );
+
+const adminUserRaw =
+    localStorage.getItem(
+        "carecompanion_admin_user"
+    );
+
+
+if (!adminToken || !adminUserRaw) {
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+let adminUser = null;
+
+try {
+
+    adminUser =
+        JSON.parse(adminUserRaw);
+
+} catch (error) {
+
+    localStorage.removeItem(
+        "carecompanion_admin_token"
+    );
+
+    localStorage.removeItem(
+        "carecompanion_admin_user"
+    );
+
+    window.location.href =
+        "admin-login.html";
+
+}
+
+
+/* =========================================
+   DATA
+========================================= */
+
+let allUsers = [];
+let allCaregivers = [];
+let allBookings = [];
+let allReviews = [];
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const adminMessage =
+    document.getElementById(
+        "adminMessage"
+    );
+
+const adminWelcomeText =
+    document.getElementById(
+        "adminWelcomeText"
+    );
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(
+    message,
+    type = "success"
+) {
+
+    adminMessage.textContent =
+        message;
+
+    adminMessage.className =
+        `admin-message ${type}`;
+
+    // Keep error messages visible long enough to inspect them.
+    if (type === "error") {
+        return;
+    }
+
+    setTimeout(() => {
+
+        adminMessage.className =
+            "admin-message";
+
+        adminMessage.textContent =
+            "";
+
+    }, 4000);
+
+}
+
+
+/* =========================================
+   API REQUEST
+========================================= */
+
+async function adminRequest(
+    endpoint,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            `${API_BASE_URL}${endpoint}`,
+            {
+                ...options,
+
+                headers: {
+                    "Content-Type":
+                        "application/json",
+
+                    Authorization:
+                        `Bearer ${adminToken}`,
+
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+
+    let result = {};
+
+    try {
+
+        result =
+            await response.json();
+
+    } catch (error) {
+
+        result = {};
+
+    }
+
+
+    if (
+        response.status === 401 ||
+        response.status === 403
+    ) {
+
+        // IMPORTANT:
+        // Do NOT delete the admin session or redirect immediately.
+        // A single failed API request should not send the admin back
+        // to the login page before we can see the real backend error.
+        console.error("ADMIN API AUTH ERROR", {
+            endpoint,
+            status: response.status,
+            result,
+            tokenPresent: Boolean(adminToken),
+            tokenLength: adminToken ? adminToken.length : 0
+        });
+
+        const authError = new Error(
+            result.message ||
+            `Admin API authentication failed (${response.status}) at ${endpoint}.`
+        );
+
+        authError.status = response.status;
+        authError.endpoint = endpoint;
+        authError.apiResult = result;
+
+        if (typeof showMessage === "function") {
+            showMessage(
+                `${authError.message} Open F12 → Console for details.`,
+                "error"
+            );
+        }
+
+        throw authError;
+    }
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            result.message ||
+            "Request failed."
+        );
+    }
+
+
+    return result;
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+    const date =
+        new Date(value);
+
+    if (Number.isNaN(
+        date.getTime()
+    )) {
+        return "-";
+    }
+
+    return date.toLocaleDateString(
+        "en-PK",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+function initializeAdmin() {
+
+    if (adminUser) {
+
+        adminWelcomeText.textContent =
+            `Welcome, ${
+                adminUser.name ||
+                "Administrator"
+            }. Manage CareCompanion from one place.`;
+
+    }
+
+
+    loadDashboard();
+
+}
+
+
+/* =========================================
+   LOAD DASHBOARD
+========================================= */
+
+/*
+   FAST DASHBOARD LOADING
+   ----------------------
+   Only statistics + the first Users tab load immediately.
+   Caregivers, Bookings and Reviews load when their tab is opened.
+*/
+
+const loadedTabs = {
+    users: false,
+    caregivers: false,
+    bookings: false,
+    reviews: false,
+    reports: false
+};
+
+const loadingTabs = {
+    users: false,
+    caregivers: false,
+    bookings: false,
+    reviews: false,
+    reports: false
+};
+
+let activeManagementTab = "users";
+
+
+async function loadDashboard() {
+
+    try {
+
+        // Load only the essential dashboard data immediately.
+        await loadStats();
+
+        await loadAdminNotifications();
+
+        // Users is the default visible tab.
+        await loadManagementTab("users");
+
+    } catch (error) {
+
+        console.error(
+            "Admin dashboard error:",
+            error
+        );
+
+        showMessage(
+            error.message ||
+            "Unable to load admin dashboard.",
+            "error"
+        );
+
+    }
+
+}
+
+
+async function loadManagementTab(tabName, forceReload = false) {
+
+    if (!["users", "caregivers", "bookings", "reviews", "reports"].includes(tabName)) {
+        return;
+    }
+
+    if (loadingTabs[tabName]) {
+        return;
+    }
+
+    if (loadedTabs[tabName] && !forceReload) {
+        return;
+    }
+
+    loadingTabs[tabName] = true;
+
+    try {
+
+        if (tabName === "users") {
+            await loadUsers();
+        }
+
+        if (tabName === "caregivers") {
+            await loadCaregivers();
+        }
+
+        if (tabName === "bookings") {
+            await loadBookings();
+        }
+
+        if (tabName === "reviews") {
+            await loadReviews();
+        }
+
+        if (tabName === "reports") {
+            await loadReports(forceReload);
+        }
+
+        loadedTabs[tabName] = true;
+
+    } catch (error) {
+
+        console.error(
+            `Unable to load ${tabName}:`,
+            error
+        );
+
+        showMessage(
+            error.message ||
+            `Unable to load ${tabName}.`,
+            "error"
+        );
+
+    } finally {
+
+        loadingTabs[tabName] = false;
+
+    }
+
+}
+
+
+
+/* =========================================
+   ADMIN NOTIFICATIONS
+========================================= */
+
+let adminNotifications = [];
+
+function getNotificationIcon(type) {
+
+    const icons = {
+        booking_created: "📅",
+        booking_accepted: "✅",
+        booking_rejected: "❌",
+        booking_completed: "✔️",
+        booking_cancelled: "🚫",
+        review_reminder: "⭐",
+        new_review: "⭐",
+        caregiver_registered: "👨‍⚕️",
+        caregiver_verified: "✓",
+        user_registered: "👤"
+    };
+
+    return icons[type] || "🔔";
+}
+
+function formatNotificationDate(date) {
+
+    if (!date) return "";
+
+    const value = new Date(date);
+
+    if (Number.isNaN(value.getTime())) return "";
+
+    return value.toLocaleString("en-PK", {
+        dateStyle: "medium",
+        timeStyle: "short"
+    });
+}
+
+async function loadAdminNotifications() {
+
+    const list = document.getElementById("adminNotificationList");
+
+    if (!list) return;
+
+    list.innerHTML = `
+        <div class="notification-empty">
+            Loading notifications...
+        </div>
+    `;
+
+    try {
+
+        const result = await adminRequest("/admin/notifications");
+
+        adminNotifications = Array.isArray(result)
+            ? result
+            : result.notifications || [];
+
+        renderAdminNotifications();
+
+    } catch (error) {
+
+        console.error("Admin notifications error:", error);
+
+        list.innerHTML = `
+            <div class="notification-empty">
+                Unable to load notifications.
+            </div>
+        `;
+    }
+}
+
+function renderAdminNotifications() {
+
+    const list = document.getElementById("adminNotificationList");
+    const count = document.getElementById("adminNotificationCount");
+
+    if (!list) return;
+
+    const unread = adminNotifications.filter(
+        notification => !notification.isRead
+    ).length;
+
+    if (count) {
+        count.textContent = unread;
+        count.style.display = unread > 0 ? "inline-flex" : "none";
+    }
+
+    if (!adminNotifications.length) {
+        list.innerHTML = `
+            <div class="notification-empty">
+                🔔 No notifications yet.
+            </div>
+        `;
+        return;
+    }
+
+    list.innerHTML = adminNotifications.map(notification => {
+
+        const icon = getNotificationIcon(notification.type);
+        const title = escapeHtml(notification.title || "Notification");
+        const message = escapeHtml(notification.message || "");
+        const time = formatNotificationDate(notification.createdAt);
+        const unreadClass = notification.isRead ? "" : "unread";
+
+        return `
+            <div class="notification-item ${unreadClass}">
+
+                <div class="notification-icon">
+                    ${icon}
+                </div>
+
+                <div class="notification-content">
+                    <strong>${title}</strong>
+                    <p>${message}</p>
+                    <div class="notification-time">${time}</div>
+                </div>
+
+                ${!notification.isRead ? `
+                    <button
+                        type="button"
+                        class="table-btn booking-status-btn"
+                        onclick="markAdminNotificationRead('${notification._id}')"
+                    >
+                        Mark Read
+                    </button>
+                ` : ""}
+
+            </div>
+        `;
+
+    }).join("");
+}
+
+async function markAdminNotificationRead(notificationId) {
+
+    try {
+
+        await adminRequest(
+            `/notifications/${notificationId}/read`,
+            { method: "PUT" }
+        );
+
+        const notification = adminNotifications.find(
+            item => item._id === notificationId
+        );
+
+        if (notification) {
+            notification.isRead = true;
+        }
+
+        renderAdminNotifications();
+
+    } catch (error) {
+
+        console.error(
+            "Mark notification error:",
+            error
+        );
+
+        showMessage(
+            error.message ||
+            "Unable to mark notification as read.",
+            "error"
+        );
+    }
+}
+
+async function markAllAdminNotificationsRead() {
+
+    try {
+
+        await adminRequest(
+            "/notifications/read-all",
+            { method: "PUT" }
+        );
+
+        adminNotifications = adminNotifications.map(
+            notification => ({
+                ...notification,
+                isRead: true
+            })
+        );
+
+        renderAdminNotifications();
+
+        showMessage(
+            "All notifications marked as read."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Mark all notifications error:",
+            error
+        );
+
+        showMessage(
+            error.message ||
+            "Unable to mark all notifications as read.",
+            "error"
+        );
+    }
+}
+
+
+
+/* =========================================
+   REPORTS & EARNINGS
+========================================= */
+
+let reportsLoaded = false;
+
+function formatReportMoney(value) {
+    return `Rs. ${Number(value || 0).toLocaleString()}`;
+}
+
+function formatReportMonth(year, month) {
+    const date = new Date(Number(year), Number(month) - 1, 1);
+    return date.toLocaleString("en-PK", {
+        month: "short",
+        year: "numeric"
+    });
+}
+
+async function loadReports(forceReload = false) {
+
+    if (reportsLoaded && !forceReload) {
+        return;
+    }
+
+    const monthlyList = document.getElementById("monthlyReportList");
+    const topBody = document.getElementById("topCaregiversReportBody");
+
+    if (monthlyList) {
+        monthlyList.innerHTML = `
+            <div class="report-empty">Loading reports...</div>
+        `;
+    }
+
+    if (topBody) {
+        topBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="report-empty">Loading reports...</td>
+            </tr>
+        `;
+    }
+
+    try {
+
+        const result = await adminRequest("/admin/reports");
+        const summary = result.summary || {};
+
+        document.getElementById("reportTotalRevenue").textContent =
+            formatReportMoney(summary.totalRevenue);
+
+        document.getElementById("reportCompletedRevenue").textContent =
+            formatReportMoney(summary.completedRevenue);
+
+        document.getElementById("reportTotalBookings").textContent =
+            summary.totalBookings || 0;
+
+        document.getElementById("reportCompletedBookings").textContent =
+            summary.completedBookings || 0;
+
+        document.getElementById("reportCustomers").textContent =
+            summary.customers || 0;
+
+        document.getElementById("reportCaregivers").textContent =
+            summary.caregivers || 0;
+
+        document.getElementById("reportVerifiedCaregivers").textContent =
+            summary.verifiedCaregivers || 0;
+
+        document.getElementById("reportTotalReviews").textContent =
+            summary.totalReviews || 0;
+
+        renderMonthlyReports(result.monthlyBookings || []);
+        renderTopCaregiversReport(result.topCaregivers || []);
+
+        reportsLoaded = true;
+
+    } catch (error) {
+
+        console.error("Reports error:", error);
+
+        if (monthlyList) {
+            monthlyList.innerHTML = `
+                <div class="report-empty">
+                    Unable to load reports.
+                </div>
+            `;
+        }
+
+        if (topBody) {
+            topBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="report-empty">
+                        Unable to load reports.
+                    </td>
+                </tr>
+            `;
+        }
+
+        showMessage(
+            error.message || "Unable to load reports.",
+            "error"
+        );
+    }
+}
+
+function renderMonthlyReports(items) {
+
+    const container = document.getElementById("monthlyReportList");
+
+    if (!container) return;
+
+    if (!items.length) {
+        container.innerHTML = `
+            <div class="report-empty">
+                No monthly booking data available.
+            </div>
+        `;
+        return;
+    }
+
+    const maxBookings = Math.max(
+        ...items.map(item => Number(item.bookings || 0)),
+        1
+    );
+
+    container.innerHTML = items.map(item => {
+
+        const year = item._id?.year;
+        const month = item._id?.month;
+        const bookings = Number(item.bookings || 0);
+        const revenue = Number(item.revenue || 0);
+        const width = Math.max(
+            2,
+            Math.round((bookings / maxBookings) * 100)
+        );
+
+        return `
+            <div class="monthly-report-row">
+                <strong>${formatReportMonth(year, month)}</strong>
+
+                <div class="monthly-report-bar-wrap" title="${bookings} bookings">
+                    <div
+                        class="monthly-report-bar"
+                        style="width:${width}%"
+                    ></div>
+                </div>
+
+                <span class="monthly-report-value">
+                    ${bookings} bookings · ${formatReportMoney(revenue)}
+                </span>
+            </div>
+        `;
+
+    }).join("");
+}
+
+function renderTopCaregiversReport(items) {
+
+    const body = document.getElementById("topCaregiversReportBody");
+
+    if (!body) return;
+
+    if (!items.length) {
+        body.innerHTML = `
+            <tr>
+                <td colspan="6" class="report-empty">
+                    No caregiver booking data available.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    body.innerHTML = items.map((item, index) => {
+
+        const name = escapeHtml(item.name || "Unknown");
+        const city = escapeHtml(item.city || "-");
+        const rating = Number(item.rating || 0).toFixed(1);
+        const bookings = Number(item.bookings || 0);
+        const revenue = formatReportMoney(item.revenue);
+
+        return `
+            <tr>
+                <td>${index + 1}</td>
+                <td><strong>${name}</strong></td>
+                <td>${city}</td>
+                <td>⭐ ${rating}</td>
+                <td>${bookings}</td>
+                <td>${revenue}</td>
+            </tr>
+        `;
+
+    }).join("");
+}
+
+/* =========================================
+   LOAD STATS
+========================================= */
+
+async function loadStats() {
+
+    const stats =
+        await adminRequest(
+            "/admin/stats"
+        );
+
+
+    document.getElementById(
+        "totalUsers"
+    ).textContent =
+        stats.totalUsers || 0;
+
+
+    document.getElementById(
+        "totalCaregivers"
+    ).textContent =
+        stats.totalCaregivers || 0;
+
+
+    document.getElementById(
+        "totalBookings"
+    ).textContent =
+        stats.totalBookings || 0;
+
+
+    document.getElementById(
+        "totalReviews"
+    ).textContent =
+        stats.totalReviews || 0;
+
+
+    document.getElementById(
+        "pendingBookings"
+    ).textContent =
+        stats.pendingBookings || 0;
+
+
+    document.getElementById(
+        "verifiedCaregivers"
+    ).textContent =
+        stats.verifiedCaregivers || 0;
+
+
+    document.getElementById(
+        "completedBookings"
+    ).textContent =
+        stats.completedBookings || 0;
+
+
+    document.getElementById(
+        "bookingValue"
+    ).textContent =
+        `Rs. ${Number(
+            stats.totalBookingValue || 0
+        ).toLocaleString()}`;
+
+    renderAnalytics(stats);
+
+}
+
+
+/* =========================================
+   ADVANCED ANALYTICS
+========================================= */
+
+function renderAnalytics(stats) {
+
+    const totalBookings =
+        Number(stats.totalBookings || 0);
+
+    const statuses = [
+        {
+            label: "Pending",
+            value: Number(stats.pendingBookings || 0)
+        },
+        {
+            label: "Accepted",
+            value: Number(stats.acceptedBookings || 0)
+        },
+        {
+            label: "Completed",
+            value: Number(stats.completedBookings || 0)
+        },
+        {
+            label: "Rejected",
+            value: Number(stats.rejectedBookings || 0)
+        },
+        {
+            label: "Cancelled",
+            value: Number(stats.cancelledBookings || 0)
+        }
+    ];
+
+    const chart =
+        document.getElementById("bookingChart");
+
+    if (!chart) {
+        return;
+    }
+
+    const maxBookingValue =
+        Math.max(
+            ...statuses.map(item => item.value),
+            1
+        );
+
+    chart.innerHTML =
+        statuses.map(item => {
+
+            const height =
+                item.value === 0
+                    ? 3
+                    : Math.max(
+                        8,
+                        (item.value / maxBookingValue) * 175
+                    );
+
+            return `
+                <div class="chart-bar-group">
+
+                    <div class="chart-bar-value">
+                        ${item.value}
+                    </div>
+
+                    <div
+                        class="chart-bar"
+                        style="height:${height}px;"
+                        title="${item.label}: ${item.value}"
+                    ></div>
+
+                    <div class="chart-bar-label">
+                        ${item.label}
+                    </div>
+
+                </div>
+            `;
+
+        }).join("");
+
+
+    const customerCount =
+        Number(stats.totalCustomers || 0);
+
+    const caregiverCount =
+        Number(stats.totalCaregivers || 0);
+
+    const adminCount =
+        Math.max(
+            0,
+            Number(stats.totalUsers || 0) -
+            customerCount -
+            caregiverCount
+        );
+
+    const totalUserTypes =
+        customerCount +
+        caregiverCount +
+        adminCount;
+
+    const userAnalytics =
+        document.getElementById("userAnalytics");
+
+    if (userAnalytics) {
+
+        if (totalUserTypes === 0) {
+
+            userAnalytics.innerHTML = `
+                <div class="analytics-empty">
+                    No user data available.
+                </div>
+            `;
+
+        } else {
+
+            const rows = [
+                {
+                    label: "Customers",
+                    value: customerCount
+                },
+                {
+                    label: "Caregivers",
+                    value: caregiverCount
+                },
+                {
+                    label: "Admins",
+                    value: adminCount
+                }
+            ];
+
+            userAnalytics.innerHTML =
+                rows.map(row => {
+
+                    const percentage =
+                        totalUserTypes === 0
+                            ? 0
+                            : Math.round(
+                                (row.value / totalUserTypes) * 100
+                            );
+
+                    return `
+                        <div class="analytics-list-row">
+
+                            <div class="analytics-list-label">
+                                ${row.label}
+                            </div>
+
+                            <div class="analytics-progress">
+                                <span
+                                    style="width:${percentage}%"
+                                ></span>
+                            </div>
+
+                            <div class="analytics-list-value">
+                                ${row.value}
+                            </div>
+
+                        </div>
+                    `;
+
+                }).join("");
+
+        }
+
+    }
+
+
+    const totalValue =
+        Number(stats.totalBookingValue || 0);
+
+    // The current stats endpoint exposes total booking value
+    // but does not expose a separate completed booking value.
+    // Keep this clearly based on available API data.
+    const completedValue =
+        Number(stats.completedBookingValue || 0);
+
+    const totalValueElement =
+        document.getElementById(
+            "analyticsTotalValue"
+        );
+
+    const completedValueElement =
+        document.getElementById(
+            "analyticsCompletedValue"
+        );
+
+    const verifiedElement =
+        document.getElementById(
+            "analyticsVerified"
+        );
+
+    if (totalValueElement) {
+        totalValueElement.textContent =
+            `Rs. ${totalValue.toLocaleString()}`;
+    }
+
+    if (completedValueElement) {
+        completedValueElement.textContent =
+            `Rs. ${completedValue.toLocaleString()}`;
+    }
+
+    if (verifiedElement) {
+        verifiedElement.textContent =
+            Number(
+                stats.verifiedCaregivers || 0
+            ).toLocaleString();
+    }
+
+}
+
+
+/* =========================================
+   LOAD USERS
+========================================= */
+
+async function loadUsers() {
+
+    const result =
+        await adminRequest(
+            "/admin/users"
+        );
+
+
+    allUsers =
+        Array.isArray(result)
+            ? result
+            : result.users || [];
+
+
+    renderUsers();
+
+}
+
+
+/* =========================================
+   RENDER USERS
+========================================= */
+
+function renderUsers() {
+
+    const table =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    const search =
+        document.getElementById(
+            "userSearch"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const role =
+        document.getElementById(
+            "userRoleFilter"
+        ).value;
+
+
+    const filtered =
+        allUsers.filter(user => {
+
+            const matchesSearch =
+                !search ||
+                String(
+                    user.name || ""
+                ).toLowerCase().includes(search) ||
+                String(
+                    user.email || ""
+                ).toLowerCase().includes(search);
+
+
+            const matchesRole =
+                role === "all" ||
+                user.role === role;
+
+
+            return (
+                matchesSearch &&
+                matchesRole
+            );
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    class="empty-cell"
+                >
+                    No users found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML =
+        filtered.map(user => {
+
+            const statusClass =
+                user.isActive
+                    ? "status-active"
+                    : "status-inactive";
+
+
+            const statusText =
+                user.isActive
+                    ? "Active"
+                    : "Inactive";
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                user.name
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.email
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.role
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            user.city || "-"
+                        )}
+                    </td>
+
+                    <td>
+                        <span
+                            class="status-badge ${statusClass}"
+                        >
+                            ${statusText}
+                        </span>
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            user.createdAt
+                        )}
+                    </td>
+
+                    <td>
+
+                        ${
+                            user._id ===
+                            adminUser?._id
+                                ? `
+                                    <span>
+                                        Current Admin
+                                    </span>
+                                `
+                                : `
+                                    <button
+                                        class="table-btn ${
+                                            user.isActive
+                                                ? "deactivate-btn"
+                                                : "activate-btn"
+                                        }"
+                                        onclick="toggleUserStatus(
+                                            '${user._id}',
+                                            ${!user.isActive}
+                                        )"
+                                    >
+                                        ${
+                                            user.isActive
+                                                ? "Deactivate"
+                                                : "Activate"
+                                        }
+                                    </button>
+                                `
+                        }
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   TOGGLE USER
+========================================= */
+
+async function toggleUserStatus(
+    userId,
+    newStatus
+) {
+
+    const action =
+        newStatus
+            ? "activate"
+            : "deactivate";
+
+
+    if (
+        !confirm(
+            `Are you sure you want to ${action} this account?`
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        await adminRequest(
+            `/admin/users/${userId}/status`,
+            {
+                method: "PUT",
+
+                body: JSON.stringify({
+                    isActive:
+                        newStatus
+                })
+            }
+        );
+
+
+        showMessage(
+            newStatus
+                ? "User activated successfully."
+                : "User deactivated successfully."
+        );
+
+
+        await loadUsers();
+
+        await loadStats();
+
+
+    } catch (error) {
+
+        showMessage(
+            error.message ||
+            "Unable to update user.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD CAREGIVERS
+========================================= */
+
+async function loadCaregivers() {
+
+    const result =
+        await adminRequest(
+            "/admin/caregivers"
+        );
+
+
+    allCaregivers =
+        Array.isArray(result)
+            ? result
+            : result.caregivers || [];
+
+
+    renderCaregivers();
+
+}
+
+
+/* =========================================
+   RENDER CAREGIVERS
+========================================= */
+
+function renderCaregivers() {
+
+    const table =
+        document.getElementById(
+            "caregiversTable"
+        );
+
+
+    const search =
+        document.getElementById(
+            "caregiverSearch"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const verification =
+        document.getElementById(
+            "caregiverVerificationFilter"
+        ).value;
+
+
+    const filtered =
+        allCaregivers.filter(
+            caregiver => {
+
+                const user =
+                    caregiver.user || {};
+
+
+                const name =
+                    caregiver.name ||
+                    user.name ||
+                    "";
+
+
+                const email =
+                    caregiver.email ||
+                    user.email ||
+                    "";
+
+
+                const matchesSearch =
+                    !search ||
+                    name.toLowerCase()
+                        .includes(search) ||
+                    email.toLowerCase()
+                        .includes(search) ||
+                    String(
+                        caregiver.city || ""
+                    ).toLowerCase()
+                        .includes(search);
+
+
+                const matchesVerification =
+                    verification === "all" ||
+                    (
+                        verification === "verified" &&
+                        caregiver.verified
+                    ) ||
+                    (
+                        verification === "unverified" &&
+                        !caregiver.verified
+                    );
+
+
+                return (
+                    matchesSearch &&
+                    matchesVerification
+                );
+
+            }
+        );
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="empty-cell"
+                >
+                    No caregivers found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML =
+        filtered.map(caregiver => {
+
+            const user =
+                caregiver.user || {};
+
+
+            const name =
+                caregiver.name ||
+                user.name ||
+                "Caregiver";
+
+
+            const email =
+                caregiver.email ||
+                user.email ||
+                "-";
+
+
+            const verified =
+                Boolean(
+                    caregiver.verified
+                );
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                name
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            email
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            caregiver.city ||
+                            user.city ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                caregiver.experience || 0
+                            )
+                        }
+                        years
+                    </td>
+
+                    <td>
+                        Rs.
+                        ${
+                            Number(
+                                caregiver.hourlyRate || 0
+                            ).toLocaleString()
+                        }
+                    </td>
+
+                    <td>
+                        <span class="rating-stars">
+                            ⭐
+                        </span>
+                        ${
+                            Number(
+                                caregiver.rating || 0
+                            ).toFixed(1)
+                        }
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status-badge ${
+                                verified
+                                    ? "status-verified"
+                                    : "status-unverified"
+                            }"
+                        >
+                            ${
+                                verified
+                                    ? "Verified"
+                                    : "Unverified"
+                            }
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="table-btn ${
+                                verified
+                                    ? "unverify-btn"
+                                    : "verify-btn"
+                            }"
+                            onclick="toggleCaregiverVerification(
+                                '${caregiver._id}',
+                                ${!verified}
+                            )"
+                        >
+                            ${
+                                verified
+                                    ? "Unverify"
+                                    : "Verify"
+                            }
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   VERIFY CAREGIVER
+========================================= */
+
+async function toggleCaregiverVerification(
+    caregiverId,
+    newStatus
+) {
+
+    const action =
+        newStatus
+            ? "verify"
+            : "remove verification from";
+
+
+    if (
+        !confirm(
+            `Are you sure you want to ${action} this caregiver?`
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        await adminRequest(
+            `/admin/caregivers/${caregiverId}/verify`,
+            {
+                method: "PUT",
+
+                body: JSON.stringify({
+                    verified:
+                        newStatus
+                })
+            }
+        );
+
+
+        showMessage(
+            newStatus
+                ? "Caregiver verified successfully."
+                : "Caregiver verification removed."
+        );
+
+
+        await loadCaregivers();
+
+        await loadStats();
+
+
+    } catch (error) {
+
+        showMessage(
+            error.message ||
+            "Unable to update caregiver.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD BOOKINGS
+========================================= */
+
+async function loadBookings() {
+
+    const result =
+        await adminRequest(
+            "/admin/bookings"
+        );
+
+
+    allBookings =
+        Array.isArray(result)
+            ? result
+            : result.bookings || [];
+
+
+    renderBookings();
+
+}
+
+
+/* =========================================
+   RENDER BOOKINGS
+========================================= */
+
+function renderBookings() {
+
+    const table =
+        document.getElementById(
+            "bookingsTable"
+        );
+
+
+    const search =
+        document.getElementById(
+            "bookingSearch"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const status =
+        document.getElementById(
+            "bookingStatusFilter"
+        ).value;
+
+
+    const filtered =
+        allBookings.filter(
+            booking => {
+
+                const customer =
+                    booking.customer || {};
+
+
+                const caregiver =
+                    booking.caregiver || {};
+
+
+                const caregiverUser =
+                    caregiver.user || {};
+
+
+                const customerName =
+                    customer.name || "";
+
+
+                const caregiverName =
+                    caregiver.name ||
+                    caregiverUser.name ||
+                    "";
+
+
+                const service =
+                    booking.service || "";
+
+
+                const matchesSearch =
+                    !search ||
+                    customerName
+                        .toLowerCase()
+                        .includes(search) ||
+                    caregiverName
+                        .toLowerCase()
+                        .includes(search) ||
+                    service
+                        .toLowerCase()
+                        .includes(search);
+
+
+                const matchesStatus =
+                    status === "all" ||
+                    booking.status === status;
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    class="empty-cell"
+                >
+                    No bookings found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML =
+        filtered.map(booking => {
+
+            const customer =
+                booking.customer || {};
+
+
+            const caregiver =
+                booking.caregiver || {};
+
+
+            const caregiverUser =
+                caregiver.user || {};
+
+
+            const status =
+                booking.status ||
+                "pending";
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            customer.name ||
+                            "Customer"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            caregiver.name ||
+                            caregiverUser.name ||
+                            "Caregiver"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            booking.service ||
+                            "-"
+                        )}
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            booking.bookingDate
+                        )}
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                booking.hours || 0
+                            )
+                        }
+                    </td>
+
+                    <td>
+                        Rs.
+                        ${
+                            Number(
+                                booking.totalPrice || 0
+                            ).toLocaleString()
+                        }
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status-badge status-${escapeHtml(
+                                status
+                            )}"
+                        >
+                            ${escapeHtml(
+                                status
+                            )}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="action-group">
+
+                            <select
+                                class="admin-inline-select"
+                                id="booking-status-${booking._id}"
+                                data-previous="${status}"
+                                onchange="updateAdminBookingStatus(
+                                    '${booking._id}',
+                                    this.value
+                                )"
+                            >
+                                ${["pending","accepted","completed","rejected","cancelled"]
+                                    .map(option => `
+                                        <option
+                                            value="${option}"
+                                            ${status === option ? "selected" : ""}
+                                        >
+                                            ${option.charAt(0).toUpperCase() + option.slice(1)}
+                                        </option>
+                                    `)
+                                    .join("")}
+                            </select>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   ADMIN BOOKING MANAGEMENT
+========================================= */
+
+async function updateAdminBookingStatus(
+    bookingId,
+    newStatus
+) {
+
+    if (!bookingId || !newStatus) {
+        return;
+    }
+
+    const select =
+        document.getElementById(
+            `booking-status-${bookingId}`
+        );
+
+    const previousStatus =
+        select?.dataset.previous ||
+        select?.querySelector("option:checked")?.value ||
+        "";
+
+    if (
+        !confirm(
+            `Change this booking status to "${newStatus}"?`
+        )
+    ) {
+
+        if (select && previousStatus) {
+            select.value = previousStatus;
+        }
+
+        return;
+    }
+
+    if (select) {
+        select.disabled = true;
+    }
+
+    try {
+
+        await adminRequest(
+            `/admin/bookings/${bookingId}/status`,
+            {
+                method: "PUT",
+                body: JSON.stringify({
+                    status: newStatus
+                })
+            }
+        );
+
+        showMessage(
+            "Booking status updated successfully."
+        );
+
+        await loadBookings();
+        await loadStats();
+
+    } catch (error) {
+
+        console.error(
+            "Admin booking status error:",
+            error
+        );
+
+        showMessage(
+            error.message ||
+            "Unable to update booking status.",
+            "error"
+        );
+
+        await loadBookings();
+
+    } finally {
+
+        const refreshedSelect =
+            document.getElementById(
+                `booking-status-${bookingId}`
+            );
+
+        if (refreshedSelect) {
+            refreshedSelect.disabled = false;
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD REVIEWS
+========================================= */
+
+async function loadReviews() {
+
+    const result =
+        await adminRequest(
+            "/admin/reviews"
+        );
+
+
+    allReviews =
+        Array.isArray(result)
+            ? result
+            : result.reviews || [];
+
+
+    renderReviews();
+
+}
+
+
+/* =========================================
+   RENDER REVIEWS
+========================================= */
+
+function renderReviews() {
+
+    const table =
+        document.getElementById(
+            "reviewsTable"
+        );
+
+
+    const search =
+        document.getElementById(
+            "reviewSearch"
+        ).value
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        allReviews.filter(review => {
+
+            const customer =
+                review.customer || {};
+
+
+            const caregiver =
+                review.caregiver || {};
+
+
+            const customerName =
+                customer.name || "";
+
+
+            const caregiverName =
+                caregiver.name || "";
+
+
+            return (
+                !search ||
+                customerName
+                    .toLowerCase()
+                    .includes(search) ||
+                caregiverName
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty-cell"
+                >
+                    No reviews found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    table.innerHTML =
+        filtered.map(review => {
+
+            const customer =
+                review.customer || {};
+
+
+            const caregiver =
+                review.caregiver || {};
+
+
+            const rating =
+                Number(
+                    review.rating || 0
+                );
+
+
+            const stars =
+                "★".repeat(
+                    Math.max(
+                        0,
+                        Math.min(
+                            5,
+                            rating
+                        )
+                    )
+                );
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(
+                            customer.name ||
+                            "Customer"
+                        )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                            caregiver.name ||
+                            "Caregiver"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span class="rating-stars">
+                            ${stars}
+                        </span>
+
+                        <br>
+
+                        ${rating}/5
+
+                    </td>
+
+                    <td>
+
+                        <div class="review-comment">
+                            ${escapeHtml(
+                                review.comment ||
+                                "No comment"
+                            )}
+                        </div>
+
+                    </td>
+
+                    <td>
+                        ${formatDate(
+                            review.createdAt
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="table-btn delete-btn"
+                            onclick="deleteReview(
+                                '${review._id}'
+                            )"
+                        >
+                            🗑 Delete
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================
+   DELETE REVIEW
+========================================= */
+
+async function deleteReview(
+    reviewId
+) {
+
+    if (
+        !confirm(
+            "Are you sure you want to permanently delete this review?"
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        await adminRequest(
+            `/admin/reviews/${reviewId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+
+        showMessage(
+            "Review deleted successfully."
+        );
+
+
+        await loadReviews();
+
+        await loadStats();
+
+
+    } catch (error) {
+
+        showMessage(
+            error.message ||
+            "Unable to delete review.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   TABS
+========================================= */
+
+document
+    .querySelectorAll(
+        ".admin-tab"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            async () => {
+
+                const tabName =
+                    button.dataset.tab;
+
+                activeManagementTab =
+                    tabName;
+
+
+                document
+                    .querySelectorAll(
+                        ".admin-tab"
+                    )
+                    .forEach(tab => {
+
+                        tab.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                document
+                    .querySelectorAll(
+                        ".management-tab"
+                    )
+                    .forEach(tab => {
+
+                        tab.style.display =
+                            "none";
+
+                    });
+
+
+                const selectedTab =
+                    document.getElementById(
+                        `${tabName}Tab`
+                    );
+
+
+                if (selectedTab) {
+
+                    selectedTab.style.display =
+                        "block";
+
+                }
+
+
+                // Load this section only when the admin opens it.
+                button.classList.add("loading");
+
+                try {
+                    await loadManagementTab(tabName);
+                } finally {
+                    button.classList.remove("loading");
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   SEARCH LISTENERS
+========================================= */
+
+document
+    .getElementById(
+        "userSearch"
+    )
+    .addEventListener(
+        "input",
+        renderUsers
+    );
+
+
+document
+    .getElementById(
+        "userRoleFilter"
+    )
+    .addEventListener(
+        "change",
+        renderUsers
+    );
+
+
+document
+    .getElementById(
+        "caregiverSearch"
+    )
+    .addEventListener(
+        "input",
+        renderCaregivers
+    );
+
+
+document
+    .getElementById(
+        "caregiverVerificationFilter"
+    )
+    .addEventListener(
+        "change",
+        renderCaregivers
+    );
+
+
+document
+    .getElementById(
+        "bookingSearch"
+    )
+    .addEventListener(
+        "input",
+        renderBookings
+    );
+
+
+document
+    .getElementById(
+        "bookingStatusFilter"
+    )
+    .addEventListener(
+        "change",
+        renderBookings
+    );
+
+
+document
+    .getElementById(
+        "reviewSearch"
+    )
+    .addEventListener(
+        "input",
+        renderReviews
+    );
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+document
+    .getElementById(
+        "refreshDashboard"
+    )
+    .addEventListener(
+        "click",
+        async () => {
+
+            const button =
+                document.getElementById(
+                    "refreshDashboard"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                "Refreshing...";
+
+
+            try {
+
+                // Refresh statistics and only the currently open section.
+                await loadStats();
+
+                await loadAdminNotifications();
+
+                await loadManagementTab(
+                    activeManagementTab,
+                    true
+                );
+
+                showMessage(
+                    "Dashboard refreshed successfully."
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+            } finally {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "↻ Refresh";
+
+            }
+
+        }
+    );
+
+
+
+
+document
+    .getElementById("refreshNotifications")
+    .addEventListener("click", loadAdminNotifications);
+
+document
+    .getElementById("markAllNotificationsRead")
+    .addEventListener("click", markAllAdminNotificationsRead);
+
+/* =========================================
+   ADMIN SESSION CHECK
+========================================= */
+
+async function checkAdminSession() {
+
+    const button =
+        document.getElementById("checkAdminSession");
+
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Checking...";
+    }
+
+    try {
+
+        const result =
+            await adminRequest("/auth/me");
+
+        const user = result.user || result;
+
+        if (!user || user.role !== "admin") {
+            throw new Error(
+                "Backend session check returned a non-admin user."
+            );
+        }
+
+        console.log("ADMIN SESSION OK", user);
+
+        showMessage(
+            `Admin session is valid. Logged in as ${user.name || user.email || "Administrator"}.`,
+            "success"
+        );
+
+    } catch (error) {
+
+        console.error("Admin session check failed:", error);
+
+        showMessage(
+            error.message ||
+            "Admin session check failed. Open F12 → Console for details.",
+            "error"
+        );
+
+    } finally {
+
+        if (button) {
+            button.disabled = false;
+            button.textContent = "✓ Check Session";
+        }
+
+    }
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+document
+    .getElementById("checkAdminSession")
+    .addEventListener("click", checkAdminSession);
+
+
+document
+    .getElementById(
+        "adminLogout"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            if (
+                !confirm(
+                    "Are you sure you want to logout?"
+                )
+            ) {
+                return;
+            }
+
+
+            localStorage.removeItem(
+                "carecompanion_admin_token"
+            );
+
+            localStorage.removeItem(
+                "carecompanion_admin_user"
+            );
+
+
+            window.location.href =
+                "admin-login.html";
+
+        }
+    );
+
+
+/* =========================================
+   START
+========================================= */
+
+initializeAdmin();
+
+</script>
+
+</body>
+
+</html>

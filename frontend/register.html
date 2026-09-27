@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | CareCompanion</title>
+
+    <style>
+        :root {
+            --primary: #08a88a;
+            --primary-dark: #07836d;
+            --primary-soft: #e9fbf6;
+            --ink: #173642;
+            --muted: #6d7f87;
+            --line: #dfe9e7;
+            --surface: #ffffff;
+            --page: #f3f8f7;
+            --danger: #c24141;
+            --success: #147a5d;
+            --shadow: 0 22px 60px rgba(24, 54, 66, 0.12);
+            --radius-xl: 28px;
+            --radius-lg: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Arial, Helvetica, sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 8% 12%, rgba(8, 168, 138, 0.10), transparent 24%),
+                radial-gradient(circle at 93% 88%, rgba(32, 90, 108, 0.07), transparent 26%),
+                var(--page);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(223, 233, 231, 0.92);
+        }
+
+        .header-inner {
+            width: min(1240px, calc(100% - 40px));
+            min-height: 78px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 850;
+            letter-spacing: -0.6px;
+        }
+
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), #0ac49f);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(8, 168, 138, 0.23);
+            font-size: 18px;
+        }
+
+        .brand-accent {
+            color: var(--primary);
+        }
+
+        .header-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 750;
+            font-size: 14px;
+            padding: 11px 16px;
+            border-radius: 12px;
+            transition: 0.2s ease;
+        }
+
+        .header-link:hover {
+            color: var(--ink);
+            background: #f3f7f6;
+        }
+
+        .page {
+            width: min(1240px, calc(100% - 40px));
+            margin: 34px auto 48px;
+        }
+
+        .register-shell {
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel {
+            position: relative;
+            min-height: 760px;
+            padding: 54px 48px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(255,255,255,0.18), transparent 19%),
+                radial-gradient(circle at 85% 76%, rgba(0,0,0,0.18), transparent 23%),
+                linear-gradient(145deg, #0d705f 0%, #087e6b 42%, #0e9780 100%);
+            overflow: hidden;
+        }
+
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            right: -120px;
+            top: -90px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .hero-panel::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 42% 58% 60% 40% / 44% 42% 58% 56%;
+            left: -110px;
+            bottom: -90px;
+            background: rgba(255,255,255,0.07);
+            transform: rotate(25deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.14);
+            font-size: 11px;
+            font-weight: 850;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-panel h1 {
+            margin-top: 24px;
+            max-width: 440px;
+            font-size: clamp(38px, 4vw, 56px);
+            line-height: 1.02;
+            letter-spacing: -2.6px;
+        }
+
+        .hero-panel h1 span {
+            color: #bff7e8;
+        }
+
+        .hero-panel > .hero-content > p {
+            margin-top: 18px;
+            max-width: 470px;
+            color: rgba(255,255,255,0.82);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 15px;
+            margin-top: 34px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 14px;
+            align-items: center;
+            padding: 13px 14px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,0.13);
+            font-size: 20px;
+        }
+
+        .feature-item strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .feature-item span {
+            display: block;
+            color: rgba(255,255,255,0.72);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .hero-quote {
+            margin-top: auto;
+            padding: 20px 20px 19px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .hero-quote .quote-mark {
+            color: #bff7e8;
+            font-size: 25px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero-quote p {
+            color: #f4fffc;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-panel {
+            padding: 46px 54px 42px;
+            background: #fff;
+        }
+
+        .form-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .form-top h2 {
+            font-size: 32px;
+            letter-spacing: -1.4px;
+            line-height: 1.1;
+        }
+
+        .form-top p {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .secure-badge {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 11px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--success);
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .alert {
+            display: none;
+            margin-top: 22px;
+            padding: 13px 15px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .alert.error {
+            color: #9f2f2f;
+            border: 1px solid #f4caca;
+            background: #fff5f5;
+        }
+
+        .alert.success {
+            color: #0d704f;
+            border: 1px solid #b7e9d8;
+            background: #effcf7;
+        }
+
+        form {
+            margin-top: 28px;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label,
+        .field legend {
+            margin-bottom: 8px;
+            color: #314e58;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.15px;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #d7e1df;
+            border-radius: 12px;
+            outline: none;
+            padding: 0 14px;
+            background: #fbfdfd;
+            color: var(--ink);
+            font-size: 14px;
+            transition: 0.18s ease;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: rgba(8, 168, 138, 0.72);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(8, 168, 138, 0.10);
+        }
+
+        .field input::placeholder {
+            color: #9aa9af;
+        }
+
+        .password-wrap {
+            position: relative;
+        }
+
+        .password-wrap input {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            border: 0;
+            background: transparent;
+            color: #71848b;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            background: #f1f6f4;
+            color: var(--primary-dark);
+        }
+
+        .account-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .account-option {
+            position: relative;
+        }
+
+        .account-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .account-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 68px;
+            padding: 12px 13px;
+            border: 1px solid #d8e3e0;
+            border-radius: 15px;
+            background: #fbfdfd;
+            cursor: pointer;
+            transition: 0.18s ease;
+        }
+
+        .account-label:hover {
+            border-color: #b8d8d0;
+            transform: translateY(-1px);
+        }
+
+        .account-option input:checked + .account-label {
+            border-color: rgba(8, 168, 138, 0.76);
+            background: var(--primary-soft);
+            box-shadow: 0 0 0 3px rgba(8, 168, 138, 0.08);
+        }
+
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: #eaf3f1;
+            font-size: 18px;
+            flex: 0 0 auto;
+        }
+
+        .account-label strong {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .account-label span {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .password-rules {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .rule {
+            color: #87979e;
+            font-size: 11px;
+        }
+
+        .rule.valid {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .agreement {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.55;
+        }
+
+        .agreement input {
+            margin-top: 3px;
+            accent-color: var(--primary);
+        }
+
+        .agreement a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 750;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 54px;
+            margin-top: 22px;
+            border: 0;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), #0abb98);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 850;
+            cursor: pointer;
+            box-shadow: 0 12px 26px rgba(8, 168, 138, 0.22);
+            transition: 0.18s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 15px 30px rgba(8, 168, 138, 0.26);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .login-note {
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .login-note a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 18px;
+            color: #8a989d;
+            font-size: 11px;
+        }
+
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .success-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 18px;
+            display: grid;
+            place-items: center;
+            background: var(--primary-soft);
+            color: var(--success);
+            font-size: 34px;
+        }
+
+        .success-screen h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .success-screen p {
+            max-width: 480px;
+            margin: 0 auto;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .success-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            height: 48px;
+            margin-top: 22px;
+            padding: 0 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1050px) {
+            .register-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel {
+                min-height: auto;
+                padding: 40px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-quote {
+                margin-top: 28px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .header-inner,
+            .page {
+                width: min(100% - 24px, 1240px);
+            }
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .brand {
+                font-size: 19px;
+            }
+
+            .hero-panel,
+            .form-panel {
+                padding: 30px 22px;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .field-grid,
+            .account-types {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .form-top {
+                flex-direction: column;
+            }
+
+            .secure-badge {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <a href="index.html" class="brand">
+            <span class="brand-mark">♥</span>
+            <span>
+                Care<span class="brand-accent">Companion</span>
+            </span>
+        </a>
+
+        <a href="login.html" class="header-link">
+            Already have an account? Login →
+        </a>
+
+    </div>
+</header>
+
+
+<main class="page">
+
+    <section class="register-shell">
+
+        <!-- =========================================
+             HERO
+        ========================================== -->
+
+        <aside class="hero-panel">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    ✓ Trusted • Safe • Compassionate
+                </div>
+
+                <h1>
+                    Better Care.<br>
+                    <span>Brighter Lives.</span>
+                </h1>
+
+                <p>
+                    Join CareCompanion and connect with a
+                    care community built around trust,
+                    comfort and meaningful support.
+                </p>
+
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div>
+                            <strong>Trusted Care</strong>
+                            <span>Designed around safer and more reliable care connections.</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">👩‍⚕️</div>
+                        <div>
+                            <strong>Caregiver Network</strong>
+                            <span>Discover caregivers and care opportunities in one place.</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">📅</div>
+                        <div>
+                            <strong>Simple Booking</strong>
+                            <span>Manage care requests and bookings with less hassle.</span>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">💚</div>
+                        <div>
+                            <strong>Made for Families</strong>
+                            <span>A clean experience focused on dignity, support and convenience.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="hero-quote">
+
+                    <div class="quote-mark">“</div>
+
+                    <p>
+                        Care is not just a service;
+                        it is a meaningful way to make
+                        everyday life better.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================================
+             REGISTER FORM
+        ========================================== -->
+
+        <section class="form-panel">
+
+            <div
+                id="registerArea"
+            >
+
+                <div class="form-top">
+
+                    <div>
+                        <h2>Create Your Account</h2>
+
+                        <p>
+                            Join CareCompanion and start using your account.
+                        </p>
+                    </div>
+
+                    <div class="secure-badge">
+                        🔒 Secure Registration
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="message"
+                    class="alert"
+                ></div>
+
+
+                <form id="registerForm">
+
+                    <div class="field-grid">
+
+                        <!-- FULL NAME -->
+
+                        <div class="field full">
+
+                            <label for="name">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="field">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                maxlength="120"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="field">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="03XX-XXXXXXX"
+                                autocomplete="tel"
+                                maxlength="30"
+                            >
+
+                        </div>
+
+
+                        <!-- CITY -->
+
+                        <div class="field full">
+
+                            <label for="city">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter your city"
+                                autocomplete="address-level2"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- ACCOUNT TYPE -->
+
+                        <div class="field full">
+
+                            <label>
+                                Account Type
+                            </label>
+
+                            <div class="account-types">
+
+                                <div class="account-option">
+
+                                    <input
+                                        type="radio"
+                                        id="customer"
+                                        name="role"
+                                        value="customer"
+                                        checked
+                                    >
+
+                                    <label
+                                        for="customer"
+                                        class="account-label"
+                                    >
+
+                                        <div class="account-icon">
+                                            👤
+                                        </div>
+
+                                        <div>
+                                            <strong>Customer</strong>
+                                            <span>Book trusted care services</span>
+                                        </div>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="account-option">
+
+                                    <input
+                                        type="radio"
+                                        id="caregiver"
+                                        name="role"
+                                        value="caregiver"
+                                    >
+
+                                    <label
+                                        for="caregiver"
+                                        class="account-label"
+                                    >
+
+                                        <div class="account-icon">
+                                            🩺
+                                        </div>
+
+                                        <div>
+                                            <strong>Caregiver</strong>
+                                            <span>Offer care and manage bookings</span>
+                                        </div>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="field">
+
+                            <label for="password">
+                                Password
+                            </label>
+
+                            <div class="password-wrap">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create a password"
+                                    autocomplete="new-password"
+                                    minlength="6"
+                                    maxlength="100"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('password', this)"
+                                    aria-label="Show password"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                            <div class="password-rules">
+
+                                <span
+                                    id="ruleLength"
+                                    class="rule"
+                                >
+                                    ○ 6+ characters
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="field">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="password-wrap">
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Re-enter your password"
+                                    autocomplete="new-password"
+                                    minlength="6"
+                                    maxlength="100"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword('confirmPassword', this)"
+                                    aria-label="Show password"
+                                >
+                                    👁
+                                </button>
+
+                            </div>
+
+                            <div class="password-rules">
+
+                                <span
+                                    id="ruleMatch"
+                                    class="rule"
+                                >
+                                    ○ Passwords must match
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="agreement">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the CareCompanion
+                            <a href="#" onclick="return false;">Terms of Service</a>
+                            and
+                            <a href="#" onclick="return false;">Privacy Policy</a>.
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        type="submit"
+                        id="registerButton"
+                        class="submit-btn"
+                    >
+                        Create Account →
+                    </button>
+
+                </form>
+
+
+                <div class="login-note">
+                    Already registered?
+                    <a href="login.html">
+                        Login to your account
+                    </a>
+                </div>
+
+
+                <div class="footer-note">
+                    Your information is submitted securely to the CareCompanion backend.
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 SUCCESS
+            ========================================== -->
+
+            <div
+                id="successScreen"
+                class="success-screen"
+            >
+
+                <div class="success-circle">
+                    ✓
+                </div>
+
+                <h3>
+                    Account Created
+                </h3>
+
+                <p id="successText">
+                    Your account has been created successfully.
+                </p>
+
+                <a
+                    id="successLink"
+                    href="login.html"
+                    class="success-link"
+                >
+                    Continue
+                </a>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    // =====================================================
+    // API CONFIGURATION
+    // =====================================================
+
+    const API_BASE_URL =
+        "http://127.0.0.1:5000/api";
+
+
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+    const registerForm =
+        document.getElementById(
+            "registerForm"
+        );
+
+    const registerButton =
+        document.getElementById(
+            "registerButton"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "message"
+        );
+
+    const passwordInput =
+        document.getElementById(
+            "password"
+        );
+
+    const confirmPasswordInput =
+        document.getElementById(
+            "confirmPassword"
+        );
+
+    const ruleLength =
+        document.getElementById(
+            "ruleLength"
+        );
+
+    const ruleMatch =
+        document.getElementById(
+            "ruleMatch"
+        );
+
+    const registerArea =
+        document.getElementById(
+            "registerArea"
+        );
+
+    const successScreen =
+        document.getElementById(
+            "successScreen"
+        );
+
+    const successText =
+        document.getElementById(
+            "successText"
+        );
+
+    const successLink =
+        document.getElementById(
+            "successLink"
+        );
+
+
+    // =====================================================
+    // SHOW MESSAGE
+    // =====================================================
+
+    function showMessage(
+        text,
+        type = "error"
+    ) {
+
+        messageElement.textContent =
+            text;
+
+        messageElement.className =
+            `alert ${type}`;
+
+        messageElement.style.display =
+            "block";
+
+    }
+
+
+    function hideMessage() {
+
+        messageElement.style.display =
+            "none";
+
+        messageElement.textContent =
+            "";
+
+    }
+
+
+    // =====================================================
+    // PASSWORD VISIBILITY
+    // =====================================================
+
+    function togglePassword(
+        inputId,
+        button
+    ) {
+
+        const input =
+            document.getElementById(
+                inputId
+            );
+
+        if (
+            input.type === "password"
+        ) {
+
+            input.type =
+                "text";
+
+            button.textContent =
+                "🙈";
+
+            button.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        } else {
+
+            input.type =
+                "password";
+
+            button.textContent =
+                "👁";
+
+            button.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    }
+
+
+    // =====================================================
+    // PASSWORD VALIDATION UI
+    // =====================================================
+
+    function updatePasswordRules() {
+
+        const password =
+            passwordInput.value;
+
+        const confirmation =
+            confirmPasswordInput.value;
+
+
+        if (
+            password.length >= 6
+        ) {
+
+            ruleLength.textContent =
+                "✓ 6+ characters";
+
+            ruleLength.classList.add(
+                "valid"
+            );
+
+        } else {
+
+            ruleLength.textContent =
+                "○ 6+ characters";
+
+            ruleLength.classList.remove(
+                "valid"
+            );
+
+        }
+
+
+        if (
+            confirmation &&
+            password === confirmation
+        ) {
+
+            ruleMatch.textContent =
+                "✓ Passwords match";
+
+            ruleMatch.classList.add(
+                "valid"
+            );
+
+        } else {
+
+            ruleMatch.textContent =
+                "○ Passwords must match";
+
+            ruleMatch.classList.remove(
+                "valid"
+            );
+
+        }
+
+    }
+
+
+    passwordInput.addEventListener(
+        "input",
+        updatePasswordRules
+    );
+
+    confirmPasswordInput.addEventListener(
+        "input",
+        updatePasswordRules
+    );
+
+
+    // =====================================================
+    // REGISTER
+    // =====================================================
+
+    registerForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            hideMessage();
+
+
+            const name =
+                document.getElementById(
+                    "name"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim().toLowerCase();
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const city =
+                document.getElementById(
+                    "city"
+                ).value.trim();
+
+
+            const role =
+                document.querySelector(
+                    'input[name="role"]:checked'
+                )?.value || "customer";
+
+
+            const password =
+                passwordInput.value;
+
+
+            const confirmPassword =
+                confirmPasswordInput.value;
+
+
+            // -------------------------------------------------
+            // VALIDATION
+            // -------------------------------------------------
+
+            if (
+                name.length < 2
+            ) {
+
+                showMessage(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !email ||
+                !email.includes("@")
+            ) {
+
+                showMessage(
+                    "Please enter a valid email address."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !city
+            ) {
+
+                showMessage(
+                    "Please enter your city."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                password.length < 6
+            ) {
+
+                showMessage(
+                    "Password must be at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    "Passwords do not match."
+                );
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // LOADING
+            // -------------------------------------------------
+
+            registerButton.disabled =
+                true;
+
+            registerButton.textContent =
+                "Creating Account...";
+
+
+            try {
+
+                // ---------------------------------------------
+                // API REQUEST
+                // ---------------------------------------------
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/auth/register`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    name,
+
+                                    email,
+
+                                    password,
+
+                                    phone,
+
+                                    city,
+
+                                    role
+
+                                })
+                        }
+                    );
+
+
+                let data = {};
+
+                try {
+
+                    data =
+                        await response.json();
+
+                } catch (error) {
+
+                    data = {};
+
+                }
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        `Registration failed (${response.status}).`
+                    );
+
+                }
+
+
+                // ---------------------------------------------
+                // SAVE LOGIN SESSION
+                // ---------------------------------------------
+
+                if (
+                    data.token
+                ) {
+
+                    localStorage.setItem(
+                        "carecompanion_token",
+                        data.token
+                    );
+
+                }
+
+
+                if (
+                    data.user
+                ) {
+
+                    localStorage.setItem(
+                        "carecompanion_user",
+                        JSON.stringify(
+                            data.user
+                        )
+                    );
+
+                }
+
+
+                // ---------------------------------------------
+                // SUCCESS
+                // ---------------------------------------------
+
+                registerArea.style.display =
+                    "none";
+
+                successScreen.style.display =
+                    "block";
+
+
+                successText.textContent =
+                    data.message ||
+                    "Your CareCompanion account has been created successfully.";
+
+
+                if (
+                    role === "caregiver"
+                ) {
+
+                    successLink.href =
+                        "caregiver-dashboard.html";
+
+                    successLink.textContent =
+                        "Open Caregiver Dashboard →";
+
+                } else {
+
+                    successLink.href =
+                        "dashboard.html";
+
+                    successLink.textContent =
+                        "Open Customer Dashboard →";
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Registration Error:",
+                    error
+                );
+
+
+                const message =
+                    error.message ||
+                    "Unable to create your account.";
+
+
+                if (
+                    message
+                        .toLowerCase()
+                        .includes(
+                            "failed to fetch"
+                        )
+                ) {
+
+                    showMessage(
+                        "Backend se connection nahi ho raha. Please make sure node server.js is running on port 5000."
+                    );
+
+                } else {
+
+                    showMessage(
+                        message
+                    );
+
+                }
+
+            }
+
+            finally {
+
+                registerButton.disabled =
+                    false;
+
+                registerButton.textContent =
+                    "Create Account →";
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

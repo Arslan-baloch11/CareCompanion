@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Profile - CareCompanion</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           CUSTOMER EDIT PROFILE
+        ===================================================== */
+
+        .customer-profile-section {
+            min-height: calc(100vh - 150px);
+            padding: 60px 20px;
+            background: #f7f9fc;
+        }
+
+
+        .customer-profile-wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+
+        .profile-page-header {
+            margin-bottom: 28px;
+        }
+
+
+        .profile-page-header .small-title {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 0 0 8px;
+        }
+
+
+        .profile-page-header h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+            color: #172033;
+        }
+
+
+        .profile-page-header p {
+            margin: 0;
+            color: #667085;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+
+        .customer-profile-card {
+            background: #ffffff;
+            border: 1px solid #e6eaf0;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(16, 24, 40, 0.07);
+            padding: 32px;
+        }
+
+
+        .profile-top-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+
+        .customer-avatar {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+
+        .profile-top-info h2 {
+            margin: 0 0 5px;
+            color: #172033;
+            font-size: 22px;
+        }
+
+
+        .profile-top-info p {
+            margin: 0;
+            color: #667085;
+            font-size: 14px;
+        }
+
+
+        .profile-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+
+        .form-group label {
+            margin-bottom: 8px;
+            color: #344054;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+
+        .form-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #d0d5dd;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #101828;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(
+                    37,
+                    99,
+                    235,
+                    0.10
+                );
+        }
+
+
+        .form-group input:disabled {
+            background: #f2f4f7;
+            color: #667085;
+            cursor: not-allowed;
+        }
+
+
+        .field-help {
+            margin-top: 6px;
+            color: #98a2b3;
+            font-size: 12px;
+        }
+
+
+        .profile-message {
+            display: none;
+            margin-bottom: 20px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        .profile-message.success {
+            display: block;
+            color: #067647;
+            background: #ecfdf3;
+            border: 1px solid #abefc6;
+        }
+
+
+        .profile-message.error {
+            display: block;
+            color: #b42318;
+            background: #fef3f2;
+            border: 1px solid #fecdca;
+        }
+
+
+        .profile-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 25px;
+            border-top: 1px solid #edf0f4;
+        }
+
+
+        .profile-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+
+        .profile-btn.cancel {
+            background: #f2f4f7;
+            color: #344054;
+        }
+
+
+        .profile-btn.cancel:hover {
+            background: #e4e7ec;
+        }
+
+
+        .profile-btn.save {
+            background: #2563eb;
+            color: #ffffff;
+            min-width: 135px;
+        }
+
+
+        .profile-btn.save:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+
+        .profile-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+
+        .loading-area {
+            text-align: center;
+            padding: 70px 20px;
+            color: #667085;
+        }
+
+
+        .loading-spinner {
+            width: 34px;
+            height: 34px;
+            border: 4px solid #e4e7ec;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: profileSpin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+
+        @keyframes profileSpin {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .customer-profile-section {
+                padding: 35px 15px;
+            }
+
+
+            .customer-profile-card {
+                padding: 22px;
+            }
+
+
+            .profile-page-header h1 {
+                font-size: 28px;
+            }
+
+
+            .profile-form {
+                grid-template-columns: 1fr;
+            }
+
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+
+            .profile-top-area {
+                align-items: flex-start;
+            }
+
+
+            .profile-actions {
+                flex-direction: column-reverse;
+            }
+
+
+            .profile-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            Care<span>Companion</span>
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="caregivers.html">
+                Find Caregivers
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a
+                href="#"
+                id="logoutLink"
+            >
+                Logout
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+    <section class="customer-profile-section">
+
+        <div class="customer-profile-wrapper">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="profile-page-header">
+
+                <p class="small-title">
+                    MY ACCOUNT
+                </p>
+
+                <h1>
+                    Edit Your Profile
+                </h1>
+
+                <p>
+                    Keep your personal information
+                    up to date so caregivers can
+                    contact you easily.
+                </p>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loadingArea"
+                class="loading-area"
+            >
+
+                <div class="loading-spinner"></div>
+
+                <div>
+                    Loading your profile...
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE CARD -->
+
+            <div
+                id="profileCard"
+                class="customer-profile-card"
+                style="display:none;"
+            >
+
+
+                <!-- PROFILE TOP -->
+
+                <div class="profile-top-area">
+
+                    <div
+                        id="customerAvatar"
+                        class="customer-avatar"
+                    >
+                        U
+                    </div>
+
+
+                    <div class="profile-top-info">
+
+                        <h2 id="profileDisplayName">
+                            Customer
+                        </h2>
+
+                        <p>
+                            Customer Account
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="profileMessage"
+                    class="profile-message"
+                ></div>
+
+
+                <!-- FORM -->
+
+                <form
+                    id="profileForm"
+                    class="profile-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="customerName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="name"
+                            placeholder="Enter your full name"
+                            maxlength="100"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="customerEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="customerEmail"
+                            disabled
+                        >
+
+                        <div class="field-help">
+                            Email cannot be changed from this page.
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="customerPhone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            name="phone"
+                            placeholder="03XX XXXXXXX"
+                            maxlength="30"
+                        >
+
+                    </div>
+
+
+                    <!-- CITY -->
+
+                    <div class="form-group">
+
+                        <label for="customerCity">
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerCity"
+                            name="city"
+                            placeholder="Enter your city"
+                            maxlength="100"
+                        >
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-group full-width">
+
+                        <div class="profile-actions">
+
+                            <button
+                                type="button"
+                                class="profile-btn cancel"
+                                id="cancelButton"
+                            >
+                                Cancel
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="profile-btn save"
+                                id="saveButton"
+                            >
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <p>
+        Trusted care and companionship
+        for families.
+    </p>
+
+    <p>
+        © 2026 CareCompanion.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     API CLIENT
+===================================================== -->
+
+<script src="js/api.js"></script>
+
+
+<script>
+
+    // =====================================================
+    // CARECOMPANION CUSTOMER EDIT PROFILE
+    // =====================================================
+
+
+    const loadingArea =
+        document.getElementById(
+            "loadingArea"
+        );
+
+
+    const profileCard =
+        document.getElementById(
+            "profileCard"
+        );
+
+
+    const profileForm =
+        document.getElementById(
+            "profileForm"
+        );
+
+
+    const nameInput =
+        document.getElementById(
+            "customerName"
+        );
+
+
+    const emailInput =
+        document.getElementById(
+            "customerEmail"
+        );
+
+
+    const phoneInput =
+        document.getElementById(
+            "customerPhone"
+        );
+
+
+    const cityInput =
+        document.getElementById(
+            "customerCity"
+        );
+
+
+    const avatarElement =
+        document.getElementById(
+            "customerAvatar"
+        );
+
+
+    const displayNameElement =
+        document.getElementById(
+            "profileDisplayName"
+        );
+
+
+    const messageElement =
+        document.getElementById(
+            "profileMessage"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    const cancelButton =
+        document.getElementById(
+            "cancelButton"
+        );
+
+
+    const logoutLink =
+        document.getElementById(
+            "logoutLink"
+        );
+
+
+    // =====================================================
+    // SHOW MESSAGE
+    // =====================================================
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+        messageElement.textContent =
+            message;
+
+        messageElement.className =
+            `profile-message ${type}`;
+
+    }
+
+
+    // =====================================================
+    // GET TOKEN
+    // =====================================================
+
+    function getToken() {
+
+        return localStorage.getItem(
+            "carecompanion_token"
+        );
+
+    }
+
+
+    // =====================================================
+    // LOAD PROFILE
+    // =====================================================
+
+    async function loadCustomerProfile() {
+
+        try {
+
+            const token =
+                getToken();
+
+
+            if (!token) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            const response =
+                await fetch(
+                    "http://localhost:5000/api/auth/me",
+                    {
+                        method: "GET",
+
+                        headers: {
+
+                            "Authorization":
+                                `Bearer ${token}`,
+
+                            "Content-Type":
+                                "application/json"
+
+                        }
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Failed to load profile."
+                );
+
+            }
+
+
+            if (
+                !data.user ||
+                data.user.role !== "customer"
+            ) {
+
+                alert(
+                    "This page is only available for customer accounts."
+                );
+
+                window.location.href =
+                    "dashboard.html";
+
+                return;
+
+            }
+
+
+            const user =
+                data.user;
+
+
+            // -----------------------------------------
+            // FILL FORM
+            // -----------------------------------------
+
+            nameInput.value =
+                user.name || "";
+
+
+            emailInput.value =
+                user.email || "";
+
+
+            phoneInput.value =
+                user.phone || "";
+
+
+            cityInput.value =
+                user.city || "";
+
+
+            displayNameElement.textContent =
+                user.name || "Customer";
+
+
+            const firstLetter =
+                (
+                    user.name ||
+                    "U"
+                )
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            avatarElement.textContent =
+                firstLetter;
+
+
+            // -----------------------------------------
+            // SHOW CARD
+            // -----------------------------------------
+
+            loadingArea.style.display =
+                "none";
+
+            profileCard.style.display =
+                "block";
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Load Profile Error:",
+                error
+            );
+
+
+            loadingArea.innerHTML = `
+
+                <div style="
+                    color:#b42318;
+                    font-weight:600;
+                ">
+                    ${error.message}
+                </div>
+
+                <button
+                    type="button"
+                    onclick="location.reload()"
+                    style="
+                        margin-top:15px;
+                        padding:10px 18px;
+                        border:none;
+                        border-radius:8px;
+                        background:#2563eb;
+                        color:white;
+                        cursor:pointer;
+                        font-weight:700;
+                    "
+                >
+                    Try Again
+                </button>
+
+            `;
+
+        }
+
+    }
+
+
+    // =====================================================
+    // SAVE PROFILE
+    // =====================================================
+
+    profileForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            try {
+
+                const token =
+                    getToken();
+
+
+                if (!token) {
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                const name =
+                    nameInput.value.trim();
+
+
+                const phone =
+                    phoneInput.value.trim();
+
+
+                const city =
+                    cityInput.value.trim();
+
+
+                if (!name) {
+
+                    showMessage(
+                        "Please enter your full name.",
+                        "error"
+                    );
+
+                    nameInput.focus();
+
+                    return;
+
+                }
+
+
+                if (name.length < 2) {
+
+                    showMessage(
+                        "Name must contain at least 2 characters.",
+                        "error"
+                    );
+
+                    nameInput.focus();
+
+                    return;
+
+                }
+
+
+                // -------------------------------------
+                // BUTTON LOADING
+                // -------------------------------------
+
+                saveButton.disabled =
+                    true;
+
+                saveButton.textContent =
+                    "Saving...";
+
+
+                const response =
+                    await fetch(
+                        "http://localhost:5000/api/auth/profile/update",
+                        {
+                            method: "PUT",
+
+                            headers: {
+
+                                "Authorization":
+                                    `Bearer ${token}`,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body: JSON.stringify({
+
+                                name,
+                                phone,
+                                city
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        "Profile update failed."
+                    );
+
+                }
+
+
+                // -------------------------------------
+                // UPDATE LOCAL SESSION
+                // -------------------------------------
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (currentUser) {
+
+                    const updatedUser = {
+
+                        ...currentUser,
+
+                        name:
+                            data.user.name,
+
+                        phone:
+                            data.user.phone,
+
+                        city:
+                            data.user.city
+
+                    };
+
+
+                    localStorage.setItem(
+                        "carecompanion_user",
+                        JSON.stringify(
+                            updatedUser
+                        )
+                    );
+
+                }
+
+
+                // -------------------------------------
+                // UPDATE SCREEN
+                // -------------------------------------
+
+                displayNameElement.textContent =
+                    data.user.name;
+
+
+                avatarElement.textContent =
+                    data.user.name
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                showMessage(
+                    "Your profile has been updated successfully.",
+                    "success"
+                );
+
+
+                // -------------------------------------
+                // RESTORE BUTTON
+                // -------------------------------------
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "Save Changes";
+
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Save Profile Error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Failed to update profile.",
+                    "error"
+                );
+
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "Save Changes";
+
+            }
+
+        }
+    );
+
+
+    // =====================================================
+    // CANCEL
+    // =====================================================
+
+    cancelButton.addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+    );
+
+
+    // =====================================================
+    // LOGOUT
+    // =====================================================
+
+    logoutLink.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+
+            logoutUser();
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+    // =====================================================
+    // START
+    // =====================================================
+
+    loadCustomerProfile();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,3737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Caregiver Dashboard | CareCompanion</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        .dashboard-message {
+            padding: 15px 18px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .dashboard-message.success {
+            display: block;
+            background: #e8f8ef;
+            color: #147a43;
+            border: 1px solid #b8e6ca;
+        }
+
+        .dashboard-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+            border: 1px solid #f2b8b5;
+        }
+
+        .request-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .request-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .customer-info h3 {
+            margin: 0 0 6px;
+        }
+
+        .customer-info p {
+            margin: 4px 0;
+            color: #666;
+        }
+
+        .booking-status {
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fff4d6;
+            color: #946200;
+        }
+
+        .status-accepted {
+            background: #e8f8ef;
+            color: #147a43;
+        }
+
+        .status-rejected {
+            background: #fff0f0;
+            color: #b42318;
+        }
+
+        .status-completed {
+            background: #e8f0ff;
+            color: #2459a6;
+        }
+
+        .status-cancelled {
+            background: #eeeeee;
+            color: #555;
+        }
+
+        .booking-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .booking-detail {
+            background: #f8f9fb;
+            padding: 12px 14px;
+            border-radius: 9px;
+        }
+
+        .booking-detail span {
+            display: block;
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 4px;
+        }
+
+        .booking-detail strong {
+            color: #222;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top: 1px solid #eeeeee;
+            padding-top: 16px;
+        }
+
+        .request-actions button {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 17px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .accept-btn {
+            background: #198754;
+            color: white;
+        }
+
+        .reject-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .complete-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .request-actions button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .empty-bookings {
+            text-align: center;
+            padding: 45px 20px;
+            background: #f8f9fb;
+            border-radius: 12px;
+            color: #666;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile-info-item {
+            background: #f8f9fb;
+            padding: 14px;
+            border-radius: 9px;
+        }
+
+        .profile-info-item span {
+            display: block;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .profile-info-item strong {
+            color: #222;
+        }
+
+        .loading-text {
+            text-align: center;
+            padding: 35px;
+            color: #666;
+        }
+
+        .refresh-btn {
+            background: transparent;
+            border: 1px solid #d5d9df;
+            padding: 9px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .refresh-btn:hover {
+            background: #f5f7fa;
+        }
+
+        .availability-toggle {
+            min-width: 120px;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .availability-toggle:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+
+        /* =====================================================
+           WEEKLY AVAILABILITY PANEL
+        ===================================================== */
+
+        .weekly-availability-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .weekly-availability-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .weekly-availability-header h2 {
+            margin: 0 0 7px;
+            color: #222;
+        }
+
+        .weekly-availability-header p {
+            margin: 0;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .availability-save-btn {
+            border: none;
+            background: #2563eb;
+            color: #ffffff;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+
+        .availability-save-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .availability-save-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .availability-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .availability-table th {
+            background: #f8f9fb;
+            color: #555;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 13px 14px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .availability-table td {
+            padding: 13px 14px;
+            border-bottom: 1px solid #eeeeee;
+            vertical-align: middle;
+        }
+
+        .availability-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .availability-day {
+            font-weight: 700;
+            color: #222;
+            min-width: 110px;
+        }
+
+        .day-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .day-switch input {
+            display: none;
+        }
+
+        .day-switch-track {
+            width: 42px;
+            height: 23px;
+            border-radius: 30px;
+            background: #cbd5e1;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .day-switch-track::after {
+            content: "";
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            top: 3px;
+            left: 3px;
+            border-radius: 50%;
+            background: #ffffff;
+            transition: 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .day-switch input:checked + .day-switch-track {
+            background: #198754;
+        }
+
+        .day-switch input:checked + .day-switch-track::after {
+            transform: translateX(19px);
+        }
+
+        .day-status {
+            font-size: 12px;
+            font-weight: 700;
+            color: #777;
+        }
+
+        .day-switch input:checked ~ .day-status {
+            color: #198754;
+        }
+
+        .availability-time-input {
+            width: 145px;
+            max-width: 100%;
+            padding: 9px 10px;
+            border: 1px solid #d5d9df;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #222;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .availability-time-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .availability-time-input:disabled {
+            background: #f1f3f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .availability-loading {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .availability-note {
+            margin: 14px 0 0;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+
+            .weekly-availability-header {
+                flex-direction: column;
+            }
+
+            .availability-save-btn {
+                width: 100%;
+            }
+
+            .availability-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .availability-time-input {
+                width: 125px;
+            }
+
+        }
+
+        /* =====================================================
+           NOTIFICATION SYSTEM
+        ===================================================== */
+
+        .notification-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .notification-button {
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #e1e5ea;
+            background: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .notification-button:hover {
+            background: #f5f7fa;
+            transform: translateY(-1px);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            min-width: 19px;
+            height: 19px;
+            padding: 0 5px;
+            border-radius: 20px;
+            background: #dc3545;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        .notification-dropdown {
+            position: absolute;
+            top: 52px;
+            right: 0;
+            width: 360px;
+            max-width: calc(100vw - 30px);
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.14);
+            z-index: 9999;
+            display: none;
+            overflow: hidden;
+        }
+
+        .notification-dropdown.show {
+            display: block;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 18px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .notification-header h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .mark-all-btn {
+            border: none;
+            background: transparent;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .mark-all-btn:hover {
+            text-decoration: underline;
+        }
+
+        .notification-list {
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            position: relative;
+            padding: 15px 42px 15px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .notification-item:hover {
+            background: #f8fafc;
+        }
+
+        .notification-item.unread {
+            background: #f0f7ff;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: #222;
+            margin-bottom: 5px;
+        }
+
+        .notification-message {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .notification-time {
+            color: #999;
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        .notification-dot {
+            position: absolute;
+            left: 7px;
+            top: 19px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #2563eb;
+        }
+
+        .notification-delete {
+            position: absolute;
+            right: 12px;
+            top: 15px;
+            border: none;
+            background: transparent;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 3px;
+        }
+
+        .notification-delete:hover {
+            color: #dc3545;
+        }
+
+        .notification-empty {
+            text-align: center;
+            padding: 35px 20px;
+            color: #777;
+        }
+
+        .notification-empty-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .notification-loading {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+
+        @media (max-width: 700px) {
+
+            .booking-details-grid,
+            .profile-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .request-card-header {
+                flex-direction: column;
+            }
+
+            .notification-dropdown {
+                right: -70px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="caregivers.html">
+            Find Caregiver
+        </a>
+
+        <a href="caregiver-dashboard.html">
+            Dashboard
+        </a>
+
+
+        <!-- =========================
+             NOTIFICATION BELL
+        ========================= -->
+
+        <div
+            class="notification-wrapper"
+            id="notificationWrapper"
+        >
+
+            <button
+                id="notificationButton"
+                class="notification-button"
+                type="button"
+                aria-label="Notifications"
+            >
+                🔔
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <div
+                id="notificationDropdown"
+                class="notification-dropdown"
+            >
+
+                <div class="notification-header">
+
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <button
+                        id="markAllNotifications"
+                        class="mark-all-btn"
+                        type="button"
+                    >
+                        Mark all as read
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="notificationList"
+                    class="notification-list"
+                >
+
+                    <div class="notification-loading">
+                        Loading...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="caregiverLogout"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+<section class="caregiver-dashboard-page">
+
+    <div class="caregiver-dashboard-container">
+
+
+        <!-- =========================
+             WELCOME
+        ========================= -->
+
+        <div class="caregiver-dashboard-welcome">
+
+            <div>
+
+                <p class="small-title">
+                    CAREGIVER DASHBOARD
+                </p>
+
+                <h1 id="caregiverWelcome">
+                    Welcome 👋
+                </h1>
+
+                <p>
+                    Manage your bookings,
+                    availability and care requests.
+                </p>
+
+            </div>
+
+
+            <div
+                id="availabilityControl"
+                class="availability-control"
+            >
+
+                <span>
+                    Availability
+                </span>
+
+                <button
+                    id="availabilityButton"
+                    class="availability-toggle"
+                    type="button"
+                >
+                    Loading...
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================
+             MESSAGE
+========================= -->
+
+        <div
+            id="dashboardMessage"
+            class="dashboard-message"
+        ></div>
+
+
+
+        <!-- =========================
+             STATISTICS
+========================= -->
+
+        <div class="dashboard-stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        New Requests
+                    </span>
+
+                    <strong id="requestCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Accepted
+                    </span>
+
+                    <strong id="acceptedCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Earnings
+                    </span>
+
+                    <strong id="earningsCount">
+                        Rs. 0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <span>
+                        Rating
+                    </span>
+
+                    <strong id="caregiverRating">
+                        0.0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- =========================
+             WEEKLY AVAILABILITY
+        ========================= -->
+
+        <section class="weekly-availability-section">
+
+            <div class="weekly-availability-header">
+
+                <div>
+                    <p class="small-title">
+                        YOUR SCHEDULE
+                    </p>
+
+                    <h2>
+                        Weekly Availability
+                    </h2>
+
+                    <p>
+                        Set the days and times when customers can request your care services.
+                    </p>
+                </div>
+
+                <button
+                    id="saveAvailability"
+                    class="availability-save-btn"
+                    type="button"
+                >
+                    💾 Save Availability
+                </button>
+
+            </div>
+
+            <div id="weeklyAvailabilityContainer">
+
+                <div class="availability-loading">
+                    Loading weekly availability...
+                </div>
+
+            </div>
+
+            <p class="availability-note">
+                Tip: Turn a day off if you are not available. Customers will see your weekly schedule before booking.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================
+             BOOKING REQUESTS
+        ========================= -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-header">
+
+                <div>
+
+                    <p class="small-title">
+                        BOOKINGS
+                    </p>
+
+                    <h2>
+                        Booking Requests
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="refreshBookings"
+                    class="refresh-btn"
+                    type="button"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div
+                id="caregiverRequests"
+                class="caregiver-request-list"
+            >
+
+                <div class="loading-text">
+                    Loading booking requests...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             PROFILE
+        ========================= -->
+
+        <section class="caregiver-profile-settings">
+
+            <div>
+
+                <p class="small-title">
+                    MY PROFILE
+                </p>
+
+                <h2>
+                    Caregiver Information
+                </h2>
+
+                <p>
+                    Your caregiver information
+                    from CareCompanion.
+                </p>
+
+            </div>
+
+
+            <div
+                id="caregiverInformation"
+                class="caregiver-information"
+            >
+
+                <div class="loading-text">
+                    Loading profile...
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <p>
+        Trusted care and companionship for families.
+    </p>
+
+    <p>
+        © 2026 CareCompanion.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     API CLIENT
+========================= -->
+
+<script src="js/api.js"></script>
+
+
+<script>
+
+    // =====================================================
+    // CARECOMPANION CAREGIVER DASHBOARD
+    // =====================================================
+
+
+    let caregiverBookings = [];
+
+    let caregiverProfile = null;
+
+    let notifications = [];
+
+
+
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+    const welcomeElement =
+        document.getElementById(
+            "caregiverWelcome"
+        );
+
+    const requestsElement =
+        document.getElementById(
+            "caregiverRequests"
+        );
+
+    const profileElement =
+        document.getElementById(
+            "caregiverInformation"
+        );
+
+    const requestCountElement =
+        document.getElementById(
+            "requestCount"
+        );
+
+    const acceptedCountElement =
+        document.getElementById(
+            "acceptedCount"
+        );
+
+    const earningsCountElement =
+        document.getElementById(
+            "earningsCount"
+        );
+
+    const ratingElement =
+        document.getElementById(
+            "caregiverRating"
+        );
+
+    const logoutButton =
+        document.getElementById(
+            "caregiverLogout"
+        );
+
+    const refreshButton =
+        document.getElementById(
+            "refreshBookings"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "dashboardMessage"
+        );
+
+    const availabilityButton =
+        document.getElementById(
+            "availabilityButton"
+        );
+
+
+    // =====================================================
+    // NOTIFICATION ELEMENTS
+    // =====================================================
+
+    const notificationButton =
+        document.getElementById(
+            "notificationButton"
+        );
+
+    const notificationBadge =
+        document.getElementById(
+            "notificationBadge"
+        );
+
+    const notificationDropdown =
+        document.getElementById(
+            "notificationDropdown"
+        );
+
+    const notificationList =
+        document.getElementById(
+            "notificationList"
+        );
+
+    const markAllNotificationsButton =
+        document.getElementById(
+            "markAllNotifications"
+        );
+
+    const notificationWrapper =
+        document.getElementById(
+            "notificationWrapper"
+        );
+
+
+
+
+    // =====================================================
+    // WEEKLY AVAILABILITY ELEMENTS
+    // =====================================================
+
+    const weeklyAvailabilityContainer =
+        document.getElementById(
+            "weeklyAvailabilityContainer"
+        );
+
+    const saveAvailabilityButton =
+        document.getElementById(
+            "saveAvailability"
+        );
+
+    const availabilityDays = [
+        {
+            key: "monday",
+            label: "Monday"
+        },
+        {
+            key: "tuesday",
+            label: "Tuesday"
+        },
+        {
+            key: "wednesday",
+            label: "Wednesday"
+        },
+        {
+            key: "thursday",
+            label: "Thursday"
+        },
+        {
+            key: "friday",
+            label: "Friday"
+        },
+        {
+            key: "saturday",
+            label: "Saturday"
+        },
+        {
+            key: "sunday",
+            label: "Sunday"
+        }
+    ];
+
+    // =====================================================
+    // ESCAPE HTML
+    // =====================================================
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    // =====================================================
+    // SHOW MESSAGE
+    // =====================================================
+
+    function showMessage(
+        message,
+        type = "success"
+    ) {
+
+        messageElement.textContent =
+            message;
+
+        messageElement.className =
+            `dashboard-message ${type}`;
+
+
+        setTimeout(() => {
+
+            messageElement.className =
+                "dashboard-message";
+
+            messageElement.textContent =
+                "";
+
+        }, 4000);
+
+    }
+
+
+
+    // =====================================================
+    // CHECK LOGIN
+    // =====================================================
+
+    function checkCaregiverLogin() {
+
+        const user =
+            getCurrentUser();
+
+        const token =
+            localStorage.getItem(
+                "carecompanion_token"
+            );
+
+
+        if (!user || !token) {
+
+            window.location.href =
+                "login.html";
+
+            return false;
+
+        }
+
+
+        if (
+            user.role !== "caregiver"
+        ) {
+
+            alert(
+                "This dashboard is only for caregiver accounts."
+            );
+
+
+            window.location.href =
+                "dashboard.html";
+
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+
+    // =====================================================
+    // LOAD BOOKINGS
+    // =====================================================
+
+    async function loadBookings() {
+
+        requestsElement.innerHTML = `
+            <div class="loading-text">
+                Loading booking requests...
+            </div>
+        `;
+
+
+        try {
+
+            const result =
+                await getCaregiverBookings();
+
+
+            if (
+                Array.isArray(result)
+            ) {
+
+                caregiverBookings =
+                    result;
+
+            } else if (
+                result &&
+                Array.isArray(
+                    result.bookings
+                )
+            ) {
+
+                caregiverBookings =
+                    result.bookings;
+
+            } else {
+
+                caregiverBookings = [];
+
+            }
+
+
+            renderBookings();
+
+            updateStatistics();
+
+
+        } catch (error) {
+
+            console.error(
+                "Booking loading error:",
+                error
+            );
+
+
+            requestsElement.innerHTML = `
+                <div class="empty-bookings">
+
+                    <h3>
+                        Unable to load bookings
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message ||
+                            "Please try again."
+                        )}
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // RENDER BOOKINGS
+    // =====================================================
+
+    function renderBookings() {
+
+        if (
+            caregiverBookings.length === 0
+        ) {
+
+            requestsElement.innerHTML = `
+                <div class="empty-bookings">
+
+                    <h3>
+                        No bookings yet
+                    </h3>
+
+                    <p>
+                        New customer booking
+                        requests will appear here.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        const sortedBookings =
+            [...caregiverBookings].sort(
+                (a, b) =>
+                    new Date(
+                        b.createdAt || 0
+                    ) -
+                    new Date(
+                        a.createdAt || 0
+                    )
+            );
+
+
+        requestsElement.innerHTML =
+            sortedBookings
+                .map(
+                    booking =>
+                        createBookingCard(
+                            booking
+                        )
+                )
+                .join("");
+
+    }
+
+
+
+    // =====================================================
+    // CREATE BOOKING CARD
+    // =====================================================
+
+    function createBookingCard(
+        booking
+    ) {
+
+        const customer =
+            booking.customer || {};
+
+
+        const customerName =
+            customer.name ||
+            "Customer";
+
+
+        const customerEmail =
+            customer.email ||
+            "-";
+
+
+        const customerPhone =
+            customer.phone ||
+            "-";
+
+
+        const status =
+            booking.status ||
+            "pending";
+
+
+        const service =
+            formatService(
+                booking.service
+            );
+
+
+        const date =
+            formatDate(
+                booking.bookingDate
+            );
+
+
+        const startTime =
+            formatTime(
+                booking.startTime
+            );
+
+
+        const hours =
+            Number(
+                booking.hours
+            ) || 0;
+
+
+        const totalPrice =
+            Number(
+                booking.totalPrice
+            ) || 0;
+
+
+        const address =
+            booking.address ||
+            "-";
+
+
+        const notes =
+            booking.notes ||
+            "";
+
+
+        return `
+
+            <div class="request-card">
+
+                <div class="request-card-header">
+
+                    <div class="customer-info">
+
+                        <h3>
+                            ${escapeHtml(
+                                customerName
+                            )}
+                        </h3>
+
+                        <p>
+                            📧 ${escapeHtml(
+                                customerEmail
+                            )}
+                        </p>
+
+                        <p>
+                            📱 ${escapeHtml(
+                                customerPhone
+                            )}
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        class="booking-status status-${escapeHtml(
+                            status
+                        )}"
+                    >
+                        ${escapeHtml(
+                            status
+                        )}
+                    </span>
+
+                </div>
+
+
+                <div class="booking-details-grid">
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Service
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                service
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Booking Date
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                date
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Start Time
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                startTime
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong>
+                            ${hours}
+                            hour${
+                                hours === 1
+                                    ? ""
+                                    : "s"
+                            }
+                        </strong>
+
+                    </div>
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Care Location
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                address
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="booking-detail">
+
+                        <span>
+                            Total Amount
+                        </span>
+
+                        <strong>
+                            Rs.
+                            ${totalPrice.toLocaleString()}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                ${
+                    notes
+                        ? `
+                            <div
+                                class="booking-detail"
+                                style="margin-bottom: 18px;"
+                            >
+
+                                <span>
+                                    Customer Notes
+                                </span>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        notes
+                                    )}
+                                </strong>
+
+                            </div>
+                        `
+                        : ""
+                }
+
+
+                <div class="request-actions">
+
+                    ${
+                        status === "pending"
+                            ? `
+
+                                <button
+                                    class="accept-btn"
+                                    onclick="handleAccept('${booking._id}')"
+                                >
+                                    ✓ Accept
+                                </button>
+
+
+                                <button
+                                    class="reject-btn"
+                                    onclick="handleReject('${booking._id}')"
+                                >
+                                    ✕ Reject
+                                </button>
+
+                            `
+                            : ""
+                    }
+
+
+                    ${
+                        status === "accepted"
+                            ? `
+
+                                <button
+                                    class="complete-btn"
+                                    onclick="handleComplete('${booking._id}')"
+                                >
+                                    ✓ Mark as Completed
+                                </button>
+
+                            `
+                            : ""
+                    }
+
+
+                    ${
+                        status === "rejected"
+                            ? `
+
+                                <span>
+                                    This booking was rejected.
+                                </span>
+
+                            `
+                            : ""
+                    }
+
+
+                    ${
+                        status === "completed"
+                            ? `
+
+                                <span>
+                                    ✓ Booking completed.
+                                </span>
+
+                            `
+                            : ""
+                    }
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    // =====================================================
+    // ACCEPT BOOKING
+    // =====================================================
+
+    async function handleAccept(
+        bookingId
+    ) {
+
+        if (
+            !confirm(
+                "Are you sure you want to accept this booking?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            await acceptBooking(
+                bookingId
+            );
+
+
+            showMessage(
+                "Booking accepted successfully.",
+                "success"
+            );
+
+
+            await loadBookings();
+
+            await loadNotifications();
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to accept booking.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // REJECT BOOKING
+    // =====================================================
+
+    async function handleReject(
+        bookingId
+    ) {
+
+        if (
+            !confirm(
+                "Are you sure you want to reject this booking?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            await rejectBooking(
+                bookingId
+            );
+
+
+            showMessage(
+                "Booking rejected successfully.",
+                "success"
+            );
+
+
+            await loadBookings();
+
+            await loadNotifications();
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to reject booking.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // COMPLETE BOOKING
+    // =====================================================
+
+    async function handleComplete(
+        bookingId
+    ) {
+
+        if (
+            !confirm(
+                "Mark this booking as completed?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            await completeBooking(
+                bookingId
+            );
+
+
+            showMessage(
+                "Booking marked as completed.",
+                "success"
+            );
+
+
+            await loadBookings();
+
+            await loadNotifications();
+
+
+        } catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to complete booking.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // UPDATE STATISTICS
+    // =====================================================
+
+    function updateStatistics() {
+
+        const pending =
+            caregiverBookings.filter(
+                booking =>
+                    booking.status === "pending"
+            ).length;
+
+
+        const accepted =
+            caregiverBookings.filter(
+                booking =>
+                    booking.status === "accepted"
+            ).length;
+
+
+        const earnings =
+            caregiverBookings
+                .filter(
+                    booking =>
+                        booking.status === "accepted" ||
+                        booking.status === "completed"
+                )
+                .reduce(
+                    (
+                        total,
+                        booking
+                    ) =>
+                        total +
+                        (
+                            Number(
+                                booking.totalPrice
+                            ) || 0
+                        ),
+                    0
+                );
+
+
+        requestCountElement.textContent =
+            pending;
+
+
+        acceptedCountElement.textContent =
+            accepted;
+
+
+        earningsCountElement.textContent =
+            `Rs. ${earnings.toLocaleString()}`;
+
+
+        if (caregiverProfile) {
+
+            ratingElement.textContent =
+                caregiverProfile.rating ??
+                "0.0";
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // LOAD CAREGIVER PROFILE
+    // =====================================================
+
+    async function loadCaregiverProfile() {
+
+        try {
+
+            let profile = null;
+
+
+            if (
+                caregiverBookings.length > 0 &&
+                caregiverBookings[0].caregiver
+            ) {
+
+                profile =
+                    caregiverBookings[0].caregiver;
+
+            }
+
+
+            if (!profile) {
+
+                const currentUser =
+                    getCurrentUser();
+
+
+                if (currentUser) {
+
+                    const caregiverResult =
+                        await getCaregivers();
+
+                    const caregivers =
+                        Array.isArray(caregiverResult)
+                            ? caregiverResult
+                            : caregiverResult?.caregivers ||
+                              [];
+
+                    profile =
+                        caregivers.find(
+                            caregiver =>
+                                String(caregiver.user || "") ===
+                                String(currentUser.id || currentUser._id || "") ||
+                                String(caregiver.user?._id || "") ===
+                                String(currentUser.id || currentUser._id || "") ||
+                                caregiver.email?.toLowerCase() ===
+                                currentUser.email?.toLowerCase()
+                        );
+
+                }
+
+            }
+
+
+            caregiverProfile =
+                profile;
+
+
+            renderProfile();
+
+            updateStatistics();
+
+        } catch (error) {
+
+            console.error(
+                "Profile loading error:",
+                error
+            );
+
+
+            profileElement.innerHTML = `
+                <div class="empty-bookings">
+                    Unable to load profile information.
+                </div>
+            `;
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // RENDER PROFILE
+    // =====================================================
+
+    function renderProfile() {
+
+        if (!caregiverProfile) {
+
+            profileElement.innerHTML = `
+                <div class="empty-bookings">
+
+                    <h3>
+                        Profile information unavailable
+                    </h3>
+
+                    <p>
+                        Please refresh the page.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        const name =
+            caregiverProfile.name ||
+            "Caregiver";
+
+
+        const email =
+            caregiverProfile.email ||
+            "-";
+
+
+        const phone =
+            caregiverProfile.phone ||
+            "-";
+
+
+        const city =
+            caregiverProfile.city ||
+            "-";
+
+
+        const gender =
+            caregiverProfile.gender ||
+            "-";
+
+
+        const experience =
+            caregiverProfile.experience ??
+            0;
+
+
+        const hourlyRate =
+            Number(
+                caregiverProfile.hourlyRate
+            ) || 0;
+
+
+        const rating =
+            caregiverProfile.rating ??
+            "0.0";
+
+
+        const reviews =
+            caregiverProfile.reviews ??
+            0;
+
+
+        const available =
+            caregiverProfile.available !== false;
+
+
+        profileElement.innerHTML = `
+
+            <div class="profile-info-grid">
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Name
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            name
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Email
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            email
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Phone
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            phone
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        City
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            city
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Gender
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            gender
+                        )}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Experience
+                    </span>
+
+                    <strong>
+                        ${escapeHtml(
+                            experience
+                        )}
+                        years
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Hourly Rate
+                    </span>
+
+                    <strong>
+                        Rs.
+                        ${hourlyRate.toLocaleString()}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Rating
+                    </span>
+
+                    <strong>
+                        ⭐
+                        ${escapeHtml(
+                            rating
+                        )}
+                        (
+                        ${reviews}
+                        reviews)
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        Availability
+                    </span>
+
+                    <strong>
+                        ${
+                            available
+                                ? "Available"
+                                : "Unavailable"
+                        }
+                    </strong>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        updateAvailabilityButton(
+            available
+        );
+
+    }
+
+
+
+    // =====================================================
+    // UPDATE AVAILABILITY BUTTON UI
+    // =====================================================
+
+    function updateAvailabilityButton(
+        available
+    ) {
+
+        availabilityButton.disabled =
+            false;
+
+
+        availabilityButton.textContent =
+            available
+                ? "Available"
+                : "Unavailable";
+
+
+        availabilityButton.style.background =
+            available
+                ? "#198754"
+                : "#dc3545";
+
+    }
+
+
+
+    // =====================================================
+    // CHANGE AVAILABILITY
+    // =====================================================
+
+    async function toggleAvailability() {
+
+        if (!caregiverProfile) {
+
+            showMessage(
+                "Caregiver profile is not loaded yet.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const currentAvailable =
+            caregiverProfile.available !== false;
+
+
+        const newAvailability =
+            !currentAvailable;
+
+
+        try {
+
+            availabilityButton.disabled =
+                true;
+
+
+            availabilityButton.textContent =
+                "Updating...";
+
+
+            const result =
+                await updateCaregiverAvailability(
+                    newAvailability
+                );
+
+
+            caregiverProfile.available =
+                result.available;
+
+
+            updateAvailabilityButton(
+                result.available
+            );
+
+
+            showMessage(
+                result.message ||
+                "Availability updated successfully.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Availability error:",
+                error
+            );
+
+
+            updateAvailabilityButton(
+                currentAvailable
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to update availability.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+
+    // =====================================================
+    // WEEKLY AVAILABILITY
+    // =====================================================
+
+    function getDefaultWeeklyAvailability() {
+
+        return {
+            monday: { available: true, startTime: "09:00", endTime: "17:00" },
+            tuesday: { available: true, startTime: "09:00", endTime: "17:00" },
+            wednesday: { available: true, startTime: "09:00", endTime: "17:00" },
+            thursday: { available: true, startTime: "09:00", endTime: "17:00" },
+            friday: { available: true, startTime: "09:00", endTime: "17:00" },
+            saturday: { available: true, startTime: "09:00", endTime: "17:00" },
+            sunday: { available: true, startTime: "09:00", endTime: "17:00" }
+        };
+
+    }
+
+
+    async function loadWeeklyAvailability() {
+
+        // Always render the schedule first so the page never
+        // becomes unusable because of a network/auth problem.
+        renderWeeklyAvailability(
+            getDefaultWeeklyAvailability()
+        );
+
+        try {
+
+            const currentUser =
+                getCurrentUser();
+
+            const token =
+                localStorage.getItem(
+                    "carecompanion_token"
+                );
+
+            if (!currentUser) {
+                return;
+            }
+
+            // Use the public caregiver list to resolve the
+            // logged-in caregiver profile by ID/email. This
+            // avoids making the page depend on /availability/my
+            // authentication mapping.
+            const caregiverResult =
+                await fetch(
+                    "http://127.0.0.1:5000/api/caregivers"
+                );
+
+            let caregiverData = {};
+
+            try {
+                caregiverData =
+                    await caregiverResult.json();
+            } catch (e) {
+                caregiverData = {};
+            }
+
+            if (!caregiverResult.ok) {
+                throw new Error(
+                    caregiverData.message ||
+                    `Unable to load caregivers (${caregiverResult.status}).`
+                );
+            }
+
+            const caregivers =
+                Array.isArray(caregiverData)
+                    ? caregiverData
+                    : caregiverData.caregivers || [];
+
+            const caregiver =
+                caregivers.find(item =>
+                    String(item.email || "").toLowerCase() ===
+                    String(currentUser.email || "").toLowerCase()
+                    ||
+                    String(item.user || "") ===
+                    String(currentUser.id || currentUser._id || "")
+                    ||
+                    String(item.user?._id || "") ===
+                    String(currentUser.id || currentUser._id || "")
+                );
+
+            if (!caregiver || !caregiver._id) {
+                console.warn(
+                    "Weekly availability: caregiver profile could not be resolved on the frontend."
+                );
+                return;
+            }
+
+            const availabilityResponse =
+                await fetch(
+                    `http://127.0.0.1:5000/api/availability/${caregiver._id}`,
+                    {
+                        headers: token
+                            ? {
+                                Authorization:
+                                    `Bearer ${token}`
+                            }
+                            : {}
+                    }
+                );
+
+            let availabilityResult = {};
+
+            try {
+                availabilityResult =
+                    await availabilityResponse.json();
+            } catch (e) {
+                availabilityResult = {};
+            }
+
+            if (!availabilityResponse.ok) {
+                throw new Error(
+                    availabilityResult.message ||
+                    `Unable to load availability (${availabilityResponse.status}).`
+                );
+            }
+
+            // Backend may return either { availability: {...} }
+            // or the availability object directly.
+            const savedAvailability =
+                availabilityResult.availability ||
+                availabilityResult;
+
+            renderWeeklyAvailability(
+                savedAvailability
+            );
+
+        } catch (error) {
+
+            // Keep the already-rendered default schedule visible.
+            // Do not replace the usable UI with an error panel.
+            console.warn(
+                "Weekly availability background load warning:",
+                error.message || error
+            );
+
+        }
+    }
+
+
+    function renderWeeklyAvailability(availability) {
+
+        // Normalize API response shapes.
+        if (availability && availability.availability) {
+            availability = availability.availability;
+        }
+
+        availability =
+            availability ||
+            getDefaultWeeklyAvailability();
+
+        weeklyAvailabilityContainer.innerHTML = `
+            <div style="overflow-x:auto;">
+                <table class="availability-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Status</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${
+                            availabilityDays.map(day => {
+
+                                const data =
+                                    availability?.[day.key] || {
+                                        available: true,
+                                        startTime: "09:00",
+                                        endTime: "17:00"
+                                    };
+
+                                const available =
+                                    data.available !== false;
+
+                                const startTime =
+                                    data.startTime || "09:00";
+
+                                const endTime =
+                                    data.endTime || "17:00";
+
+                                return `
+                                    <tr>
+
+                                        <td class="availability-day">
+                                            ${day.label}
+                                        </td>
+
+                                        <td>
+
+                                            <label
+                                                class="day-switch"
+                                                title="Toggle ${day.label}"
+                                            >
+
+                                                <input
+                                                    type="checkbox"
+                                                    class="availability-day-checkbox"
+                                                    data-day="${day.key}"
+                                                    ${available ? "checked" : ""}
+                                                    onchange="handleAvailabilityDayToggle('${day.key}')"
+                                                >
+
+                                                <span class="day-switch-track"></span>
+
+                                                <span
+                                                    id="${day.key}-status"
+                                                    class="day-status"
+                                                >
+                                                    ${
+                                                        available
+                                                            ? "Available"
+                                                            : "Unavailable"
+                                                    }
+                                                </span>
+
+                                            </label>
+
+                                        </td>
+
+                                        <td>
+
+                                            <input
+                                                id="${day.key}-start"
+                                                class="availability-time-input"
+                                                type="time"
+                                                value="${escapeHtml(startTime)}"
+                                                ${available ? "" : "disabled"}
+                                            >
+
+                                        </td>
+
+                                        <td>
+
+                                            <input
+                                                id="${day.key}-end"
+                                                class="availability-time-input"
+                                                type="time"
+                                                value="${escapeHtml(endTime)}"
+                                                ${available ? "" : "disabled"}
+                                            >
+
+                                        </td>
+
+                                    </tr>
+                                `;
+
+                            }).join("")
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        `;
+
+    }
+
+
+    function handleAvailabilityDayToggle(day) {
+
+        const checkbox =
+            document.querySelector(
+                `.availability-day-checkbox[data-day="${day}"]`
+            );
+
+        const status =
+            document.getElementById(
+                `${day}-status`
+            );
+
+        const startInput =
+            document.getElementById(
+                `${day}-start`
+            );
+
+        const endInput =
+            document.getElementById(
+                `${day}-end`
+            );
+
+        if (!checkbox) {
+            return;
+        }
+
+        const isAvailable =
+            checkbox.checked;
+
+        if (status) {
+
+            status.textContent =
+                isAvailable
+                    ? "Available"
+                    : "Unavailable";
+
+        }
+
+        if (startInput) {
+            startInput.disabled =
+                !isAvailable;
+        }
+
+        if (endInput) {
+            endInput.disabled =
+                !isAvailable;
+        }
+    }
+
+
+    async function saveWeeklyAvailability() {
+
+        const payload = {};
+
+        availabilityDays.forEach(day => {
+
+            const checkbox =
+                document.querySelector(
+                    `.availability-day-checkbox[data-day="${day.key}"]`
+                );
+
+            const startInput =
+                document.getElementById(
+                    `${day.key}-start`
+                );
+
+            const endInput =
+                document.getElementById(
+                    `${day.key}-end`
+                );
+
+            payload[day.key] = {
+                available:
+                    checkbox
+                        ? checkbox.checked
+                        : false,
+
+                startTime:
+                    startInput?.value ||
+                    "09:00",
+
+                endTime:
+                    endInput?.value ||
+                    "17:00"
+            };
+
+        });
+
+
+        // Validate time ranges for available days
+        for (const day of availabilityDays) {
+
+            const dayData =
+                payload[day.key];
+
+            if (
+                dayData.available &&
+                dayData.startTime >= dayData.endTime
+            ) {
+
+                showMessage(
+                    `${day.label}: End time must be later than start time.`,
+                    "error"
+                );
+
+                return;
+            }
+        }
+
+
+        try {
+
+            saveAvailabilityButton.disabled =
+                true;
+
+            saveAvailabilityButton.textContent =
+                "Saving...";
+
+
+            const result =
+                await apiRequest(
+                    "/availability/update",
+                    {
+                        method: "PUT",
+                        body: JSON.stringify(
+                            payload
+                        )
+                    }
+                );
+
+
+            renderWeeklyAvailability(
+                result.availability
+            );
+
+
+            showMessage(
+                result.message ||
+                "Weekly availability saved successfully.",
+                "success"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Weekly availability save error:",
+                error
+            );
+
+            showMessage(
+                error.message ||
+                "Unable to save weekly availability.",
+                "error"
+            );
+
+        } finally {
+
+            saveAvailabilityButton.disabled =
+                false;
+
+            saveAvailabilityButton.textContent =
+                "💾 Save Availability";
+
+        }
+    }
+
+
+    // =====================================================
+    // FORMAT SERVICE
+    // =====================================================
+
+    function formatService(
+        service
+    ) {
+
+        if (!service) {
+
+            return "-";
+
+        }
+
+
+        const serviceMap = {
+
+            elderly:
+                "Elderly Care",
+
+            companion:
+                "Companionship",
+
+            personal:
+                "Personal Assistance",
+
+            transport:
+                "Transportation"
+
+        };
+
+
+        return (
+            serviceMap[
+                String(service)
+                    .toLowerCase()
+            ] ||
+            String(service)
+        );
+
+    }
+
+
+
+    // =====================================================
+    // FORMAT DATE
+    // =====================================================
+
+    function formatDate(
+        dateValue
+    ) {
+
+        if (!dateValue) {
+
+            return "-";
+
+        }
+
+
+        const date =
+            new Date(dateValue);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(
+                dateValue
+            );
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-PK",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    }
+
+
+
+    // =====================================================
+    // FORMAT TIME
+    // =====================================================
+
+    function formatTime(
+        time
+    ) {
+
+        if (!time) {
+
+            return "-";
+
+        }
+
+
+        const parts =
+            String(time).split(":");
+
+
+        if (
+            parts.length < 2
+        ) {
+
+            return String(time);
+
+        }
+
+
+        let hour =
+            Number(
+                parts[0]
+            );
+
+
+        const minute =
+            parts[1];
+
+
+        const period =
+            hour >= 12
+                ? "PM"
+                : "AM";
+
+
+        hour =
+            hour % 12 || 12;
+
+
+        return `${hour}:${minute} ${period}`;
+
+    }
+
+
+
+    // =====================================================
+    // NOTIFICATIONS
+    // =====================================================
+
+    async function loadNotifications() {
+
+        try {
+
+            const result =
+                await getNotifications();
+
+
+            if (
+                Array.isArray(result)
+            ) {
+
+                notifications =
+                    result;
+
+            } else if (
+                result &&
+                Array.isArray(
+                    result.notifications
+                )
+            ) {
+
+                notifications =
+                    result.notifications;
+
+            } else {
+
+                notifications = [];
+
+            }
+
+
+            const unreadCount =
+                result?.unreadCount ??
+                notifications.filter(
+                    notification =>
+                        !notification.isRead
+                ).length;
+
+
+            updateNotificationBadge(
+                unreadCount
+            );
+
+
+            renderNotifications();
+
+        } catch (error) {
+
+            console.error(
+                "Notification loading error:",
+                error
+            );
+
+
+            notificationList.innerHTML = `
+                <div class="notification-empty">
+
+                    <div class="notification-empty-icon">
+                        ⚠️
+                    </div>
+
+                    <p>
+                        Unable to load notifications.
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // UPDATE NOTIFICATION BADGE
+    // =====================================================
+
+    function updateNotificationBadge(
+        count
+    ) {
+
+        const safeCount =
+            Number(count) || 0;
+
+
+        if (safeCount <= 0) {
+
+            notificationBadge.style.display =
+                "none";
+
+            notificationBadge.textContent =
+                "0";
+
+            return;
+
+        }
+
+
+        notificationBadge.style.display =
+            "flex";
+
+
+        notificationBadge.textContent =
+            safeCount > 99
+                ? "99+"
+                : safeCount;
+
+    }
+
+
+
+    // =====================================================
+    // RENDER NOTIFICATIONS
+    // =====================================================
+
+    function renderNotifications() {
+
+        if (
+            notifications.length === 0
+        ) {
+
+            notificationList.innerHTML = `
+                <div class="notification-empty">
+
+                    <div class="notification-empty-icon">
+                        🔔
+                    </div>
+
+                    <p>
+                        No notifications yet.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        notificationList.innerHTML =
+            notifications
+                .map(
+                    notification =>
+                        createNotificationHtml(
+                            notification
+                        )
+                )
+                .join("");
+
+    }
+
+
+
+    // =====================================================
+    // CREATE NOTIFICATION HTML
+    // =====================================================
+
+    function createNotificationHtml(
+        notification
+    ) {
+
+        const id =
+            notification._id ||
+            notification.id;
+
+
+        const title =
+            notification.title ||
+            "Notification";
+
+
+        const message =
+            notification.message ||
+            "";
+
+
+        const isRead =
+            notification.isRead === true;
+
+
+        const createdAt =
+            notification.createdAt;
+
+
+        return `
+
+            <div
+                class="notification-item ${
+                    isRead
+                        ? ""
+                        : "unread"
+                }"
+                onclick="handleNotificationClick('${id}')"
+            >
+
+                ${
+                    !isRead
+                        ? `
+                            <span
+                                class="notification-dot"
+                            ></span>
+                        `
+                        : ""
+                }
+
+
+                <div class="notification-title">
+                    ${escapeHtml(
+                        title
+                    )}
+                </div>
+
+
+                <div class="notification-message">
+                    ${escapeHtml(
+                        message
+                    )}
+                </div>
+
+
+                <div class="notification-time">
+                    ${formatNotificationTime(
+                        createdAt
+                    )}
+                </div>
+
+
+                <button
+                    class="notification-delete"
+                    type="button"
+                    onclick="event.stopPropagation(); handleDeleteNotification('${id}')"
+                    title="Delete notification"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    // =====================================================
+    // NOTIFICATION CLICK
+    // =====================================================
+
+    async function handleNotificationClick(
+        notificationId
+    ) {
+
+        const notification =
+            notifications.find(
+                item =>
+                    String(
+                        item._id ||
+                        item.id
+                    ) ===
+                    String(
+                        notificationId
+                    )
+            );
+
+
+        if (!notification) {
+
+            return;
+
+        }
+
+
+        if (!notification.isRead) {
+
+            try {
+
+                await markNotificationAsRead(
+                    notificationId
+                );
+
+
+                notification.isRead =
+                    true;
+
+
+                const unreadCount =
+                    notifications.filter(
+                        item =>
+                            !item.isRead
+                    ).length;
+
+
+                updateNotificationBadge(
+                    unreadCount
+                );
+
+
+                renderNotifications();
+
+            } catch (error) {
+
+                console.error(
+                    "Notification read error:",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // MARK ALL NOTIFICATIONS AS READ
+    // =====================================================
+
+    async function handleMarkAllNotifications() {
+
+        try {
+
+            await markAllNotificationsAsRead();
+
+
+            notifications =
+                notifications.map(
+                    notification => ({
+                        ...notification,
+                        isRead: true
+                    })
+                );
+
+
+            updateNotificationBadge(
+                0
+            );
+
+
+            renderNotifications();
+
+
+        } catch (error) {
+
+            console.error(
+                "Mark all notifications error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to mark notifications as read.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // DELETE NOTIFICATION
+    // =====================================================
+
+    async function handleDeleteNotification(
+        notificationId
+    ) {
+
+        try {
+
+            await deleteNotification(
+                notificationId
+            );
+
+
+            notifications =
+                notifications.filter(
+                    notification =>
+                        String(
+                            notification._id ||
+                            notification.id
+                        ) !==
+                        String(
+                            notificationId
+                        )
+                );
+
+
+            const unreadCount =
+                notifications.filter(
+                    notification =>
+                        !notification.isRead
+                ).length;
+
+
+            updateNotificationBadge(
+                unreadCount
+            );
+
+
+            renderNotifications();
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete notification error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to delete notification.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+
+    // =====================================================
+    // FORMAT NOTIFICATION TIME
+    // =====================================================
+
+    function formatNotificationTime(
+        dateValue
+    ) {
+
+        if (!dateValue) {
+
+            return "";
+
+        }
+
+
+        const date =
+            new Date(dateValue);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return "";
+
+        }
+
+
+        const now =
+            new Date();
+
+
+        const difference =
+            now.getTime() -
+            date.getTime();
+
+
+        const minutes =
+            Math.floor(
+                difference /
+                (1000 * 60)
+            );
+
+
+        if (minutes < 1) {
+
+            return "Just now";
+
+        }
+
+
+        if (minutes < 60) {
+
+            return `${minutes} minute${
+                minutes === 1
+                    ? ""
+                    : "s"
+            } ago`;
+
+        }
+
+
+        const hours =
+            Math.floor(
+                minutes / 60
+            );
+
+
+        if (hours < 24) {
+
+            return `${hours} hour${
+                hours === 1
+                    ? ""
+                    : "s"
+            } ago`;
+
+        }
+
+
+        const days =
+            Math.floor(
+                hours / 24
+            );
+
+
+        if (days < 7) {
+
+            return `${days} day${
+                days === 1
+                    ? ""
+                    : "s"
+            } ago`;
+
+        }
+
+
+        return date.toLocaleDateString(
+            "en-PK",
+            {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    }
+
+
+
+    // =====================================================
+    // NOTIFICATION DROPDOWN
+    // =====================================================
+
+    notificationButton.addEventListener(
+        "click",
+        async function (event) {
+
+            event.stopPropagation();
+
+
+            notificationDropdown.classList.toggle(
+                "show"
+            );
+
+
+            if (
+                notificationDropdown.classList.contains(
+                    "show"
+                )
+            ) {
+
+                await loadNotifications();
+
+            }
+
+        }
+    );
+
+
+    notificationDropdown.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            notificationDropdown.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    markAllNotificationsButton.addEventListener(
+        "click",
+        handleMarkAllNotifications
+    );
+
+
+
+
+    // =====================================================
+    // SAVE WEEKLY AVAILABILITY
+    // =====================================================
+
+    saveAvailabilityButton.addEventListener(
+        "click",
+        saveWeeklyAvailability
+    );
+
+
+    // =====================================================
+    // LOGOUT
+    // =====================================================
+
+    logoutButton.addEventListener(
+        "click",
+        function () {
+
+            logoutUser();
+
+        }
+    );
+
+
+
+    // =====================================================
+    // REFRESH BOOKINGS
+    // =====================================================
+
+    refreshButton.addEventListener(
+        "click",
+        async function () {
+
+            refreshButton.disabled =
+                true;
+
+
+            refreshButton.textContent =
+                "↻ Loading...";
+
+
+            await loadBookings();
+
+            await loadCaregiverProfile();
+
+            await loadNotifications();
+
+
+            refreshButton.disabled =
+                false;
+
+
+            refreshButton.textContent =
+                "↻ Refresh";
+
+        }
+    );
+
+
+
+    // =====================================================
+    // AVAILABILITY BUTTON
+    // =====================================================
+
+    availabilityButton.addEventListener(
+        "click",
+        toggleAvailability
+    );
+
+
+
+    // =====================================================
+    // INITIALIZE DASHBOARD
+    // =====================================================
+
+    async function initializeDashboard() {
+
+        if (
+            !checkCaregiverLogin()
+        ) {
+
+            return;
+
+        }
+
+
+        const user =
+            getCurrentUser();
+
+
+        if (user) {
+
+            welcomeElement.textContent =
+                `Welcome, ${
+                    user.name ||
+                    "Caregiver"
+                } 👋`;
+
+        }
+
+
+        await loadBookings();
+
+        await loadCaregiverProfile();
+
+        await loadNotifications();
+
+        await loadWeeklyAvailability();
+
+    }
+
+
+
+    // =====================================================
+    // START
+    // =====================================================
+
+    initializeDashboard();
+
+</script>
+
+</body>
+
+</html>

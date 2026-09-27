@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Caregivers | CareCompanion</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #f5f9f8;
+            color: #183642;
+            font-family: Arial, sans-serif;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+        }
+
+        .page-header p {
+            margin: 0;
+            color: #6c7c83;
+            font-size: 16px;
+        }
+
+        .filters {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+
+        .filters h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            border: 1px solid #ccd9d8;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        .filter-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .btn-primary {
+            background: #08a88a;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #183642;
+            color: white;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .results-header h2 {
+            margin: 0;
+        }
+
+        #resultCount {
+            color: #08a88a;
+            font-weight: bold;
+        }
+
+        .caregiver-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .caregiver-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease;
+        }
+
+        .caregiver-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .caregiver-top {
+            padding: 25px;
+            text-align: center;
+            background: #eef8f6;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            border-radius: 50%;
+            background: #08a88a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .caregiver-top h3 {
+            margin: 15px 0 5px;
+            font-size: 21px;
+        }
+
+        .city {
+            color: #6b7c83;
+        }
+
+        .caregiver-body {
+            padding: 22px;
+        }
+
+        .rating {
+            color: #d99a00;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .info-row {
+            margin: 9px 0;
+            color: #52676e;
+        }
+
+        .info-row strong {
+            color: #183642;
+        }
+
+        .services {
+            margin-top: 15px;
+        }
+
+        .service-tag {
+            display: inline-block;
+            background: #e8f7f3;
+            color: #087b67;
+            padding: 6px 9px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 12px;
+        }
+
+        .verified {
+            display: inline-block;
+            background: #e0f7ec;
+            color: #087653;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .available {
+            display: inline-block;
+            background: #e0f7ec;
+            color: #087653;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .unavailable {
+            display: inline-block;
+            background: #ffe4e4;
+            color: #a52c2c;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .rate {
+            margin-top: 18px;
+            font-size: 20px;
+            color: #08a88a;
+            font-weight: bold;
+        }
+
+        .rate small {
+            font-size: 13px;
+            color: #60747a;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .card-buttons a {
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            padding: 11px 8px;
+            border-radius: 9px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .profile-btn {
+            background: #e9f5f3;
+            color: #087b67;
+        }
+
+        .book-btn {
+            background: #08a88a;
+            color: white;
+        }
+
+        .loading,
+        .empty,
+        .error {
+            background: white;
+            padding: 50px;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .error {
+            color: #a52c2c;
+        }
+
+        .retry-btn {
+            margin-top: 15px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #08a88a;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+
+            .caregiver-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .caregiver-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .card-buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                Care<span>Companion</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="caregivers.html">
+                    Find Caregivers
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <main class="page-container">
+
+
+        <!-- HEADER -->
+
+        <section class="page-header">
+
+            <h1>
+                Find Your Caregiver
+            </h1>
+
+            <p>
+                Browse trusted caregivers and choose the right
+                person for your care needs.
+            </p>
+
+        </section>
+
+
+        <!-- FILTERS -->
+
+        <section class="filters">
+
+            <h2>
+                Search & Filter
+            </h2>
+
+
+            <div class="filter-grid">
+
+
+                <div class="filter-group">
+
+                    <label for="city">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="e.g. Lahore"
+                    >
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="service">
+                        Service
+                    </label>
+
+                    <select id="service">
+
+                        <option value="">
+                            All Services
+                        </option>
+
+                        <option value="elderly">
+                            Elderly Care
+                        </option>
+
+                        <option value="companion">
+                            Companionship
+                        </option>
+
+                        <option value="personal">
+                            Personal Care
+                        </option>
+
+                        <option value="transport">
+                            Transportation
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-group">
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <select id="gender">
+
+                        <option value="">
+                            Any Gender
+                        </option>
+
+                        <option value="male">
+                            Male
+                        </option>
+
+                        <option value="female">
+                            Female
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-buttons">
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="searchCaregiverList()"
+                >
+                    Search
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="resetFilters()"
+                >
+                    Reset
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS HEADER -->
+
+        <div class="results-header">
+
+            <h2>
+                Available Caregivers
+            </h2>
+
+            <span id="resultCount">
+                Loading...
+            </span>
+
+        </div>
+
+
+        <!-- CAREGIVERS -->
+
+        <div id="caregiverContainer">
+
+            <div class="loading">
+                Loading caregivers...
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- API -->
+
+    <script src="js/api.js"></script>
+
+
+    <script>
+
+        let allCaregivers = [];
+
+
+        // =====================================================
+        // LOAD CAREGIVERS
+        // =====================================================
+
+        async function loadCaregivers() {
+
+            const container =
+                document.getElementById(
+                    "caregiverContainer"
+                );
+
+            const resultCount =
+                document.getElementById(
+                    "resultCount"
+                );
+
+
+            container.innerHTML = `
+                <div class="loading">
+                    Loading caregivers...
+                </div>
+            `;
+
+            resultCount.textContent =
+                "Loading...";
+
+
+            try {
+
+                const response =
+                    await getCaregivers();
+
+
+                console.log(
+                    "CARE GIVERS API RESPONSE:",
+                    response
+                );
+
+
+                // Backend returns:
+                // { success, count, caregivers }
+
+                if (
+                    !response ||
+                    !Array.isArray(
+                        response.caregivers
+                    )
+                ) {
+
+                    throw new Error(
+                        "Invalid caregiver response from server."
+                    );
+
+                }
+
+
+                allCaregivers =
+                    response.caregivers;
+
+
+                renderCaregivers(
+                    allCaregivers
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Caregiver Error:",
+                    error
+                );
+
+
+                container.innerHTML = `
+
+                    <div class="error">
+
+                        <h3>
+                            Unable to load caregivers
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(
+                                error.message ||
+                                "Something went wrong."
+                            )}
+                        </p>
+
+                        <button
+                            class="retry-btn"
+                            onclick="loadCaregivers()"
+                        >
+                            Try Again
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                resultCount.textContent =
+                    "0 caregivers";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // RENDER
+        // =====================================================
+
+        function renderCaregivers(
+            caregivers
+        ) {
+
+            const container =
+                document.getElementById(
+                    "caregiverContainer"
+                );
+
+            const resultCount =
+                document.getElementById(
+                    "resultCount"
+                );
+
+
+            resultCount.textContent =
+                `${caregivers.length} caregiver${
+                    caregivers.length === 1
+                        ? ""
+                        : "s"
+                }`;
+
+
+            if (
+                !caregivers.length
+            ) {
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        <h3>
+                            No caregivers found
+                        </h3>
+
+                        <p>
+                            Try changing your search filters.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+            }
+
+
+            container.innerHTML = `
+
+                <div class="caregiver-grid">
+
+                    ${caregivers
+                        .map(
+                            caregiver =>
+                                createCaregiverCard(
+                                    caregiver
+                                )
+                        )
+                        .join("")
+                    }
+
+                </div>
+
+            `;
+
+        }
+
+
+        // =====================================================
+        // CAREGIVER CARD
+        // =====================================================
+
+        function createCaregiverCard(
+            caregiver
+        ) {
+
+            const id =
+                caregiver._id;
+
+
+            const name =
+                caregiver.name ||
+                "Caregiver";
+
+
+            const firstLetter =
+                name
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const city =
+                caregiver.city ||
+                "Pakistan";
+
+
+            const rating =
+                Number(
+                    caregiver.rating || 0
+                ).toFixed(1);
+
+
+            const reviews =
+                caregiver.reviews || 0;
+
+
+            const experience =
+                caregiver.experience || 0;
+
+
+            const hourlyRate =
+                Number(
+                    caregiver.hourlyRate || 0
+                ).toLocaleString("en-PK");
+
+
+            const services =
+                Array.isArray(
+                    caregiver.services
+                )
+                    ? caregiver.services
+                    : [];
+
+
+            const isAvailable =
+                caregiver.available !== false;
+
+
+            const serviceTags =
+                services.length
+
+                    ? services
+                        .map(
+                            service => `
+                                <span class="service-tag">
+                                    ${escapeHtml(
+                                        capitalize(
+                                            service
+                                        )
+                                    )}
+                                </span>
+                            `
+                        )
+                        .join("")
+
+                    : `
+                        <span class="service-tag">
+                            General Care
+                        </span>
+                    `;
+
+
+            return `
+
+                <div class="caregiver-card">
+
+
+                    <div class="caregiver-top">
+
+
+                        <div class="avatar">
+
+                            ${escapeHtml(
+                                firstLetter
+                            )}
+
+                        </div>
+
+
+                        <h3>
+
+                            ${escapeHtml(
+                                name
+                            )}
+
+                        </h3>
+
+
+                        <div class="city">
+
+                            📍
+                            ${escapeHtml(
+                                city
+                            )}
+
+                        </div>
+
+
+                        ${
+                            caregiver.verified
+
+                                ? `
+                                    <span class="verified">
+                                        ✓ Verified
+                                    </span>
+                                `
+
+                                : ""
+                        }
+
+
+                    </div>
+
+
+                    <div class="caregiver-body">
+
+
+                        <div class="rating">
+
+                            ⭐ ${rating}
+
+                            (${reviews} reviews)
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <strong>
+                                Experience:
+                            </strong>
+
+                            ${experience}
+                            years
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <strong>
+                                Gender:
+                            </strong>
+
+                            ${capitalize(
+                                caregiver.gender ||
+                                "Not specified"
+                            )}
+
+                        </div>
+
+
+                        <div class="services">
+
+                            <strong>
+                                Services:
+                            </strong>
+
+                            <div>
+                                ${serviceTags}
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            ${
+                                isAvailable
+
+                                    ? `
+                                        <span class="available">
+                                            ● Available
+                                        </span>
+                                    `
+
+                                    : `
+                                        <span class="unavailable">
+                                            ● Currently Unavailable
+                                        </span>
+                                    `
+                            }
+
+                        </div>
+
+
+                        <div class="rate">
+
+                            PKR ${hourlyRate}
+
+                            <small>
+                                / hour
+                            </small>
+
+                        </div>
+
+
+                        <div class="card-buttons">
+
+
+                            <a
+                                href="caregiver-profile.html?id=${encodeURIComponent(id)}"
+                                class="profile-btn"
+                            >
+                                View Profile
+                            </a>
+
+
+                            ${
+                                isAvailable
+
+                                    ? `
+                                        <a
+                                            href="booking.html?caregiver=${encodeURIComponent(id)}"
+                                            class="book-btn"
+                                        >
+                                            Book Now
+                                        </a>
+                                    `
+
+                                    : `
+                                        <a
+                                            href="caregiver-profile.html?id=${encodeURIComponent(id)}"
+                                            class="profile-btn"
+                                        >
+                                            View
+                                        </a>
+                                    `
+                            }
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        }
+
+
+        // =====================================================
+        // SEARCH
+        // =====================================================
+
+        async function searchCaregiverList() {
+
+            const city =
+                document
+                    .getElementById("city")
+                    .value
+                    .trim();
+
+
+            const service =
+                document
+                    .getElementById("service")
+                    .value;
+
+
+            const gender =
+                document
+                    .getElementById("gender")
+                    .value;
+
+
+            const container =
+                document.getElementById(
+                    "caregiverContainer"
+                );
+
+
+            container.innerHTML = `
+
+                <div class="loading">
+                    Searching caregivers...
+                </div>
+
+            `;
+
+
+            try {
+
+                const params =
+                    new URLSearchParams();
+
+
+                if (city) {
+
+                    params.set(
+                        "city",
+                        city
+                    );
+
+                }
+
+
+                if (service) {
+
+                    params.set(
+                        "service",
+                        service
+                    );
+
+                }
+
+
+                if (gender) {
+
+                    params.set(
+                        "gender",
+                        gender
+                    );
+
+                }
+
+
+                const query =
+                    params.toString()
+                        ? `?${params.toString()}`
+                        : "";
+
+
+                const response =
+                    await getCaregivers(
+                        query
+                    );
+
+
+                console.log(
+                    "SEARCH RESPONSE:",
+                    response
+                );
+
+
+                if (
+                    !response ||
+                    !Array.isArray(
+                        response.caregivers
+                    )
+                ) {
+
+                    throw new Error(
+                        "Invalid search response."
+                    );
+
+                }
+
+
+                renderCaregivers(
+                    response.caregivers
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Search Error:",
+                    error
+                );
+
+
+                container.innerHTML = `
+
+                    <div class="error">
+
+                        <h3>
+                            Search failed
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(
+                                error.message ||
+                                "Please try again."
+                            )}
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // RESET
+        // =====================================================
+
+        function resetFilters() {
+
+            document.getElementById(
+                "city"
+            ).value = "";
+
+
+            document.getElementById(
+                "service"
+            ).value = "";
+
+
+            document.getElementById(
+                "gender"
+            ).value = "";
+
+
+            renderCaregivers(
+                allCaregivers
+            );
+
+        }
+
+
+        // =====================================================
+        // HELPERS
+        // =====================================================
+
+        function capitalize(text) {
+
+            if (!text) {
+                return "";
+            }
+
+
+            return (
+                text
+                    .charAt(0)
+                    .toUpperCase()
+                +
+                text.slice(1)
+            );
+
+        }
+
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // =====================================================
+        // START
+        // =====================================================
+
+        loadCaregivers();
+
+    </script>
+
+
+</body>
+
+</html>

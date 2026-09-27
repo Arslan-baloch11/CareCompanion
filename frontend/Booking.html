@@ -1,0 +1,3164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Book Caregiver | CareCompanion</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        .booking-message {
+            margin-top: 20px;
+            padding: 14px 18px;
+            border-radius: 10px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .booking-message.success {
+            display: block;
+            background: #e8f8ef;
+            color: #147a43;
+            border: 1px solid #b8e6ca;
+        }
+
+        .booking-message.error {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+            border: 1px solid #f2b8b5;
+        }
+
+        .booking-caregiver-loading {
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+
+        .booking-caregiver-card-inner {
+            padding: 25px;
+        }
+
+        .caregiver-avatar-large {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #e8f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #1d70d6;
+            margin-bottom: 18px;
+        }
+
+        .booking-caregiver-card-inner h2 {
+            margin-bottom: 8px;
+        }
+
+        .caregiver-location {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .caregiver-rating {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .caregiver-rate-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f7f9fc;
+            border-radius: 10px;
+        }
+
+        .caregiver-rate-box strong {
+            font-size: 22px;
+        }
+
+        .verified-badge {
+            display: inline-block;
+            margin-top: 12px;
+            margin-right: 6px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #e8f8ef;
+            color: #147a43;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .unavailable-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #fff0f0;
+            color: #b42318;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .loading-button {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* =====================================================
+           WEEKLY AVAILABILITY
+        ===================================================== */
+
+        .availability-section {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f7f9fc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+        }
+
+        .availability-section h3 {
+            margin: 0 0 5px;
+            font-size: 18px;
+        }
+
+        .availability-subtitle {
+            margin: 0 0 15px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .availability-day-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .availability-day {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        .availability-day-name {
+            font-weight: 700;
+            color: #222;
+        }
+
+        .availability-day-time {
+            color: #147a43;
+            font-weight: 600;
+        }
+
+        .availability-day-unavailable {
+            color: #b42318;
+            font-weight: 600;
+        }
+
+        .availability-loading {
+            color: #777;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* =====================================================
+           DATE AVAILABILITY
+        ===================================================== */
+
+        .date-availability-message {
+            margin-top: 8px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .date-availability-message.available {
+            display: block;
+            background: #e8f8ef;
+            color: #147a43;
+            border: 1px solid #b8e6ca;
+        }
+
+        .date-availability-message.unavailable {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+            border: 1px solid #f2b8b5;
+        }
+
+        .date-availability-message.info {
+            display: block;
+            background: #eef5ff;
+            color: #2459a6;
+            border: 1px solid #cbdcff;
+        }
+
+        .time-hint {
+            margin-top: 6px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           BOOKED SLOTS
+        ===================================================== */
+
+        .booked-slots-section {
+            margin-top: 20px;
+            padding: 16px;
+            background: #fff8f8;
+            border: 1px solid #f2d0d0;
+            border-radius: 12px;
+        }
+
+        .booked-slots-section h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+            color: #222;
+        }
+
+        .booked-slots-subtitle {
+            margin: 0 0 12px;
+            color: #777;
+            font-size: 12px;
+        }
+
+        .booked-slot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 12px;
+            margin-top: 8px;
+            background: #ffffff;
+            border: 1px solid #f0caca;
+            border-radius: 8px;
+        }
+
+        .booked-slot-time {
+            color: #b42318;
+            font-weight: 700;
+        }
+
+        .booked-slot-status {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            background: #fff0f0;
+            color: #b42318;
+            font-weight: 700;
+        }
+
+        .no-booked-slots {
+            padding: 10px;
+            background: #e8f8ef;
+            color: #147a43;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =====================================================
+           TIME AVAILABILITY
+        ===================================================== */
+
+        .time-availability-section {
+            margin-top: 15px;
+            padding: 14px;
+            background: #f7f9fc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .time-availability-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .time-slot {
+            padding: 7px 10px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 600;
+            background: #e8f8ef;
+            color: #147a43;
+        }
+
+        .time-slot.booked {
+            background: #fff0f0;
+            color: #b42318;
+            text-decoration: line-through;
+        }
+
+        .schedule-loading {
+            font-size: 12px;
+            color: #777;
+            padding: 8px 0;
+        }
+
+        /* =====================================================
+           FORM HELP
+        ===================================================== */
+
+        .form-help {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #777;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="caregivers.html">
+            Find Caregiver
+        </a>
+
+        <a href="login.html">
+            Login
+        </a>
+
+        <a
+            href="register.html"
+            class="signup"
+        >
+            Get Started
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+<section class="booking-page">
+
+    <div class="booking-container">
+
+
+        <div class="booking-title">
+
+            <p class="small-title">
+                BOOK HOME CARE
+            </p>
+
+            <h1>
+                Book a Caregiver
+            </h1>
+
+            <p>
+                Choose your preferred service,
+                date and time.
+            </p>
+
+        </div>
+
+
+        <div class="booking-grid">
+
+
+            <!-- =================================================
+                 BOOKING FORM
+            ================================================== -->
+
+            <div class="booking-form-card">
+
+                <h2>
+                    Booking Details
+                </h2>
+
+
+                <div class="form-group">
+
+                    <label for="bookingService">
+                        Select Service
+                    </label>
+
+                    <select id="bookingService">
+
+                        <option value="">
+                            Choose a service
+                        </option>
+
+                        <option value="elderly">
+                            Elderly Care
+                        </option>
+
+                        <option value="companion">
+                            Companionship
+                        </option>
+
+                        <option value="personal">
+                            Personal Assistance
+                        </option>
+
+                        <option value="transport">
+                            Transportation
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bookingDate">
+                        Select Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="bookingDate"
+                    >
+
+                    <div
+                        id="dateAvailabilityMessage"
+                        class="date-availability-message"
+                    ></div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="startTime">
+                            Start Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="startTime"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="endTime">
+                            End Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="endTime"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="timeHint"
+                    class="time-hint"
+                ></div>
+
+
+                <div
+                    id="timeAvailabilitySection"
+                    class="time-availability-section"
+                    style="display:none;"
+                >
+
+                    <div class="time-availability-title">
+                        Available / Busy Hours
+                    </div>
+
+                    <div
+                        id="timeSlots"
+                        class="time-slots"
+                    ></div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bookingLocation">
+                        Care Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bookingLocation"
+                        placeholder="Enter your home address"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="bookingNotes">
+                        Additional Information
+                    </label>
+
+                    <textarea
+                        id="bookingNotes"
+                        rows="5"
+                        placeholder="Tell the caregiver anything important about the care needed..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="price-summary">
+
+                    <div>
+
+                        <span>
+                            Hourly Rate
+                        </span>
+
+                        <strong id="hourlyRate">
+                            Rs. 0
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Total Hours
+                        </span>
+
+                        <strong id="totalHours">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total-price">
+
+                        <span>
+                            Total Amount
+                        </span>
+
+                        <strong id="totalAmount">
+                            Rs. 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="bookingMessage"
+                    class="booking-message"
+                ></div>
+
+
+                <button
+                    type="button"
+                    id="confirmBooking"
+                    class="confirm-booking-btn"
+                >
+                    Confirm Booking
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 CAREGIVER SUMMARY
+            ================================================== -->
+
+            <aside
+                class="booking-caregiver-card"
+                id="bookingCaregiver"
+            >
+
+                <div class="booking-caregiver-loading">
+                    Loading caregiver...
+                </div>
+
+            </aside>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="logo">
+        Care<span>Companion</span>
+    </div>
+
+    <p>
+        Trusted care and companionship for families.
+    </p>
+
+    <p>
+        © 2026 CareCompanion.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+<script src="js/api.js"></script>
+
+
+<script>
+
+    // =====================================================
+    // CARECOMPANION BOOKING PAGE
+    // =====================================================
+
+    let selectedCaregiver = null;
+
+    let caregiverAvailability = null;
+
+    let selectedDateSchedule = null;
+
+
+    // =====================================================
+    // GET CAREGIVER ID
+    // =====================================================
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const caregiverId =
+        urlParams.get("caregiver");
+
+
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+    const caregiverContainer =
+        document.getElementById(
+            "bookingCaregiver"
+        );
+
+    const serviceInput =
+        document.getElementById(
+            "bookingService"
+        );
+
+    const dateInput =
+        document.getElementById(
+            "bookingDate"
+        );
+
+    const startTimeInput =
+        document.getElementById(
+            "startTime"
+        );
+
+    const endTimeInput =
+        document.getElementById(
+            "endTime"
+        );
+
+    const locationInput =
+        document.getElementById(
+            "bookingLocation"
+        );
+
+    const notesInput =
+        document.getElementById(
+            "bookingNotes"
+        );
+
+    const hourlyRateElement =
+        document.getElementById(
+            "hourlyRate"
+        );
+
+    const totalHoursElement =
+        document.getElementById(
+            "totalHours"
+        );
+
+    const totalAmountElement =
+        document.getElementById(
+            "totalAmount"
+        );
+
+    const confirmButton =
+        document.getElementById(
+            "confirmBooking"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "bookingMessage"
+        );
+
+    const dateAvailabilityMessage =
+        document.getElementById(
+            "dateAvailabilityMessage"
+        );
+
+    const timeHint =
+        document.getElementById(
+            "timeHint"
+        );
+
+    const timeAvailabilitySection =
+        document.getElementById(
+            "timeAvailabilitySection"
+        );
+
+    const timeSlots =
+        document.getElementById(
+            "timeSlots"
+        );
+
+
+    // =====================================================
+    // SHOW MESSAGE
+    // =====================================================
+
+    function showMessage(
+        message,
+        type = "error"
+    ) {
+
+        messageElement.textContent =
+            message;
+
+        messageElement.className =
+            `booking-message ${type}`;
+
+    }
+
+
+    // =====================================================
+    // CLEAR MESSAGE
+    // =====================================================
+
+    function clearMessage() {
+
+        messageElement.textContent =
+            "";
+
+        messageElement.className =
+            "booking-message";
+
+    }
+
+
+    // =====================================================
+    // CHECK LOGIN
+    // =====================================================
+
+    function checkLogin() {
+
+        const user =
+            getCurrentUser();
+
+        const token =
+            localStorage.getItem(
+                "carecompanion_token"
+            );
+
+        if (!user || !token) {
+
+            showMessage(
+                "Please login as a customer before booking.",
+                "error"
+            );
+
+            confirmButton.disabled =
+                true;
+
+            setTimeout(() => {
+
+                window.location.href =
+                    `login.html?redirect=booking.html?caregiver=${encodeURIComponent(
+                        caregiverId || ""
+                    )}`;
+
+            }, 1500);
+
+            return false;
+
+        }
+
+
+        if (
+            user.role !==
+            "customer"
+        ) {
+
+            showMessage(
+                "Only customer accounts can create bookings.",
+                "error"
+            );
+
+            confirmButton.disabled =
+                true;
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    // =====================================================
+    // SET MINIMUM DATE
+    // =====================================================
+
+    function setMinimumDate() {
+
+        const today =
+            new Date();
+
+        const year =
+            today.getFullYear();
+
+        const month =
+            String(
+                today.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const day =
+            String(
+                today.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+        dateInput.min =
+            `${year}-${month}-${day}`;
+
+    }
+
+
+    // =====================================================
+    // LOAD CAREGIVER
+    // =====================================================
+
+    async function loadCaregiver() {
+
+        if (!caregiverId) {
+
+            caregiverContainer.innerHTML = `
+
+                <div class="booking-caregiver-loading">
+
+                    <h3>
+                        Caregiver not selected
+                    </h3>
+
+                    <p>
+                        Please go back and select a caregiver.
+                    </p>
+
+                </div>
+
+            `;
+
+            confirmButton.disabled =
+                true;
+
+            return;
+
+        }
+
+
+        try {
+
+            selectedCaregiver =
+                await getCaregiver(
+                    caregiverId
+                );
+
+
+            if (
+                selectedCaregiver &&
+                selectedCaregiver.caregiver
+            ) {
+
+                selectedCaregiver =
+                    selectedCaregiver.caregiver;
+
+            }
+
+
+            if (!selectedCaregiver) {
+
+                throw new Error(
+                    "Caregiver information could not be loaded."
+                );
+
+            }
+
+
+            renderCaregiver();
+
+
+            const rate =
+                Number(
+                    selectedCaregiver.hourlyRate
+                ) || 0;
+
+
+            hourlyRateElement.textContent =
+                `Rs. ${rate.toLocaleString()}`;
+
+
+            if (
+                selectedCaregiver.isAvailable === false ||
+                selectedCaregiver.available === false
+            ) {
+
+                confirmButton.disabled =
+                    true;
+
+                confirmButton.textContent =
+                    "Caregiver Unavailable";
+
+            }
+
+
+            if (
+                Array.isArray(
+                    selectedCaregiver.services
+                ) &&
+                selectedCaregiver.services.length > 0
+            ) {
+
+                const availableServices =
+                    selectedCaregiver.services
+                        .map(service =>
+                            String(
+                                service
+                            ).toLowerCase()
+                        );
+
+
+                const options =
+                    Array.from(
+                        serviceInput.options
+                    );
+
+
+                const matchingOption =
+                    options.find(
+                        option =>
+                            availableServices.includes(
+                                option.value.toLowerCase()
+                            )
+                    );
+
+
+                if (matchingOption) {
+
+                    serviceInput.value =
+                        matchingOption.value;
+
+                }
+
+            }
+
+
+            await loadCaregiverAvailability();
+
+        } catch (error) {
+
+            console.error(
+                "Caregiver loading error:",
+                error
+            );
+
+
+            caregiverContainer.innerHTML = `
+
+                <div class="booking-caregiver-loading">
+
+                    <h3>
+                        Unable to load caregiver
+                    </h3>
+
+                    <p>
+                        ${escapeHtml(
+                            error.message
+                        )}
+                    </p>
+
+                </div>
+
+            `;
+
+
+            confirmButton.disabled =
+                true;
+
+
+            showMessage(
+                error.message ||
+                "Unable to load caregiver.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    // =====================================================
+    // LOAD WEEKLY AVAILABILITY
+    // =====================================================
+
+    async function loadCaregiverAvailability() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `http://localhost:5000/api/availability/${encodeURIComponent(
+                        caregiverId
+                    )}`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load caregiver availability."
+                );
+
+            }
+
+
+            caregiverAvailability =
+                await response.json();
+
+
+            renderAvailability();
+
+
+            if (dateInput.value) {
+
+                await loadSelectedDateSchedule();
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Availability loading error:",
+                error
+            );
+
+
+            caregiverAvailability =
+                null;
+
+
+            renderAvailabilityError();
+
+        }
+
+    }
+
+
+    // =====================================================
+    // LOAD SELECTED DATE SCHEDULE
+    // =====================================================
+
+    async function loadSelectedDateSchedule() {
+
+        const date =
+            dateInput.value;
+
+
+        if (!date || !caregiverId) {
+
+            return null;
+
+        }
+
+
+        selectedDateSchedule =
+            null;
+
+
+        timeAvailabilitySection.style.display =
+            "none";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `http://localhost:5000/api/bookings/schedule/${encodeURIComponent(
+                        caregiverId
+                    )}/${encodeURIComponent(
+                        date
+                    )}`
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Unable to load booking schedule."
+                );
+
+            }
+
+
+            selectedDateSchedule =
+                result;
+
+
+            renderDateSchedule();
+
+
+            return result;
+
+        } catch (error) {
+
+            console.error(
+                "Schedule loading error:",
+                error
+            );
+
+
+            selectedDateSchedule =
+                null;
+
+
+            timeAvailabilitySection.style.display =
+                "none";
+
+
+            dateAvailabilityMessage.textContent =
+                error.message ||
+                "Unable to load schedule.";
+
+            dateAvailabilityMessage.className =
+                "date-availability-message unavailable";
+
+
+            return null;
+
+        }
+
+    }
+
+
+    // =====================================================
+    // RENDER WEEKLY AVAILABILITY
+    // =====================================================
+
+    function renderAvailability() {
+
+        const days = [
+
+            {
+                key: "monday",
+                label: "Monday"
+            },
+
+            {
+                key: "tuesday",
+                label: "Tuesday"
+            },
+
+            {
+                key: "wednesday",
+                label: "Wednesday"
+            },
+
+            {
+                key: "thursday",
+                label: "Thursday"
+            },
+
+            {
+                key: "friday",
+                label: "Friday"
+            },
+
+            {
+                key: "saturday",
+                label: "Saturday"
+            },
+
+            {
+                key: "sunday",
+                label: "Sunday"
+            }
+
+        ];
+
+
+        const rows =
+            days.map(
+                day => {
+
+                    const data =
+                        caregiverAvailability?.[
+                            day.key
+                        ];
+
+
+                    if (
+                        !data ||
+                        data.available === false
+                    ) {
+
+                        return `
+
+                            <div class="availability-day">
+
+                                <span class="availability-day-name">
+                                    ${day.label}
+                                </span>
+
+                                <span class="availability-day-unavailable">
+                                    Unavailable
+                                </span>
+
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    return `
+
+                        <div class="availability-day">
+
+                            <span class="availability-day-name">
+                                ${day.label}
+                            </span>
+
+                            <span class="availability-day-time">
+
+                                ${formatTime(
+                                    data.startTime
+                                )}
+
+                                -
+
+                                ${formatTime(
+                                    data.endTime
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            ).join("");
+
+
+        const existingSection =
+            document.getElementById(
+                "weeklyAvailability"
+            );
+
+
+        if (existingSection) {
+
+            existingSection.innerHTML = `
+
+                <h3>
+                    📅 Weekly Availability
+                </h3>
+
+                <p class="availability-subtitle">
+                    Caregiver's regular working schedule
+                </p>
+
+                <div class="availability-day-list">
+
+                    ${rows}
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const section =
+            document.createElement(
+                "div"
+            );
+
+
+        section.id =
+            "weeklyAvailability";
+
+        section.className =
+            "availability-section";
+
+
+        section.innerHTML = `
+
+            <h3>
+                📅 Weekly Availability
+            </h3>
+
+            <p class="availability-subtitle">
+                Caregiver's regular working schedule
+            </p>
+
+            <div class="availability-day-list">
+
+                ${rows}
+
+            </div>
+
+        `;
+
+
+        caregiverContainer
+            .querySelector(
+                ".booking-caregiver-card-inner"
+            )
+            ?.appendChild(
+                section
+            );
+
+    }
+
+
+    // =====================================================
+    // AVAILABILITY ERROR
+    // =====================================================
+
+    function renderAvailabilityError() {
+
+        const section =
+            document.createElement(
+                "div"
+            );
+
+
+        section.id =
+            "weeklyAvailability";
+
+        section.className =
+            "availability-section";
+
+
+        section.innerHTML = `
+
+            <h3>
+                📅 Weekly Availability
+            </h3>
+
+            <p class="availability-loading">
+                Availability information is currently unavailable.
+            </p>
+
+        `;
+
+
+        caregiverContainer
+            .querySelector(
+                ".booking-caregiver-card-inner"
+            )
+            ?.appendChild(
+                section
+            );
+
+    }
+
+
+    // =====================================================
+    // RENDER DATE SCHEDULE
+    // =====================================================
+
+    function renderDateSchedule() {
+
+        if (
+            !selectedDateSchedule
+        ) {
+
+            return;
+
+        }
+
+
+        const schedule =
+            selectedDateSchedule;
+
+
+        if (
+            schedule.available === false
+        ) {
+
+            dateAvailabilityMessage.textContent =
+                "Caregiver is unavailable on the selected date.";
+
+            dateAvailabilityMessage.className =
+                "date-availability-message unavailable";
+
+
+            timeHint.textContent =
+                "";
+
+
+            timeAvailabilitySection.style.display =
+                "none";
+
+
+            confirmButton.disabled =
+                true;
+
+
+            return;
+
+        }
+
+
+        const availability =
+            schedule.availability;
+
+
+        const bookedSlots =
+            Array.isArray(
+                schedule.bookedSlots
+            )
+                ? schedule.bookedSlots
+                : [];
+
+
+        dateAvailabilityMessage.textContent =
+            `✓ Caregiver is available from ${formatTime(
+                availability.startTime
+            )} to ${formatTime(
+                availability.endTime
+            )}.`;
+
+        dateAvailabilityMessage.className =
+            "date-availability-message available";
+
+
+        timeHint.textContent =
+            `Available hours: ${formatTime(
+                availability.startTime
+            )} - ${formatTime(
+                availability.endTime
+            )}`;
+
+
+        timeHint.style.color =
+            "#147a43";
+
+
+        renderTimeSlots(
+            availability,
+            bookedSlots
+        );
+
+
+        renderBookedSlots(
+            bookedSlots
+        );
+
+
+        updateTimeInputs(
+            availability
+        );
+
+
+        validateSelectedDate();
+
+    }
+
+
+    // =====================================================
+    // RENDER TIME SLOTS
+    // =====================================================
+
+    function renderTimeSlots(
+        availability,
+        bookedSlots
+    ) {
+
+        const start =
+            convertTimeToMinutes(
+                availability.startTime
+            );
+
+
+        const end =
+            convertTimeToMinutes(
+                availability.endTime
+            );
+
+
+        if (
+            start === null ||
+            end === null ||
+            end <= start
+        ) {
+
+            timeAvailabilitySection.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const booked =
+            bookedSlots || [];
+
+
+        let html =
+            "";
+
+
+        for (
+            let minutes = start;
+            minutes < end;
+            minutes += 60
+        ) {
+
+            const slotStart =
+                minutes;
+
+
+            const slotEnd =
+                Math.min(
+                    minutes + 60,
+                    end
+                );
+
+
+            const isBooked =
+                booked.some(
+                    slot => {
+
+                        const bookedStart =
+                            convertTimeToMinutes(
+                                slot.startTime
+                            );
+
+                        const bookedEnd =
+                            convertTimeToMinutes(
+                                slot.endTime
+                            );
+
+
+                        return (
+                            slotStart <
+                                bookedEnd &&
+                            slotEnd >
+                                bookedStart
+                        );
+
+                    }
+                );
+
+
+            html += `
+
+                <span class="time-slot ${
+                    isBooked
+                        ? "booked"
+                        : ""
+                }">
+
+                    ${formatTime(
+                        minutesToTime(
+                            slotStart
+                        )
+                    )}
+
+                    -
+
+                    ${formatTime(
+                        minutesToTime(
+                            slotEnd
+                        )
+                    )}
+
+                    ${
+                        isBooked
+                            ? " · Booked"
+                            : " · Available"
+                    }
+
+                </span>
+
+            `;
+
+        }
+
+
+        timeSlots.innerHTML =
+            html;
+
+
+        timeAvailabilitySection.style.display =
+            "block";
+
+    }
+
+
+    // =====================================================
+    // RENDER BOOKED SLOTS
+    // =====================================================
+
+    function renderBookedSlots(
+        bookedSlots
+    ) {
+
+        const existing =
+            document.getElementById(
+                "bookedSlotsSection"
+            );
+
+
+        if (existing) {
+
+            existing.remove();
+
+        }
+
+
+        const section =
+            document.createElement(
+                "div"
+            );
+
+
+        section.id =
+            "bookedSlotsSection";
+
+        section.className =
+            "booked-slots-section";
+
+
+        let content =
+            `
+
+                <h3>
+                    🔴 Booked Time Slots
+                </h3>
+
+                <p class="booked-slots-subtitle">
+                    These times are already reserved and cannot be booked.
+                </p>
+
+            `;
+
+
+        if (
+            !bookedSlots ||
+            bookedSlots.length === 0
+        ) {
+
+            content += `
+
+                <div class="no-booked-slots">
+
+                    ✓ No bookings yet for this date.
+
+                </div>
+
+            `;
+
+        } else {
+
+            bookedSlots.forEach(
+                slot => {
+
+                    content += `
+
+                        <div class="booked-slot">
+
+                            <span class="booked-slot-time">
+
+                                ${formatTime(
+                                    slot.startTime
+                                )}
+
+                                -
+
+                                ${formatTime(
+                                    slot.endTime
+                                )}
+
+                            </span>
+
+                            <span class="booked-slot-status">
+
+                                ${escapeHtml(
+                                    String(
+                                        slot.status ||
+                                        "Booked"
+                                    ).toUpperCase()
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        section.innerHTML =
+            content;
+
+
+        document
+            .querySelector(
+                ".booking-form-card"
+            )
+            ?.insertBefore(
+                section,
+                document.getElementById(
+                    "bookingMessage"
+                )
+            );
+
+    }
+
+
+    // =====================================================
+    // GET DAY KEY
+    // =====================================================
+
+    function getDayKey(
+        dateString
+    ) {
+
+        if (!dateString) {
+
+            return null;
+
+        }
+
+
+        const parts =
+            dateString.split("-");
+
+
+        if (
+            parts.length !== 3
+        ) {
+
+            return null;
+
+        }
+
+
+        const date =
+            new Date(
+                Number(parts[0]),
+                Number(parts[1]) - 1,
+                Number(parts[2])
+            );
+
+
+        const dayMap = {
+
+            0: "sunday",
+            1: "monday",
+            2: "tuesday",
+            3: "wednesday",
+            4: "thursday",
+            5: "friday",
+            6: "saturday"
+
+        };
+
+
+        return dayMap[
+            date.getDay()
+        ];
+
+    }
+
+
+    // =====================================================
+    // FORMAT TIME
+    // =====================================================
+
+    function formatTime(
+        time
+    ) {
+
+        if (!time) {
+
+            return "-";
+
+        }
+
+
+        const parts =
+            String(time).split(":");
+
+
+        if (
+            parts.length < 2
+        ) {
+
+            return String(time);
+
+        }
+
+
+        let hour =
+            Number(parts[0]);
+
+
+        const minute =
+            parts[1];
+
+
+        const period =
+            hour >= 12
+                ? "PM"
+                : "AM";
+
+
+        hour =
+            hour % 12 || 12;
+
+
+        return `${hour}:${minute} ${period}`;
+
+    }
+
+
+    // =====================================================
+    // MINUTES TO TIME
+    // =====================================================
+
+    function minutesToTime(
+        minutes
+    ) {
+
+        if (
+            !Number.isFinite(
+                minutes
+            )
+        ) {
+
+            return null;
+
+        }
+
+
+        const hour =
+            Math.floor(
+                minutes / 60
+            );
+
+
+        const minute =
+            minutes % 60;
+
+
+        return (
+            String(hour).padStart(
+                2,
+                "0"
+            ) +
+            ":" +
+            String(minute).padStart(
+                2,
+                "0"
+            )
+        );
+
+    }
+
+
+    // =====================================================
+    // VALIDATE SELECTED DATE
+    // =====================================================
+
+    function validateSelectedDate() {
+
+        if (
+            !caregiverAvailability
+        ) {
+
+            return false;
+
+        }
+
+
+        const date =
+            dateInput.value;
+
+
+        if (!date) {
+
+            dateAvailabilityMessage.className =
+                "date-availability-message";
+
+            dateAvailabilityMessage.textContent =
+                "";
+
+            return false;
+
+        }
+
+
+        const dayKey =
+            getDayKey(date);
+
+
+        const dayAvailability =
+            caregiverAvailability[
+                dayKey
+            ];
+
+
+        if (
+            !dayAvailability ||
+            dayAvailability.available === false
+        ) {
+
+            dateAvailabilityMessage.textContent =
+                `Caregiver is unavailable on ${capitalizeFirstLetter(
+                    dayKey
+                )}. Please select another date.`;
+
+            dateAvailabilityMessage.className =
+                "date-availability-message unavailable";
+
+
+            confirmButton.disabled =
+                true;
+
+
+            return false;
+
+        }
+
+
+        dateAvailabilityMessage.textContent =
+            `✓ Available on ${capitalizeFirstLetter(
+                dayKey
+            )} from ${formatTime(
+                dayAvailability.startTime
+            )} to ${formatTime(
+                dayAvailability.endTime
+            )}.`;
+
+        dateAvailabilityMessage.className =
+            "date-availability-message available";
+
+
+        timeHint.textContent =
+            `Available hours: ${formatTime(
+                dayAvailability.startTime
+            )} - ${formatTime(
+                dayAvailability.endTime
+            )}`;
+
+
+        updateTimeInputs(
+            dayAvailability
+        );
+
+
+        return true;
+
+    }
+
+
+    // =====================================================
+    // UPDATE TIME INPUTS
+    // =====================================================
+
+    function updateTimeInputs(
+        dayAvailability
+    ) {
+
+        if (!dayAvailability) {
+
+            return;
+
+        }
+
+
+        startTimeInput.min =
+            dayAvailability.startTime ||
+            "";
+
+
+        startTimeInput.max =
+            dayAvailability.endTime ||
+            "";
+
+
+        endTimeInput.min =
+            dayAvailability.startTime ||
+            "";
+
+
+        endTimeInput.max =
+            dayAvailability.endTime ||
+            "";
+
+    }
+
+
+    // =====================================================
+    // VALIDATE BOOKING TIME
+    // =====================================================
+
+    function validateBookingTime() {
+
+        if (
+            !caregiverAvailability
+        ) {
+
+            return true;
+
+        }
+
+
+        const date =
+            dateInput.value;
+
+
+        const startTime =
+            startTimeInput.value;
+
+
+        const endTime =
+            endTimeInput.value;
+
+
+        if (!date) {
+
+            return false;
+
+        }
+
+
+        const dayKey =
+            getDayKey(date);
+
+
+        const availability =
+            caregiverAvailability[
+                dayKey
+            ];
+
+
+        if (
+            !availability ||
+            availability.available === false
+        ) {
+
+            showMessage(
+                "Caregiver is unavailable on the selected date.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            !startTime ||
+            !endTime
+        ) {
+
+            return true;
+
+        }
+
+
+        const availableStart =
+            convertTimeToMinutes(
+                availability.startTime
+            );
+
+
+        const availableEnd =
+            convertTimeToMinutes(
+                availability.endTime
+            );
+
+
+        const selectedStart =
+            convertTimeToMinutes(
+                startTime
+            );
+
+
+        const selectedEnd =
+            convertTimeToMinutes(
+                endTime
+            );
+
+
+        if (
+            selectedStart <
+                availableStart ||
+            selectedEnd >
+                availableEnd
+        ) {
+
+            showMessage(
+                `Selected time must be between ${formatTime(
+                    availability.startTime
+                )} and ${formatTime(
+                    availability.endTime
+                )}.`,
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            selectedEnd <=
+            selectedStart
+        ) {
+
+            showMessage(
+                "End time must be later than start time.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        // -------------------------------------------------
+        // CHECK BOOKED SLOTS
+        // -------------------------------------------------
+
+        if (
+            selectedDateSchedule &&
+            Array.isArray(
+                selectedDateSchedule.bookedSlots
+            )
+        ) {
+
+            const selectedOverlaps =
+                selectedDateSchedule.bookedSlots
+                    .some(
+                        slot => {
+
+                            const bookedStart =
+                                convertTimeToMinutes(
+                                    slot.startTime
+                                );
+
+                            const bookedEnd =
+                                convertTimeToMinutes(
+                                    slot.endTime
+                                );
+
+
+                            return (
+                                selectedStart <
+                                    bookedEnd &&
+                                selectedEnd >
+                                    bookedStart
+                            );
+
+                        }
+                    );
+
+
+            if (selectedOverlaps) {
+
+                showMessage(
+                    "The selected time overlaps with an existing booking. Please choose another time.",
+                    "error"
+                );
+
+                return false;
+
+            }
+
+        }
+
+
+        return true;
+
+    }
+
+
+    // =====================================================
+    // CONVERT TIME TO MINUTES
+    // =====================================================
+
+    function convertTimeToMinutes(
+        time
+    ) {
+
+        if (!time) {
+
+            return null;
+
+        }
+
+
+        const parts =
+            String(time).split(":");
+
+
+        if (
+            parts.length < 2
+        ) {
+
+            return null;
+
+        }
+
+
+        return (
+            Number(parts[0]) * 60 +
+            Number(parts[1])
+        );
+
+    }
+
+
+    // =====================================================
+    // CAPITALIZE
+    // =====================================================
+
+    function capitalizeFirstLetter(
+        value
+    ) {
+
+        if (!value) {
+
+            return "";
+
+        }
+
+
+        return (
+            value.charAt(0).toUpperCase() +
+            value.slice(1)
+        );
+
+    }
+
+
+    // =====================================================
+    // RENDER CAREGIVER
+    // =====================================================
+
+    function renderCaregiver() {
+
+        const name =
+            selectedCaregiver.name ||
+            "Caregiver";
+
+
+        const firstLetter =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+
+        const city =
+            selectedCaregiver.city ||
+            "Pakistan";
+
+
+        const rating =
+            selectedCaregiver.rating ??
+            0;
+
+
+        const reviews =
+            selectedCaregiver.reviews ??
+            0;
+
+
+        const experience =
+            selectedCaregiver.experience ??
+            0;
+
+
+        const rate =
+            Number(
+                selectedCaregiver.hourlyRate
+            ) || 0;
+
+
+        const verified =
+            selectedCaregiver.isVerified ??
+            selectedCaregiver.verified;
+
+
+        const available =
+            selectedCaregiver.isAvailable ??
+            selectedCaregiver.available;
+
+
+        caregiverContainer.innerHTML = `
+
+            <div class="booking-caregiver-card-inner">
+
+                <div class="caregiver-avatar-large">
+
+                    ${escapeHtml(
+                        firstLetter
+                    )}
+
+                </div>
+
+
+                <h2>
+                    ${escapeHtml(
+                        name
+                    )}
+                </h2>
+
+
+                <p class="caregiver-location">
+
+                    📍 ${escapeHtml(
+                        city
+                    )}
+
+                </p>
+
+
+                <div class="caregiver-rating">
+
+                    ⭐ ${escapeHtml(
+                        rating
+                    )}
+
+                    (
+                    ${escapeHtml(
+                        reviews
+                    )}
+                    reviews)
+
+                </div>
+
+
+                <p>
+
+                    <strong>
+                        Experience:
+                    </strong>
+
+                    ${escapeHtml(
+                        experience
+                    )}
+
+                    years
+
+                </p>
+
+
+                <div class="caregiver-rate-box">
+
+                    <span>
+                        Hourly Rate
+                    </span>
+
+                    <br>
+
+                    <strong>
+                        Rs. ${rate.toLocaleString()}
+                    </strong>
+
+                    <span>
+                        / hour
+                    </span>
+
+                </div>
+
+
+                ${
+                    verified
+                        ? `
+                            <span class="verified-badge">
+                                ✓ Verified Caregiver
+                            </span>
+                        `
+                        : ""
+                }
+
+
+                ${
+                    available !== false
+                        ? `
+                            <span class="verified-badge">
+                                ✓ Currently Available
+                            </span>
+                        `
+                        : `
+                            <span class="unavailable-badge">
+                                Currently Unavailable
+                            </span>
+                        `
+                }
+
+
+                <div
+                    id="weeklyAvailability"
+                    class="availability-section"
+                >
+
+                    <div class="availability-loading">
+
+                        Loading weekly availability...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =====================================================
+    // CALCULATE HOURS
+    // =====================================================
+
+    function calculateHours() {
+
+        const start =
+            startTimeInput.value;
+
+
+        const end =
+            endTimeInput.value;
+
+
+        if (
+            !start ||
+            !end
+        ) {
+
+            totalHoursElement.textContent =
+                "0";
+
+            totalAmountElement.textContent =
+                "Rs. 0";
+
+            return 0;
+
+        }
+
+
+        const startMinutes =
+            convertTimeToMinutes(
+                start
+            );
+
+
+        const endMinutes =
+            convertTimeToMinutes(
+                end
+            );
+
+
+        if (
+            startMinutes === null ||
+            endMinutes === null ||
+            endMinutes <= startMinutes
+        ) {
+
+            totalHoursElement.textContent =
+                "0";
+
+            totalAmountElement.textContent =
+                "Rs. 0";
+
+            return 0;
+
+        }
+
+
+        const difference =
+            endMinutes -
+            startMinutes;
+
+
+        const hours =
+            difference / 60;
+
+
+        totalHoursElement.textContent =
+            Number.isInteger(
+                hours
+            )
+                ? hours
+                : hours.toFixed(2);
+
+
+        const rate =
+            Number(
+                selectedCaregiver?.hourlyRate
+            ) || 0;
+
+
+        const total =
+            rate * hours;
+
+
+        totalAmountElement.textContent =
+            `Rs. ${total.toLocaleString()}`;
+
+
+        return hours;
+
+    }
+
+
+    // =====================================================
+    // VALIDATE FORM
+    // =====================================================
+
+    async function validateBooking() {
+
+        if (!selectedCaregiver) {
+
+            showMessage(
+                "Caregiver information is not available.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        const caregiverAvailable =
+            selectedCaregiver.isAvailable ??
+            selectedCaregiver.available;
+
+
+        if (
+            caregiverAvailable === false
+        ) {
+
+            showMessage(
+                "This caregiver is currently unavailable.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        const service =
+            serviceInput.value;
+
+
+        const date =
+            dateInput.value;
+
+
+        const startTime =
+            startTimeInput.value;
+
+
+        const endTime =
+            endTimeInput.value;
+
+
+        const address =
+            locationInput.value.trim();
+
+
+        if (!service) {
+
+            showMessage(
+                "Please select a service.",
+                "error"
+            );
+
+            serviceInput.focus();
+
+            return false;
+
+        }
+
+
+        if (!date) {
+
+            showMessage(
+                "Please select a booking date.",
+                "error"
+            );
+
+            dateInput.focus();
+
+            return false;
+
+        }
+
+
+        if (!validateSelectedDate()) {
+
+            return false;
+
+        }
+
+
+        if (!startTime) {
+
+            showMessage(
+                "Please select a start time.",
+                "error"
+            );
+
+            startTimeInput.focus();
+
+            return false;
+
+        }
+
+
+        if (!endTime) {
+
+            showMessage(
+                "Please select an end time.",
+                "error"
+            );
+
+            endTimeInput.focus();
+
+            return false;
+
+        }
+
+
+        if (
+            !validateBookingTime()
+        ) {
+
+            return false;
+
+        }
+
+
+        const hours =
+            calculateHours();
+
+
+        if (
+            hours <= 0
+        ) {
+
+            showMessage(
+                "End time must be later than start time.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            hours < 1
+        ) {
+
+            showMessage(
+                "Minimum booking duration is 1 hour.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (!address) {
+
+            showMessage(
+                "Please enter the care location.",
+                "error"
+            );
+
+            locationInput.focus();
+
+            return false;
+
+        }
+
+
+        // -------------------------------------------------
+        // REFRESH SCHEDULE BEFORE FINAL BOOKING
+        // -------------------------------------------------
+
+        const latestSchedule =
+            await loadSelectedDateSchedule();
+
+
+        if (
+            !latestSchedule
+        ) {
+
+            showMessage(
+                "Unable to verify caregiver's latest schedule. Please try again.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            latestSchedule.available === false
+        ) {
+
+            showMessage(
+                "Caregiver is unavailable on the selected date.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            latestSchedule.bookedSlots &&
+            latestSchedule.bookedSlots.some(
+                slot => {
+
+                    const selectedStart =
+                        convertTimeToMinutes(
+                            startTime
+                        );
+
+                    const selectedEnd =
+                        convertTimeToMinutes(
+                            endTime
+                        );
+
+                    const bookedStart =
+                        convertTimeToMinutes(
+                            slot.startTime
+                        );
+
+                    const bookedEnd =
+                        convertTimeToMinutes(
+                            slot.endTime
+                        );
+
+                    return (
+                        selectedStart <
+                            bookedEnd &&
+                        selectedEnd >
+                            bookedStart
+                    );
+
+                }
+            )
+        ) {
+
+            showMessage(
+                "This time has just been booked by another customer. Please select another time.",
+                "error"
+            );
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+
+
+    // =====================================================
+    // CREATE BOOKING
+    // =====================================================
+
+    async function submitBooking() {
+
+        clearMessage();
+
+
+        if (!checkLogin()) {
+
+            return;
+
+        }
+
+
+        confirmButton.disabled =
+            true;
+
+
+        confirmButton.classList.add(
+            "loading-button"
+        );
+
+
+        confirmButton.textContent =
+            "Checking Availability...";
+
+
+        try {
+
+            const valid =
+                await validateBooking();
+
+
+            if (!valid) {
+
+                confirmButton.disabled =
+                    false;
+
+                confirmButton.classList.remove(
+                    "loading-button"
+                );
+
+                confirmButton.textContent =
+                    "Confirm Booking";
+
+                return;
+
+            }
+
+
+            const hours =
+                calculateHours();
+
+
+            const bookingData = {
+
+                caregiver:
+                    caregiverId,
+
+                service:
+                    serviceInput.value,
+
+                bookingDate:
+                    dateInput.value,
+
+                startTime:
+                    startTimeInput.value,
+
+                hours:
+                    Number(hours),
+
+                address:
+                    locationInput.value.trim(),
+
+                notes:
+                    notesInput.value.trim()
+
+            };
+
+
+            confirmButton.textContent =
+                "Creating Booking...";
+
+
+            const result =
+                await createBooking(
+                    bookingData
+                );
+
+
+            console.log(
+                "Booking created:",
+                result
+            );
+
+
+            showMessage(
+                "Booking request created successfully! Redirecting to your dashboard...",
+                "success"
+            );
+
+
+            confirmButton.textContent =
+                "Booking Created";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }, 1800);
+
+
+        } catch (error) {
+
+            console.error(
+                "Booking error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to create booking. Please try again.",
+                "error"
+            );
+
+
+            confirmButton.disabled =
+                false;
+
+
+            confirmButton.classList.remove(
+                "loading-button"
+            );
+
+
+            confirmButton.textContent =
+                "Confirm Booking";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // ESCAPE HTML
+    // =====================================================
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    // =====================================================
+    // DATE CHANGE
+    // =====================================================
+
+    dateInput.addEventListener(
+        "change",
+        async function () {
+
+            clearMessage();
+
+
+            selectedDateSchedule =
+                null;
+
+
+            const valid =
+                validateSelectedDate();
+
+
+            if (!valid) {
+
+                return;
+
+            }
+
+
+            await loadSelectedDateSchedule();
+
+
+            calculateHours();
+
+        }
+    );
+
+
+    // =====================================================
+    // START TIME CHANGE
+    // =====================================================
+
+    startTimeInput.addEventListener(
+        "change",
+        function () {
+
+            clearMessage();
+
+            calculateHours();
+
+        }
+    );
+
+
+    startTimeInput.addEventListener(
+        "input",
+        function () {
+
+            calculateHours();
+
+        }
+    );
+
+
+    // =====================================================
+    // END TIME CHANGE
+    // =====================================================
+
+    endTimeInput.addEventListener(
+        "change",
+        function () {
+
+            clearMessage();
+
+            calculateHours();
+
+        }
+    );
+
+
+    endTimeInput.addEventListener(
+        "input",
+        function () {
+
+            calculateHours();
+
+        }
+    );
+
+
+    // =====================================================
+    // CONFIRM BOOKING
+    // =====================================================
+
+    confirmButton.addEventListener(
+        "click",
+        submitBooking
+    );
+
+
+    // =====================================================
+    // INITIALIZE
+    // =====================================================
+
+    setMinimumDate();
+
+    checkLogin();
+
+    loadCaregiver();
+
+</script>
+
+
+</body>
+
+</html>

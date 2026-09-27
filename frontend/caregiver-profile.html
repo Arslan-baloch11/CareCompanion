@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Caregiver Profile - CareCompanion
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           REVIEWS SECTION
+        ====================================================== */
+
+        .reviews-section {
+            margin-top: 25px;
+        }
+
+        .reviews-summary {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px;
+            background: #f7fbfa;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .big-rating {
+            font-size: 34px;
+            font-weight: bold;
+            color: #08a88a;
+        }
+
+        .rating-stars {
+            color: #f5a623;
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+
+        .review-count {
+            color: #71828a;
+            font-size: 15px;
+        }
+
+        .review-card {
+            border: 1px solid #e2ecea;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: white;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .review-customer {
+            font-weight: bold;
+            color: #183642;
+            font-size: 17px;
+        }
+
+        .review-date {
+            color: #8a9aa0;
+            font-size: 13px;
+        }
+
+        .review-rating {
+            color: #f5a623;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .review-comment {
+            color: #566b73;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 35px 20px;
+            color: #71828a;
+            background: #f8fbfb;
+            border-radius: 14px;
+        }
+
+        .reviews-loading {
+            text-align: center;
+            padding: 30px;
+            color: #71828a;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                Care<span>Companion</span>
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="caregivers.html">
+                    Find Caregivers
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a
+                    href="register.html"
+                    class="btn btn-primary"
+                >
+                    Get Started
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         PROFILE
+    ====================================================== -->
+
+    <main>
+
+        <section class="profile-section">
+
+            <div class="container">
+
+
+                <!-- LOADING -->
+
+                <div
+                    id="loading"
+                    class="loading-message"
+                >
+                    Loading caregiver profile...
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="error"
+                    class="auth-message error"
+                    style="display:none;"
+                ></div>
+
+
+                <!-- PROFILE -->
+
+                <div
+                    id="profile"
+                    style="display:none;"
+                >
+
+                    <div class="profile-card">
+
+
+                        <!-- =================================================
+                             PROFILE TOP
+                        ================================================== -->
+
+                        <div class="profile-header">
+
+                            <div
+                                class="profile-avatar"
+                                id="profileAvatar"
+                            >
+                                A
+                            </div>
+
+
+                            <div class="profile-main-info">
+
+                                <h1 id="profileName">
+                                    Caregiver
+                                </h1>
+
+
+                                <p id="profileLocation">
+                                    📍 City
+                                </p>
+
+
+                                <div
+                                    id="verifiedBadge"
+                                    class="verified-badge"
+                                    style="display:none;"
+                                >
+                                    ✓ Verified Caregiver
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             RATING
+                        ================================================== -->
+
+                        <div class="profile-rating">
+
+                            <strong id="profileRating">
+                                ⭐ 0
+                            </strong>
+
+                            <span>
+
+                                (
+                                <span id="profileReviews">
+                                    0
+                                </span>
+
+                                reviews)
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             DETAILS
+                        ================================================== -->
+
+                        <div class="profile-details">
+
+
+                            <div class="profile-detail">
+
+                                <strong>
+                                    Experience
+                                </strong>
+
+                                <span id="profileExperience">
+                                    0 years
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <strong>
+                                    Hourly Rate
+                                </strong>
+
+                                <span id="profileRate">
+                                    PKR 0 / hour
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <strong>
+                                    Gender
+                                </strong>
+
+                                <span
+                                    id="profileGender"
+                                >
+                                    -
+                                </span>
+
+                            </div>
+
+
+                            <div class="profile-detail">
+
+                                <strong>
+                                    Availability
+                                </strong>
+
+                                <span
+                                    id="profileAvailability"
+                                >
+                                    -
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- =================================================
+                             SERVICES
+                        ================================================== -->
+
+                        <div class="profile-section-block">
+
+                            <h2>
+                                Services
+                            </h2>
+
+
+                            <div
+                                id="profileServices"
+                                class="caregiver-services"
+                            ></div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             BIO
+                        ================================================== -->
+
+                        <div class="profile-section-block">
+
+                            <h2>
+                                About
+                            </h2>
+
+
+                            <p id="profileBio">
+                                -
+                            </p>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             REVIEWS
+                        ================================================== -->
+
+                        <div
+                            class="profile-section-block reviews-section"
+                        >
+
+                            <h2>
+                                Reviews & Ratings
+                            </h2>
+
+
+                            <!-- REVIEW SUMMARY -->
+
+                            <div
+                                id="reviewsSummary"
+                                class="reviews-summary"
+                            >
+
+                                <div
+                                    id="bigRating"
+                                    class="big-rating"
+                                >
+                                    0.0
+                                </div>
+
+
+                                <div>
+
+                                    <div
+                                        id="averageStars"
+                                        class="rating-stars"
+                                    >
+                                        ☆☆☆☆☆
+                                    </div>
+
+
+                                    <div
+                                        id="reviewCount"
+                                        class="review-count"
+                                    >
+                                        0 reviews
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- REVIEWS LIST -->
+
+                            <div
+                                id="reviewsContainer"
+                            >
+
+                                <div class="reviews-loading">
+                                    Loading reviews...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             ACTIONS
+                        ================================================== -->
+
+                        <div class="profile-actions">
+
+
+                            <a
+                                href="caregivers.html"
+                                class="btn btn-secondary"
+                            >
+                                ← Back to Caregivers
+                            </a>
+
+
+                            <button
+                                id="bookButton"
+                                class="btn btn-primary"
+                            >
+                                Book Now
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         API
+    ====================================================== -->
+
+    <script src="js/api.js"></script>
+
+
+    <!-- =====================================================
+         PROFILE JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        // =====================================================
+        // ELEMENTS
+        // =====================================================
+
+        const loading =
+            document.getElementById("loading");
+
+
+        const error =
+            document.getElementById("error");
+
+
+        const profile =
+            document.getElementById("profile");
+
+
+        // =====================================================
+        // GET CAREGIVER ID
+        // =====================================================
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const caregiverId =
+            params.get("id");
+
+
+        // =====================================================
+        // FORMAT SERVICE
+        // =====================================================
+
+        function formatService(service) {
+
+            const names = {
+
+                elderly:
+                    "Elderly Care",
+
+                companion:
+                    "Companionship",
+
+                personal:
+                    "Personal Care",
+
+                transport:
+                    "Transportation"
+
+            };
+
+
+            return (
+                names[service] ||
+                service
+            );
+
+        }
+
+
+        // =====================================================
+        // GENERATE STARS
+        // =====================================================
+
+        function generateStars(rating) {
+
+            const rounded =
+                Math.round(
+                    Number(rating) || 0
+                );
+
+
+            let stars = "";
+
+
+            for (
+                let i = 1;
+                i <= 5;
+                i++
+            ) {
+
+                stars +=
+                    i <= rounded
+                        ? "★"
+                        : "☆";
+
+            }
+
+
+            return stars;
+
+        }
+
+
+        // =====================================================
+        // FORMAT REVIEW DATE
+        // =====================================================
+
+        function formatReviewDate(dateValue) {
+
+            if (!dateValue) {
+
+                return "";
+
+            }
+
+
+            const date =
+                new Date(dateValue);
+
+
+            if (
+                isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "";
+
+            }
+
+
+            return date.toLocaleDateString(
+                "en-PK",
+                {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }
+            );
+
+        }
+
+
+        // =====================================================
+        // ESCAPE HTML
+        // =====================================================
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        // =====================================================
+        // LOAD REVIEWS
+        // =====================================================
+
+        async function loadReviews() {
+
+            const container =
+                document.getElementById(
+                    "reviewsContainer"
+                );
+
+
+            try {
+
+                const result =
+                    await apiRequest(
+                        `/reviews/caregiver/${caregiverId}`
+                    );
+
+
+                const reviews =
+                    result.reviews || [];
+
+
+                // ---------------------------------------------
+                // REVIEW SUMMARY
+                // ---------------------------------------------
+
+                const count =
+                    reviews.length;
+
+
+                let average = 0;
+
+
+                if (count > 0) {
+
+                    const total =
+                        reviews.reduce(
+                            (
+                                sum,
+                                review
+                            ) =>
+                                sum +
+                                Number(
+                                    review.rating
+                                ),
+                            0
+                        );
+
+
+                    average =
+                        total / count;
+
+                }
+
+
+                document.getElementById(
+                    "bigRating"
+                ).textContent =
+                    average.toFixed(1);
+
+
+                document.getElementById(
+                    "averageStars"
+                ).textContent =
+                    generateStars(
+                        average
+                    );
+
+
+                document.getElementById(
+                    "reviewCount"
+                ).textContent =
+                    `${count} ${
+                        count === 1
+                            ? "review"
+                            : "reviews"
+                    }`;
+
+
+                // ---------------------------------------------
+                // NO REVIEWS
+                // ---------------------------------------------
+
+                if (reviews.length === 0) {
+
+                    container.innerHTML = `
+
+                        <div class="no-reviews">
+
+                            <h3>
+                                No reviews yet
+                            </h3>
+
+                            <p>
+                                Be the first customer
+                                to review this caregiver
+                                after completing a booking.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                // ---------------------------------------------
+                // REVIEWS
+                // ---------------------------------------------
+
+                container.innerHTML =
+                    reviews
+                        .map(
+                            review => {
+
+                                const customerName =
+                                    review.customer &&
+                                    typeof review.customer ===
+                                        "object"
+                                        ? (
+                                            review.customer.name ||
+                                            "Customer"
+                                        )
+                                        : "Customer";
+
+
+                                const rating =
+                                    Number(
+                                        review.rating
+                                    ) || 0;
+
+
+                                const comment =
+                                    review.comment ||
+                                    "No written comment.";
+
+
+                                const date =
+                                    formatReviewDate(
+                                        review.createdAt
+                                    );
+
+
+                                return `
+
+                                    <div class="review-card">
+
+                                        <div
+                                            class="review-header"
+                                        >
+
+                                            <div
+                                                class="review-customer"
+                                            >
+
+                                                👤
+                                                ${escapeHtml(
+                                                    customerName
+                                                )}
+
+                                            </div>
+
+
+                                            <div
+                                                class="review-date"
+                                            >
+
+                                                ${escapeHtml(
+                                                    date
+                                                )}
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <div
+                                            class="review-rating"
+                                        >
+
+                                            ${generateStars(
+                                                rating
+                                            )}
+
+                                            <span
+                                                style="
+                                                    color:#71828a;
+                                                    font-size:14px;
+                                                    margin-left:8px;
+                                                "
+                                            >
+                                                ${rating}/5
+                                            </span>
+
+                                        </div>
+
+
+                                        <p
+                                            class="review-comment"
+                                        >
+
+                                            ${escapeHtml(
+                                                comment
+                                            )}
+
+                                        </p>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+
+            } catch (err) {
+
+                console.error(
+                    "Reviews Error:",
+                    err
+                );
+
+
+                container.innerHTML = `
+
+                    <div class="no-reviews">
+
+                        <h3>
+                            Unable to load reviews
+                        </h3>
+
+                        <p>
+                            ${
+                                escapeHtml(
+                                    err.message ||
+                                    "Please try again later."
+                                )
+                            }
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // =====================================================
+        // LOAD PROFILE
+        // =====================================================
+
+        async function loadProfile() {
+
+            if (!caregiverId) {
+
+                loading.style.display =
+                    "none";
+
+
+                error.textContent =
+                    "Caregiver ID is missing.";
+
+
+                error.style.display =
+                    "block";
+
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await getCaregiver(
+                        caregiverId
+                    );
+
+
+                // Supports both API response formats
+
+                const caregiver =
+                    response.caregiver ||
+                    response;
+
+
+                // -----------------------------------------
+                // BASIC INFO
+                // -----------------------------------------
+
+                document.getElementById(
+                    "profileName"
+                ).textContent =
+                    caregiver.name ||
+                    "Caregiver";
+
+
+                document.getElementById(
+                    "profileAvatar"
+                ).textContent =
+                    (
+                        caregiver.name ||
+                        "C"
+                    )
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                document.getElementById(
+                    "profileLocation"
+                ).textContent =
+                    `📍 ${
+                        caregiver.city ||
+                        "City"
+                    }`;
+
+
+                document.getElementById(
+                    "profileRating"
+                ).textContent =
+                    `⭐ ${
+                        caregiver.rating ||
+                        0
+                    }`;
+
+
+                document.getElementById(
+                    "profileReviews"
+                ).textContent =
+                    caregiver.reviews ||
+                    0;
+
+
+                document.getElementById(
+                    "profileExperience"
+                ).textContent =
+                    `${
+                        caregiver.experience ||
+                        0
+                    } years`;
+
+
+                document.getElementById(
+                    "profileRate"
+                ).textContent =
+                    `PKR ${
+                        Number(
+                            caregiver.hourlyRate ||
+                            0
+                        ).toLocaleString()
+                    } / hour`;
+
+
+                document.getElementById(
+                    "profileGender"
+                ).textContent =
+                    caregiver.gender
+                        ? caregiver.gender
+                            .charAt(0)
+                            .toUpperCase() +
+                          caregiver.gender.slice(1)
+                        : "-";
+
+
+                document.getElementById(
+                    "profileBio"
+                ).textContent =
+                    caregiver.bio ||
+                    "This caregiver has not added a bio yet.";
+
+
+                // -----------------------------------------
+                // VERIFIED
+                // -----------------------------------------
+
+                if (
+                    caregiver.verified
+                ) {
+
+                    document.getElementById(
+                        "verifiedBadge"
+                    ).style.display =
+                        "inline-block";
+
+                }
+
+
+                // -----------------------------------------
+                // AVAILABILITY
+                // -----------------------------------------
+
+                const availability =
+                    document.getElementById(
+                        "profileAvailability"
+                    );
+
+
+                if (
+                    caregiver.available
+                ) {
+
+                    availability.textContent =
+                        "● Available";
+
+
+                    availability.style.color =
+                        "green";
+
+                } else {
+
+                    availability.textContent =
+                        "● Currently Unavailable";
+
+
+                    availability.style.color =
+                        "red";
+
+                }
+
+
+                // -----------------------------------------
+                // SERVICES
+                // -----------------------------------------
+
+                const servicesContainer =
+                    document.getElementById(
+                        "profileServices"
+                    );
+
+
+                servicesContainer.innerHTML =
+                    "";
+
+
+                (
+                    caregiver.services ||
+                    []
+                )
+                    .forEach(
+                        service => {
+
+                            const tag =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            tag.className =
+                                "service-tag";
+
+
+                            tag.textContent =
+                                formatService(
+                                    service
+                                );
+
+
+                            servicesContainer
+                                .appendChild(
+                                    tag
+                                );
+
+                        }
+                    );
+
+
+                // -----------------------------------------
+                // BOOK BUTTON
+                // -----------------------------------------
+
+                const bookButton =
+                    document.getElementById(
+                        "bookButton"
+                    );
+
+
+                if (
+                    !caregiver.available
+                ) {
+
+                    bookButton.disabled =
+                        true;
+
+
+                    bookButton.textContent =
+                        "Currently Unavailable";
+
+                } else {
+
+                    bookButton.addEventListener(
+                        "click",
+                        function() {
+
+                            window.location.href =
+                                `booking.html?caregiver=${caregiver._id}`;
+
+                        }
+                    );
+
+                }
+
+
+                // -----------------------------------------
+                // LOAD REVIEWS
+                // -----------------------------------------
+
+                await loadReviews();
+
+
+                // -----------------------------------------
+                // SHOW PROFILE
+                // -----------------------------------------
+
+                loading.style.display =
+                    "none";
+
+
+                profile.style.display =
+                    "block";
+
+
+            } catch (err) {
+
+                console.error(
+                    "Profile Error:",
+                    err
+                );
+
+
+                loading.style.display =
+                    "none";
+
+
+                error.textContent =
+                    err.message ||
+                    "Unable to load caregiver profile.";
+
+
+                error.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        // =====================================================
+        // START
+        // =====================================================
+
+        loadProfile();
+
+    </script>
+
+</body>
+
+</html>

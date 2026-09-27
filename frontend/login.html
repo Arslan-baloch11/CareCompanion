@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | CareCompanion</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #13a889;
+            --primary-dark: #0d8f76;
+            --primary-light: #e5f7f3;
+            --dark: #102a43;
+            --text: #40566b;
+            --muted: #718096;
+            --border: #dce5ea;
+            --background: #f5faf9;
+            --white: #ffffff;
+            --danger: #c53030;
+            --success: #16865f;
+        }
+
+        body {
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        /* ================================
+           NAVBAR
+        ================================= */
+
+        .navbar {
+            height: 76px;
+            background: rgba(255,255,255,0.97);
+            border-bottom: 1px solid #edf1f2;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d9f83,
+                    #17b79a
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 22px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(19,168,137,0.20);
+        }
+
+        .brand-name {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.7px;
+            color: var(--dark);
+        }
+
+        .brand-name span {
+            color: var(--primary);
+        }
+
+        .brand-tagline {
+            display: block;
+            color: #78909c;
+            font-size: 10px;
+            margin-top: -2px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #334e68;
+            font-size: 15px;
+            font-weight: 500;
+
+            transition:
+                color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .create-account-nav {
+            border: 1.5px solid var(--primary);
+            color: var(--primary) !important;
+
+            padding: 11px 20px;
+            border-radius: 12px;
+
+            font-weight: 700 !important;
+        }
+
+        .create-account-nav:hover {
+            background: var(--primary);
+            color: white !important;
+        }
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .page {
+            min-height:
+                calc(100vh - 76px);
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.05fr)
+                minmax(480px, 0.95fr);
+
+            overflow: hidden;
+        }
+
+        /* ================================
+           LEFT HERO
+        ================================= */
+
+        .hero {
+            position: relative;
+            min-height: 780px;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+
+            padding:
+                55px
+                7%
+                55px
+                7%;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(247,252,251,0.98) 0%,
+                    rgba(247,252,251,0.92) 38%,
+                    rgba(247,252,251,0.45) 68%,
+                    rgba(247,252,251,0.12) 100%
+                );
+
+            z-index: 1;
+        }
+
+        /*
+            Image-like background created with CSS.
+            No external image is required.
+        */
+
+        .hero-photo {
+            position: absolute;
+            right: -40px;
+            top: 0;
+            bottom: 0;
+            width: 68%;
+
+            background:
+                radial-gradient(
+                    circle at 72% 34%,
+                    rgba(255,255,255,0.92) 0 6%,
+                    transparent 7%
+                ),
+
+                radial-gradient(
+                    ellipse at 72% 65%,
+                    #e6d8c8 0 16%,
+                    transparent 17%
+                ),
+
+                radial-gradient(
+                    ellipse at 58% 35%,
+                    #5d7685 0 12%,
+                    transparent 13%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #dceeea,
+                    #f5f1e9 52%,
+                    #d9ebe6
+                );
+
+            opacity: 0.65;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 570px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 4px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size:
+                clamp(42px, 4.2vw, 68px);
+
+            line-height: 1.04;
+            letter-spacing: -2.5px;
+
+            color: var(--dark);
+
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            max-width: 510px;
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            color: #526779;
+
+            margin-bottom: 30px;
+        }
+
+        /* ================================
+           FEATURES
+        ================================= */
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 19px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e1f6f1,
+                    #ccefe7
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: var(--primary);
+            font-size: 22px;
+
+            border: 1px solid #d0eee7;
+        }
+
+        .feature-title {
+            font-weight: 750;
+            font-size: 15px;
+            color: var(--dark);
+
+            margin-bottom: 3px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        /* ================================
+           QUOTE
+        ================================= */
+
+        .quote {
+            margin-top: 30px;
+
+            max-width: 475px;
+
+            padding: 18px 22px;
+
+            background:
+                rgba(255,255,255,0.68);
+
+            border:
+                1px solid rgba(255,255,255,0.9);
+
+            border-radius: 18px;
+
+            backdrop-filter: blur(10px);
+
+            box-shadow:
+                0 12px 35px rgba(16,42,67,0.06);
+        }
+
+        .quote-mark {
+            color: var(--primary);
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 0.6;
+            margin-right: 5px;
+        }
+
+        .quote-text {
+            color: #4d6275;
+            font-size: 13px;
+            line-height: 1.55;
+            font-style: italic;
+        }
+
+        /* ================================
+           LOGIN SIDE
+        ================================= */
+
+        .login-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                45px
+                7%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5faf9,
+                    #eef7f5
+                );
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 540px;
+
+            background: white;
+
+            border-radius: 28px;
+
+            padding:
+                42px 44px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(16,42,67,0.10);
+
+            border:
+                1px solid rgba(255,255,255,0.9);
+        }
+
+        .login-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .login-heading h2 {
+            font-size: 38px;
+            letter-spacing: -1px;
+            color: var(--dark);
+
+            margin-bottom: 8px;
+        }
+
+        .login-heading p {
+            color: #718096;
+            font-size: 15px;
+        }
+
+        /* ================================
+           ROLE TABS
+        ================================= */
+
+        .role-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            background: #f4f7f8;
+
+            padding: 5px;
+
+            border-radius: 14px;
+
+            margin-bottom: 26px;
+        }
+
+        .role-tab {
+            border: none;
+            background: transparent;
+
+            padding: 13px 7px;
+
+            border-radius: 10px;
+
+            color: #526779;
+
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 650;
+
+            transition: all 0.2s ease;
+        }
+
+        .role-tab:hover {
+            color: var(--primary);
+        }
+
+        .role-tab.active {
+            background: white;
+
+            color: var(--primary);
+
+            box-shadow:
+                0 4px 12px rgba(16,42,67,0.08);
+        }
+
+        .role-icon {
+            font-size: 17px;
+            margin-right: 5px;
+        }
+
+        /* ================================
+           FORM
+        ================================= */
+
+        .message {
+            display: none;
+
+            padding: 12px 14px;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+            line-height: 1.5;
+
+            margin-bottom: 18px;
+        }
+
+        .message.error {
+            display: block;
+
+            color: var(--danger);
+
+            background: #fff4f4;
+
+            border: 1px solid #f3cccc;
+        }
+
+        .message.success {
+            display: block;
+
+            color: var(--success);
+
+            background: #effaf5;
+
+            border: 1px solid #c7ead9;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+
+            color: var(--dark);
+
+            font-size: 14px;
+            font-weight: 700;
+
+            margin-bottom: 9px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 16px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #7c91a3;
+
+            font-size: 18px;
+
+            pointer-events: none;
+        }
+
+        .field input {
+            width: 100%;
+
+            height: 54px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: #fbfdfd;
+
+            padding:
+                0 48px 0 46px;
+
+            outline: none;
+
+            color: var(--dark);
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s,
+                background 0.2s;
+        }
+
+        .field input:focus {
+            border-color: var(--primary);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(19,168,137,0.10);
+        }
+
+        .field input::placeholder {
+            color: #9aaab6;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #718096;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        /* ================================
+           OPTIONS
+        ================================= */
+
+        .options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin:
+                3px 0 24px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #526779;
+            font-size: 13px;
+
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+
+            accent-color: var(--primary);
+
+            cursor: pointer;
+        }
+
+        .forgot {
+            color: var(--primary);
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* ================================
+           LOGIN BUTTON
+        ================================= */
+
+        .login-button {
+            width: 100%;
+            height: 55px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #13a889,
+                    #0d997f
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px
+                rgba(19,168,137,0.22);
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                opacity 0.2s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(19,168,137,0.28);
+        }
+
+        .login-button:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .button-arrow {
+            margin-left: 8px;
+            font-size: 18px;
+        }
+
+        /* ================================
+           DIVIDER
+        ================================= */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            margin: 24px 0 20px;
+
+            color: #93a4b0;
+
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #e5eaed;
+        }
+
+        /* ================================
+           SOCIAL
+        ================================= */
+
+        .social-button {
+            width: 100%;
+            height: 50px;
+
+            background: white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            color: #334e68;
+
+            font-size: 14px;
+            font-weight: 650;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                border-color 0.2s;
+        }
+
+        .social-button:hover {
+            background: #f8fbfb;
+            border-color: #b9d9d2;
+        }
+
+        .google-icon {
+            font-weight: 800;
+            font-size: 19px;
+            color: #4285f4;
+        }
+
+        /* ================================
+           REGISTER
+        ================================= */
+
+        .register-text {
+            text-align: center;
+
+            color: #718096;
+
+            font-size: 13px;
+
+            margin-top: 25px;
+        }
+
+        .register-text a {
+            color: var(--primary);
+
+            font-weight: 750;
+        }
+
+        .register-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================================
+           LOADING
+        ================================= */
+
+        .spinner {
+            display: inline-block;
+
+            width: 15px;
+            height: 15px;
+
+            border:
+                2px solid
+                rgba(255,255,255,0.45);
+
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation:
+                spin 0.7s linear infinite;
+
+            vertical-align: middle;
+
+            margin-right: 7px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 1100px) {
+
+            .page {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .hero {
+                min-height: 570px;
+            }
+
+            .hero-photo {
+                width: 60%;
+                opacity: 0.35;
+            }
+
+            .login-area {
+                padding:
+                    45px 5%;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                height: auto;
+                min-height: 70px;
+
+                padding:
+                    15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .brand-name {
+                font-size: 23px;
+            }
+
+            .brand-tagline {
+                font-size: 9px;
+            }
+
+            .hero {
+                min-height: auto;
+
+                padding:
+                    55px 25px;
+            }
+
+            .hero-photo {
+                width: 100%;
+                right: -30%;
+                opacity: 0.18;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .login-area {
+                padding:
+                    30px 18px 45px;
+            }
+
+            .login-card {
+                padding:
+                    30px 22px;
+
+                border-radius: 22px;
+            }
+
+            .login-heading h2 {
+                font-size: 31px;
+            }
+
+            .role-tab {
+                font-size: 11px;
+            }
+
+            .role-icon {
+                display: block;
+                margin: 0 0 3px;
+            }
+
+            .quote {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .login-card {
+                padding:
+                    26px 17px;
+            }
+
+            .login-heading h2 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================
+     NAVBAR
+===================================== -->
+
+<header class="navbar">
+
+    <a href="index.html" class="brand">
+
+        <div class="brand-icon">
+            ♥
+        </div>
+
+        <div>
+            <div class="brand-name">
+                Care<span>Companion</span>
+            </div>
+
+            <span class="brand-tagline">
+                Better Care. Brighter Lives.
+            </span>
+        </div>
+
+    </a>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="caregivers.html">
+            Find Caregivers
+        </a>
+
+        <a href="index.html#about">
+            About
+        </a>
+
+        <a href="index.html#contact">
+            Contact
+        </a>
+
+        <a
+            href="register.html"
+            class="create-account-nav"
+        >
+            Create Account
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================
+     MAIN PAGE
+===================================== -->
+
+<main class="page">
+
+
+    <!-- =================================
+         LEFT HERO
+    ================================== -->
+
+    <section class="hero">
+
+        <div class="hero-photo"></div>
+
+        <div class="hero-background"></div>
+
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                TRUSTED • SAFE • COMPASSIONATE
+            </div>
+
+
+            <h1>
+                Quality Care
+                <br>
+                <span>Starts Here</span>
+            </h1>
+
+
+            <p class="hero-description">
+                Connect with verified and experienced
+                caregivers for your loved ones.
+                Because everyone deserves compassionate
+                care.
+            </p>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <div class="feature-title">
+                            Verified Caregivers
+                        </div>
+
+                        <div class="feature-text">
+                            Background checked professionals
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🛡
+                    </div>
+
+                    <div>
+
+                        <div class="feature-title">
+                            Safe &amp; Reliable
+                        </div>
+
+                        <div class="feature-text">
+                            Your family's safety is our priority
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        📅
+                    </div>
+
+                    <div>
+
+                        <div class="feature-title">
+                            Easy Booking
+                        </div>
+
+                        <div class="feature-text">
+                            Find and book care in minutes
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ♥
+                    </div>
+
+                    <div>
+
+                        <div class="feature-title">
+                            A Healthier, Happier Tomorrow
+                        </div>
+
+                        <div class="feature-text">
+                            Compassionate care for a better life
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quote">
+
+                <span class="quote-mark">
+                    “
+                </span>
+
+                <span class="quote-text">
+                    Care is not just a service,
+                    it's a way of making life better.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         LOGIN AREA
+    ================================== -->
+
+    <section class="login-area">
+
+
+        <div class="login-card">
+
+
+            <div class="login-heading">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Login to your CareCompanion account.
+                </p>
+
+            </div>
+
+
+            <!-- ROLE TABS -->
+
+            <div class="role-tabs">
+
+                <button
+                    type="button"
+                    class="role-tab active"
+                    data-role="customer"
+                >
+                    <span class="role-icon">👤</span>
+                    Customer
+                </button>
+
+
+                <button
+                    type="button"
+                    class="role-tab"
+                    data-role="caregiver"
+                >
+                    <span class="role-icon">👥</span>
+                    Caregiver
+                </button>
+
+
+                <button
+                    type="button"
+                    class="role-tab"
+                    data-role="admin"
+                >
+                    <span class="role-icon">🛡</span>
+                    Admin
+                </button>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="loginMessage"
+                class="message"
+            ></div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="field">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="forgot-password.html"
+                        class="forgot"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="loginButton"
+                >
+
+                    Login
+
+                    <span class="button-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                OR
+            </div>
+
+
+            <!-- GOOGLE BUTTON -->
+
+            <button
+                type="button"
+                class="social-button"
+                id="googleButton"
+            >
+
+                <span class="google-icon">
+                    G
+                </span>
+
+                Continue with Google
+
+            </button>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create one
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+    const API_BASE_URL =
+        "http://localhost:5000/api";
+
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+    const emailInput =
+        document.getElementById(
+            "email"
+        );
+
+    const passwordInput =
+        document.getElementById(
+            "password"
+        );
+
+    const passwordToggle =
+        document.getElementById(
+            "passwordToggle"
+        );
+
+    const loginButton =
+        document.getElementById(
+            "loginButton"
+        );
+
+    const loginMessage =
+        document.getElementById(
+            "loginMessage"
+        );
+
+    const rememberMe =
+        document.getElementById(
+            "rememberMe"
+        );
+
+
+    let selectedRole =
+        "customer";
+
+
+    /* =================================
+       ROLE TABS
+    ================================= */
+
+    const roleTabs =
+        document.querySelectorAll(
+            ".role-tab"
+        );
+
+
+    roleTabs.forEach(
+        (tab) => {
+
+            tab.addEventListener(
+                "click",
+                () => {
+
+                    roleTabs.forEach(
+                        item => {
+                            item.classList.remove(
+                                "active"
+                            );
+                        }
+                    );
+
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+
+                    selectedRole =
+                        tab.dataset.role;
+
+
+                    clearMessage();
+
+
+                    /*
+                        Admin has its own login page.
+                        Send admin there instead.
+                    */
+
+                    if (
+                        selectedRole ===
+                        "admin"
+                    ) {
+
+                        window.location.href =
+                            "admin-login.html";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =================================
+       PASSWORD SHOW / HIDE
+    ================================= */
+
+    passwordToggle.addEventListener(
+        "click",
+        () => {
+
+            if (
+                passwordInput.type ===
+                "password"
+            ) {
+
+                passwordInput.type =
+                    "text";
+
+                passwordToggle.textContent =
+                    "🙈";
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            } else {
+
+                passwordInput.type =
+                    "password";
+
+                passwordToggle.textContent =
+                    "👁";
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =================================
+       REMEMBERED EMAIL
+    ================================= */
+
+    const savedEmail =
+        localStorage.getItem(
+            "carecompanion_remember_email"
+        );
+
+
+    if (savedEmail) {
+
+        emailInput.value =
+            savedEmail;
+
+        rememberMe.checked =
+            true;
+
+    }
+
+
+    /* =================================
+       MESSAGE
+    ================================= */
+
+    function showMessage(
+        message,
+        type = "error"
+    ) {
+
+        loginMessage.textContent =
+            message;
+
+        loginMessage.className =
+            `message ${type}`;
+
+    }
+
+
+    function clearMessage() {
+
+        loginMessage.textContent =
+            "";
+
+        loginMessage.className =
+            "message";
+
+    }
+
+
+    /* =================================
+       LOGIN
+    ================================= */
+
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            clearMessage();
+
+
+            const email =
+                emailInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                passwordInput.value;
+
+
+            if (!email || !password) {
+
+                showMessage(
+                    "Please enter your email and password."
+                );
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                showMessage(
+                    "Password must be at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            loginButton.disabled =
+                true;
+
+
+            loginButton.innerHTML =
+                `<span class="spinner"></span> Logging in...`;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE_URL}/auth/login`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    email,
+                                    password
+                                })
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.message ||
+                        "Login failed."
+                    );
+
+                }
+
+
+                const user =
+                    result.user ||
+                    result.data?.user;
+
+
+                const token =
+                    result.token ||
+                    result.data?.token;
+
+
+                if (!user || !token) {
+
+                    throw new Error(
+                        "Invalid login response from server."
+                    );
+
+                }
+
+
+                /* =========================
+                   ROLE VALIDATION
+                ========================= */
+
+                if (
+                    selectedRole !==
+                    user.role
+                ) {
+
+                    showMessage(
+                        `This account is registered as ${user.role}. Please select the correct login type.`
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    user.isActive ===
+                    false
+                ) {
+
+                    showMessage(
+                        "Your account has been deactivated. Please contact support."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =========================
+                   SAVE SESSION
+                ========================= */
+
+                localStorage.setItem(
+                    "carecompanion_token",
+                    token
+                );
+
+
+                localStorage.setItem(
+                    "carecompanion_user",
+                    JSON.stringify(user)
+                );
+
+
+                if (
+                    rememberMe.checked
+                ) {
+
+                    localStorage.setItem(
+                        "carecompanion_remember_email",
+                        email
+                    );
+
+                } else {
+
+                    localStorage.removeItem(
+                        "carecompanion_remember_email"
+                    );
+
+                }
+
+
+                showMessage(
+                    "Login successful! Opening your dashboard...",
+                    "success"
+                );
+
+
+                /* =========================
+                   REDIRECT
+                ========================= */
+
+                setTimeout(
+                    () => {
+
+                        if (
+                            user.role ===
+                            "caregiver"
+                        ) {
+
+                            window.location.href =
+                                "caregiver-dashboard.html";
+
+                        } else {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        }
+
+                    },
+                    600
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Unable to login. Please try again."
+                );
+
+
+            } finally {
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.innerHTML =
+                    `Login
+                     <span class="button-arrow">→</span>`;
+
+            }
+
+        }
+    );
+
+
+    /* =================================
+       GOOGLE BUTTON
+    ================================= */
+
+    document
+        .getElementById("googleButton")
+        .addEventListener(
+            "click",
+            () => {
+
+                showMessage(
+                    "Google login is not connected yet. Please use your CareCompanion email and password."
+                );
+
+            }
+        );
+
+</script>
+
+</body>
+</html>
