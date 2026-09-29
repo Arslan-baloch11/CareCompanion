@@ -35,12 +35,20 @@
 
         body {
             min-height: 100vh;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-                "Segoe UI", Arial, Helvetica, sans-serif;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
             color: var(--ink);
             background:
-                radial-gradient(circle at 8% 12%, rgba(8, 168, 138, 0.10), transparent 24%),
-                radial-gradient(circle at 93% 88%, rgba(32, 90, 108, 0.07), transparent 26%),
+                radial-gradient(
+                    circle at 8% 12%,
+                    rgba(8, 168, 138, 0.10),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 93% 88%,
+                    rgba(32, 90, 108, 0.07),
+                    transparent 26%
+                ),
                 var(--page);
         }
 
@@ -53,6 +61,8 @@
         select {
             font: inherit;
         }
+
+        /* ================= HEADER ================= */
 
         .site-header {
             position: sticky;
@@ -89,7 +99,11 @@
             border-radius: 12px;
             display: grid;
             place-items: center;
-            background: linear-gradient(135deg, var(--primary), #0ac49f);
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #0ac49f
+            );
             color: #fff;
             box-shadow: 0 10px 22px rgba(8, 168, 138, 0.23);
             font-size: 18px;
@@ -114,6 +128,8 @@
             background: #f3f7f6;
         }
 
+        /* ================= PAGE ================= */
+
         .page {
             width: min(1240px, calc(100% - 40px));
             margin: 34px auto 48px;
@@ -129,15 +145,30 @@
             box-shadow: var(--shadow);
         }
 
+        /* ================= HERO ================= */
+
         .hero-panel {
             position: relative;
             min-height: 760px;
             padding: 54px 48px;
             color: #fff;
             background:
-                radial-gradient(circle at 18% 18%, rgba(255,255,255,0.18), transparent 19%),
-                radial-gradient(circle at 85% 76%, rgba(0,0,0,0.18), transparent 23%),
-                linear-gradient(145deg, #0d705f 0%, #087e6b 42%, #0e9780 100%);
+                radial-gradient(
+                    circle at 18% 18%,
+                    rgba(255,255,255,0.18),
+                    transparent 19%
+                ),
+                radial-gradient(
+                    circle at 85% 76%,
+                    rgba(0,0,0,0.18),
+                    transparent 23%
+                ),
+                linear-gradient(
+                    145deg,
+                    #0d705f 0%,
+                    #087e6b 42%,
+                    #0e9780 100%
+                );
             overflow: hidden;
         }
 
@@ -157,7 +188,8 @@
             position: absolute;
             width: 260px;
             height: 260px;
-            border-radius: 42% 58% 60% 40% / 44% 42% 58% 56%;
+            border-radius: 42% 58% 60% 40% /
+                         44% 42% 58% 56%;
             left: -110px;
             bottom: -90px;
             background: rgba(255,255,255,0.07);
@@ -268,6 +300,8 @@
             line-height: 1.6;
         }
 
+        /* ================= FORM ================= */
+
         .form-panel {
             padding: 46px 54px 42px;
             background: #fff;
@@ -306,6 +340,8 @@
             font-weight: 800;
             white-space: nowrap;
         }
+
+        /* ================= ALERT ================= */
 
         .alert {
             display: none;
@@ -347,8 +383,7 @@
             grid-column: 1 / -1;
         }
 
-        .field label,
-        .field legend {
+        .field label {
             margin-bottom: 8px;
             color: #314e58;
             font-size: 12px;
@@ -381,6 +416,8 @@
             color: #9aa9af;
         }
 
+        /* ================= PASSWORD ================= */
+
         .password-wrap {
             position: relative;
         }
@@ -407,6 +444,25 @@
             background: #f1f6f4;
             color: var(--primary-dark);
         }
+
+        .password-rules {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .rule {
+            color: #87979e;
+            font-size: 11px;
+        }
+
+        .rule.valid {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* ================= ACCOUNT TYPES ================= */
 
         .account-types {
             display: grid;
@@ -471,22 +527,7 @@
             font-size: 11px;
         }
 
-        .password-rules {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .rule {
-            color: #87979e;
-            font-size: 11px;
-        }
-
-        .rule.valid {
-            color: var(--success);
-            font-weight: 700;
-        }
+        /* ================= AGREEMENT ================= */
 
         .agreement {
             display: flex;
@@ -509,13 +550,19 @@
             font-weight: 750;
         }
 
+        /* ================= BUTTON ================= */
+
         .submit-btn {
             width: 100%;
             height: 54px;
             margin-top: 22px;
             border: 0;
             border-radius: 13px;
-            background: linear-gradient(135deg, var(--primary), #0abb98);
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #0abb98
+            );
             color: #fff;
             font-size: 14px;
             font-weight: 850;
@@ -555,6 +602,8 @@
             color: #8a989d;
             font-size: 11px;
         }
+
+        /* ================= SUCCESS ================= */
 
         .success-screen {
             display: none;
@@ -603,7 +652,10 @@
             font-size: 14px;
         }
 
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 1050px) {
+
             .register-shell {
                 grid-template-columns: 1fr;
             }
@@ -623,6 +675,7 @@
         }
 
         @media (max-width: 720px) {
+
             .header-inner,
             .page {
                 width: min(100% - 24px, 1240px);
@@ -667,1008 +720,1235 @@
 
 <body>
 
-<header class="site-header">
-    <div class="header-inner">
+    <!-- ================= HEADER ================= -->
 
-        <a href="index.html" class="brand">
-            <span class="brand-mark">♥</span>
-            <span>
-                Care<span class="brand-accent">Companion</span>
-            </span>
-        </a>
+    <header class="site-header">
 
-        <a href="login.html" class="header-link">
-            Already have an account? Login →
-        </a>
+        <div class="header-inner">
 
-    </div>
-</header>
+            <a href="index.html" class="brand">
 
+                <span class="brand-mark">♥</span>
 
-<main class="page">
+                <span>
+                    Care<span class="brand-accent">Companion</span>
+                </span>
 
-    <section class="register-shell">
+            </a>
 
-        <!-- =========================================
-             HERO
-        ========================================== -->
+            <a href="login.html" class="header-link">
+                Already have an account? Login →
+            </a>
 
-        <aside class="hero-panel">
+        </div>
 
-            <div class="hero-content">
-
-                <div class="eyebrow">
-                    ✓ Trusted • Safe • Compassionate
-                </div>
-
-                <h1>
-                    Better Care.<br>
-                    <span>Brighter Lives.</span>
-                </h1>
-
-                <p>
-                    Join CareCompanion and connect with a
-                    care community built around trust,
-                    comfort and meaningful support.
-                </p>
+    </header>
 
 
-                <div class="feature-list">
+    <!-- ================= MAIN ================= -->
 
-                    <div class="feature-item">
-                        <div class="feature-icon">🛡️</div>
-                        <div>
-                            <strong>Trusted Care</strong>
-                            <span>Designed around safer and more reliable care connections.</span>
-                        </div>
+    <main class="page">
+
+        <section class="register-shell">
+
+
+            <!-- ================= HERO ================= -->
+
+            <aside class="hero-panel">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        ✓ Trusted • Safe • Compassionate
                     </div>
 
-                    <div class="feature-item">
-                        <div class="feature-icon">👩‍⚕️</div>
-                        <div>
-                            <strong>Caregiver Network</strong>
-                            <span>Discover caregivers and care opportunities in one place.</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">📅</div>
-                        <div>
-                            <strong>Simple Booking</strong>
-                            <span>Manage care requests and bookings with less hassle.</span>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">💚</div>
-                        <div>
-                            <strong>Made for Families</strong>
-                            <span>A clean experience focused on dignity, support and convenience.</span>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="hero-quote">
-
-                    <div class="quote-mark">“</div>
+                    <h1>
+                        Better Care.<br>
+                        <span>Brighter Lives.</span>
+                    </h1>
 
                     <p>
-                        Care is not just a service;
-                        it is a meaningful way to make
-                        everyday life better.
+                        Join CareCompanion and connect with a
+                        care community built around trust,
+                        comfort and meaningful support.
                     </p>
 
-                </div>
 
-            </div>
+                    <div class="feature-list">
 
-        </aside>
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                🛡️
+                            </div>
+
+                            <div>
+                                <strong>Trusted Care</strong>
+
+                                <span>
+                                    Designed around safer and
+                                    more reliable care connections.
+                                </span>
+                            </div>
+
+                        </div>
 
 
-        <!-- =========================================
-             REGISTER FORM
-        ========================================== -->
+                        <div class="feature-item">
 
-        <section class="form-panel">
+                            <div class="feature-icon">
+                                👩‍⚕️
+                            </div>
 
-            <div
-                id="registerArea"
-            >
+                            <div>
+                                <strong>Caregiver Network</strong>
 
-                <div class="form-top">
+                                <span>
+                                    Discover caregivers and care
+                                    opportunities in one place.
+                                </span>
+                            </div>
 
-                    <div>
-                        <h2>Create Your Account</h2>
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                📅
+                            </div>
+
+                            <div>
+                                <strong>Simple Booking</strong>
+
+                                <span>
+                                    Manage care requests and
+                                    bookings with less hassle.
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <div class="feature-icon">
+                                💚
+                            </div>
+
+                            <div>
+                                <strong>Made for Families</strong>
+
+                                <span>
+                                    A clean experience focused on
+                                    dignity, support and convenience.
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-quote">
+
+                        <div class="quote-mark">
+                            “
+                        </div>
 
                         <p>
-                            Join CareCompanion and start using your account.
+                            Care is not just a service;
+                            it is a meaningful way to make
+                            everyday life better.
                         </p>
-                    </div>
 
-                    <div class="secure-badge">
-                        🔒 Secure Registration
                     </div>
 
                 </div>
 
+            </aside>
+
+
+            <!-- ================= REGISTER FORM ================= -->
+
+            <section class="form-panel">
+
+                <div id="registerArea">
+
+                    <div class="form-top">
+
+                        <div>
+
+                            <h2>
+                                Create Your Account
+                            </h2>
+
+                            <p>
+                                Join CareCompanion and start
+                                using your account.
+                            </p>
+
+                        </div>
+
+                        <div class="secure-badge">
+                            🔒 Secure Registration
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="message"
+                        class="alert"
+                    ></div>
+
+
+                    <!-- FORM -->
+
+                    <form id="registerForm">
+
+                        <div class="field-grid">
+
+
+                            <!-- FULL NAME -->
+
+                            <div class="field full">
+
+                                <label for="name">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Enter your full name"
+                                    autocomplete="name"
+                                    maxlength="100"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- EMAIL -->
+
+                            <div class="field">
+
+                                <label for="email">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    autocomplete="email"
+                                    maxlength="120"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- PHONE -->
+
+                            <div class="field">
+
+                                <label for="phone">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    placeholder="03XX-XXXXXXX"
+                                    autocomplete="tel"
+                                    maxlength="30"
+                                >
+
+                            </div>
+
+
+                            <!-- CITY -->
+
+                            <div class="field full">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    placeholder="Enter your city"
+                                    autocomplete="address-level2"
+                                    maxlength="100"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- ACCOUNT TYPE -->
+
+                            <div class="field full">
+
+                                <label>
+                                    Account Type
+                                </label>
+
+                                <div class="account-types">
+
+
+                                    <!-- CUSTOMER -->
+
+                                    <div class="account-option">
+
+                                        <input
+                                            type="radio"
+                                            id="customer"
+                                            name="role"
+                                            value="customer"
+                                            checked
+                                        >
+
+                                        <label
+                                            for="customer"
+                                            class="account-label"
+                                        >
+
+                                            <div class="account-icon">
+                                                👤
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    Customer
+                                                </strong>
+
+                                                <span>
+                                                    Book trusted care services
+                                                </span>
+
+                                            </div>
+
+                                        </label>
+
+                                    </div>
+
+
+                                    <!-- CAREGIVER -->
+
+                                    <div class="account-option">
+
+                                        <input
+                                            type="radio"
+                                            id="caregiver"
+                                            name="role"
+                                            value="caregiver"
+                                        >
+
+                                        <label
+                                            for="caregiver"
+                                            class="account-label"
+                                        >
+
+                                            <div class="account-icon">
+                                                🩺
+                                            </div>
+
+                                            <div>
+
+                                                <strong>
+                                                    Caregiver
+                                                </strong>
+
+                                                <span>
+                                                    Offer care and manage bookings
+                                                </span>
+
+                                            </div>
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PASSWORD -->
+
+                            <div class="field">
+
+                                <label for="password">
+                                    Password
+                                </label>
+
+                                <div class="password-wrap">
+
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        placeholder="Create a password"
+                                        autocomplete="new-password"
+                                        minlength="6"
+                                        maxlength="100"
+                                        required
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('password', this)"
+                                        aria-label="Show password"
+                                    >
+                                        👁
+                                    </button>
+
+                                </div>
+
+                                <div class="password-rules">
+
+                                    <span
+                                        id="ruleLength"
+                                        class="rule"
+                                    >
+                                        ○ 6+ characters
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CONFIRM PASSWORD -->
+
+                            <div class="field">
+
+                                <label for="confirmPassword">
+                                    Confirm Password
+                                </label>
+
+                                <div class="password-wrap">
+
+                                    <input
+                                        type="password"
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        placeholder="Re-enter your password"
+                                        autocomplete="new-password"
+                                        minlength="6"
+                                        maxlength="100"
+                                        required
+                                    >
+
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        onclick="togglePassword('confirmPassword', this)"
+                                        aria-label="Show password"
+                                    >
+                                        👁
+                                    </button>
+
+                                </div>
+
+                                <div class="password-rules">
+
+                                    <span
+                                        id="ruleMatch"
+                                        class="rule"
+                                    >
+                                        ○ Passwords must match
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TERMS -->
+
+                        <label class="agreement">
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                required
+                            >
+
+                            <span>
+
+                                I agree to the CareCompanion
+
+                                <a
+                                    href="#"
+                                    onclick="return false;"
+                                >
+                                    Terms of Service
+                                </a>
+
+                                and
+
+                                <a
+                                    href="#"
+                                    onclick="return false;"
+                                >
+                                    Privacy Policy
+                                </a>.
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            id="registerButton"
+                            class="submit-btn"
+                        >
+                            Create Account →
+                        </button>
+
+                    </form>
+
+
+                    <!-- LOGIN -->
+
+                    <div class="login-note">
+
+                        Already registered?
+
+                        <a href="login.html">
+                            Login to your account
+                        </a>
+
+                    </div>
+
+
+                    <div class="footer-note">
+
+                        Your information is submitted securely
+                        to the CareCompanion backend.
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SUCCESS ================= -->
 
                 <div
-                    id="message"
-                    class="alert"
-                ></div>
-
-
-                <form id="registerForm">
-
-                    <div class="field-grid">
-
-                        <!-- FULL NAME -->
-
-                        <div class="field full">
-
-                            <label for="name">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Enter your full name"
-                                autocomplete="name"
-                                maxlength="100"
-                                required
-                            >
-
-                        </div>
-
-
-                        <!-- EMAIL -->
-
-                        <div class="field">
-
-                            <label for="email">
-                                Email Address
-                            </label>
-
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="you@example.com"
-                                autocomplete="email"
-                                maxlength="120"
-                                required
-                            >
-
-                        </div>
-
-
-                        <!-- PHONE -->
-
-                        <div class="field">
-
-                            <label for="phone">
-                                Phone Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                placeholder="03XX-XXXXXXX"
-                                autocomplete="tel"
-                                maxlength="30"
-                            >
-
-                        </div>
-
-
-                        <!-- CITY -->
-
-                        <div class="field full">
-
-                            <label for="city">
-                                City
-                            </label>
-
-                            <input
-                                type="text"
-                                id="city"
-                                name="city"
-                                placeholder="Enter your city"
-                                autocomplete="address-level2"
-                                maxlength="100"
-                                required
-                            >
-
-                        </div>
-
-
-                        <!-- ACCOUNT TYPE -->
-
-                        <div class="field full">
-
-                            <label>
-                                Account Type
-                            </label>
-
-                            <div class="account-types">
-
-                                <div class="account-option">
-
-                                    <input
-                                        type="radio"
-                                        id="customer"
-                                        name="role"
-                                        value="customer"
-                                        checked
-                                    >
-
-                                    <label
-                                        for="customer"
-                                        class="account-label"
-                                    >
-
-                                        <div class="account-icon">
-                                            👤
-                                        </div>
-
-                                        <div>
-                                            <strong>Customer</strong>
-                                            <span>Book trusted care services</span>
-                                        </div>
-
-                                    </label>
-
-                                </div>
-
-
-                                <div class="account-option">
-
-                                    <input
-                                        type="radio"
-                                        id="caregiver"
-                                        name="role"
-                                        value="caregiver"
-                                    >
-
-                                    <label
-                                        for="caregiver"
-                                        class="account-label"
-                                    >
-
-                                        <div class="account-icon">
-                                            🩺
-                                        </div>
-
-                                        <div>
-                                            <strong>Caregiver</strong>
-                                            <span>Offer care and manage bookings</span>
-                                        </div>
-
-                                    </label>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- PASSWORD -->
-
-                        <div class="field">
-
-                            <label for="password">
-                                Password
-                            </label>
-
-                            <div class="password-wrap">
-
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    placeholder="Create a password"
-                                    autocomplete="new-password"
-                                    minlength="6"
-                                    maxlength="100"
-                                    required
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    onclick="togglePassword('password', this)"
-                                    aria-label="Show password"
-                                >
-                                    👁
-                                </button>
-
-                            </div>
-
-                            <div class="password-rules">
-
-                                <span
-                                    id="ruleLength"
-                                    class="rule"
-                                >
-                                    ○ 6+ characters
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- CONFIRM PASSWORD -->
-
-                        <div class="field">
-
-                            <label for="confirmPassword">
-                                Confirm Password
-                            </label>
-
-                            <div class="password-wrap">
-
-                                <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    placeholder="Re-enter your password"
-                                    autocomplete="new-password"
-                                    minlength="6"
-                                    maxlength="100"
-                                    required
-                                >
-
-                                <button
-                                    type="button"
-                                    class="password-toggle"
-                                    onclick="togglePassword('confirmPassword', this)"
-                                    aria-label="Show password"
-                                >
-                                    👁
-                                </button>
-
-                            </div>
-
-                            <div class="password-rules">
-
-                                <span
-                                    id="ruleMatch"
-                                    class="rule"
-                                >
-                                    ○ Passwords must match
-                                </span>
-
-                            </div>
-
-                        </div>
-
+                    id="successScreen"
+                    class="success-screen"
+                >
+
+                    <div class="success-circle">
+                        ✓
                     </div>
 
+                    <h3>
+                        Account Created
+                    </h3>
 
-                    <label class="agreement">
+                    <p id="successText">
+                        Your account has been created successfully.
+                    </p>
 
-                        <input
-                            type="checkbox"
-                            id="terms"
-                            required
-                        >
-
-                        <span>
-                            I agree to the CareCompanion
-                            <a href="#" onclick="return false;">Terms of Service</a>
-                            and
-                            <a href="#" onclick="return false;">Privacy Policy</a>.
-                        </span>
-
-                    </label>
-
-
-                    <button
-                        type="submit"
-                        id="registerButton"
-                        class="submit-btn"
+                    <a
+                        id="successLink"
+                        href="dashboard.html"
+                        class="success-link"
                     >
-                        Create Account →
-                    </button>
-
-                </form>
-
-
-                <div class="login-note">
-                    Already registered?
-                    <a href="login.html">
-                        Login to your account
+                        Open Dashboard →
                     </a>
+
                 </div>
 
-
-                <div class="footer-note">
-                    Your information is submitted securely to the CareCompanion backend.
-                </div>
-
-            </div>
-
-
-            <!-- =========================================
-                 SUCCESS
-            ========================================== -->
-
-            <div
-                id="successScreen"
-                class="success-screen"
-            >
-
-                <div class="success-circle">
-                    ✓
-                </div>
-
-                <h3>
-                    Account Created
-                </h3>
-
-                <p id="successText">
-                    Your account has been created successfully.
-                </p>
-
-                <a
-                    id="successLink"
-                    href="login.html"
-                    class="success-link"
-                >
-                    Continue
-                </a>
-
-            </div>
+            </section>
 
         </section>
 
-    </section>
+    </main>
 
-</main>
 
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
-<script>
+    <script>
 
-    // =====================================================
-    // API CONFIGURATION
-    // =====================================================
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
-    const API_BASE_URL =
-        "http://127.0.0.1:5000/api";
-
-
-    // =====================================================
-    // ELEMENTS
-    // =====================================================
-
-    const registerForm =
-        document.getElementById(
-            "registerForm"
-        );
-
-    const registerButton =
-        document.getElementById(
-            "registerButton"
-        );
-
-    const messageElement =
-        document.getElementById(
-            "message"
-        );
-
-    const passwordInput =
-        document.getElementById(
-            "password"
-        );
-
-    const confirmPasswordInput =
-        document.getElementById(
-            "confirmPassword"
-        );
-
-    const ruleLength =
-        document.getElementById(
-            "ruleLength"
-        );
-
-    const ruleMatch =
-        document.getElementById(
-            "ruleMatch"
-        );
-
-    const registerArea =
-        document.getElementById(
-            "registerArea"
-        );
-
-    const successScreen =
-        document.getElementById(
-            "successScreen"
-        );
-
-    const successText =
-        document.getElementById(
-            "successText"
-        );
-
-    const successLink =
-        document.getElementById(
-            "successLink"
-        );
-
-
-    // =====================================================
-    // SHOW MESSAGE
-    // =====================================================
-
-    function showMessage(
-        text,
-        type = "error"
-    ) {
-
-        messageElement.textContent =
-            text;
-
-        messageElement.className =
-            `alert ${type}`;
-
-        messageElement.style.display =
-            "block";
-
-    }
-
-
-    function hideMessage() {
-
-        messageElement.style.display =
-            "none";
-
-        messageElement.textContent =
-            "";
-
-    }
-
-
-    // =====================================================
-    // PASSWORD VISIBILITY
-    // =====================================================
-
-    function togglePassword(
-        inputId,
-        button
-    ) {
-
-        const input =
-            document.getElementById(
-                inputId
-            );
-
-        if (
-            input.type === "password"
-        ) {
-
-            input.type =
-                "text";
-
-            button.textContent =
-                "🙈";
-
-            button.setAttribute(
-                "aria-label",
-                "Hide password"
-            );
-
-        } else {
-
-            input.type =
-                "password";
-
-            button.textContent =
-                "👁";
-
-            button.setAttribute(
-                "aria-label",
-                "Show password"
-            );
-
-        }
-
-    }
-
-
-    // =====================================================
-    // PASSWORD VALIDATION UI
-    // =====================================================
-
-    function updatePasswordRules() {
-
-        const password =
-            passwordInput.value;
-
-        const confirmation =
-            confirmPasswordInput.value;
-
-
-        if (
-            password.length >= 6
-        ) {
-
-            ruleLength.textContent =
-                "✓ 6+ characters";
-
-            ruleLength.classList.add(
-                "valid"
-            );
-
-        } else {
-
-            ruleLength.textContent =
-                "○ 6+ characters";
-
-            ruleLength.classList.remove(
-                "valid"
-            );
-
-        }
-
-
-        if (
-            confirmation &&
-            password === confirmation
-        ) {
-
-            ruleMatch.textContent =
-                "✓ Passwords match";
-
-            ruleMatch.classList.add(
-                "valid"
-            );
-
-        } else {
-
-            ruleMatch.textContent =
-                "○ Passwords must match";
-
-            ruleMatch.classList.remove(
-                "valid"
-            );
-
-        }
-
-    }
-
-
-    passwordInput.addEventListener(
-        "input",
-        updatePasswordRules
-    );
-
-    confirmPasswordInput.addEventListener(
-        "input",
-        updatePasswordRules
-    );
-
-
-    // =====================================================
-    // REGISTER
-    // =====================================================
-
-    registerForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            hideMessage();
-
-
-            const name =
-                document.getElementById(
-                    "name"
-                ).value.trim();
-
-
-            const email =
-                document.getElementById(
-                    "email"
-                ).value.trim().toLowerCase();
-
-
-            const phone =
-                document.getElementById(
-                    "phone"
-                ).value.trim();
-
-
-            const city =
-                document.getElementById(
-                    "city"
-                ).value.trim();
-
-
-            const role =
-                document.querySelector(
-                    'input[name="role"]:checked'
-                )?.value || "customer";
-
-
-            const password =
-                passwordInput.value;
-
-
-            const confirmPassword =
-                confirmPasswordInput.value;
-
-
-            // -------------------------------------------------
-            // VALIDATION
-            // -------------------------------------------------
-
-            if (
-                name.length < 2
-            ) {
-
-                showMessage(
-                    "Please enter your full name."
+                console.log(
+                    "CareCompanion registration page loaded."
                 );
 
-                return;
 
-            }
+                // =================================================
+                // API CONFIGURATION
+                // =================================================
+
+                const API_BASE_URL =
+                    "http://127.0.0.1:5000/api";
 
 
-            if (
-                !email ||
-                !email.includes("@")
-            ) {
+                // =================================================
+                // ELEMENTS
+                // =================================================
 
-                showMessage(
-                    "Please enter a valid email address."
+                const registerForm =
+                    document.getElementById(
+                        "registerForm"
+                    );
+
+                const registerButton =
+                    document.getElementById(
+                        "registerButton"
+                    );
+
+                const messageElement =
+                    document.getElementById(
+                        "message"
+                    );
+
+                const passwordInput =
+                    document.getElementById(
+                        "password"
+                    );
+
+                const confirmPasswordInput =
+                    document.getElementById(
+                        "confirmPassword"
+                    );
+
+                const ruleLength =
+                    document.getElementById(
+                        "ruleLength"
+                    );
+
+                const ruleMatch =
+                    document.getElementById(
+                        "ruleMatch"
+                    );
+
+
+                // =================================================
+                // ELEMENT CHECK
+                // =================================================
+
+                if (!registerForm) {
+
+                    console.error(
+                        "ERROR: registerForm not found."
+                    );
+
+                    return;
+                }
+
+
+                if (!registerButton) {
+
+                    console.error(
+                        "ERROR: registerButton not found."
+                    );
+
+                    return;
+                }
+
+
+                if (!messageElement) {
+
+                    console.error(
+                        "ERROR: message element not found."
+                    );
+
+                    return;
+                }
+
+
+                console.log(
+                    "Registration form found successfully."
                 );
 
-                return;
 
-            }
+                // =================================================
+                // SHOW MESSAGE
+                // =================================================
 
+                function showMessage(
+                    text,
+                    type = "error"
+                ) {
 
-            if (
-                !city
-            ) {
+                    messageElement.textContent =
+                        text;
 
-                showMessage(
-                    "Please enter your city."
-                );
+                    messageElement.className =
+                        "alert " + type;
 
-                return;
-
-            }
-
-
-            if (
-                password.length < 6
-            ) {
-
-                showMessage(
-                    "Password must be at least 6 characters."
-                );
-
-                return;
-
-            }
+                    messageElement.style.display =
+                        "block";
+                }
 
 
-            if (
-                password !==
-                confirmPassword
-            ) {
+                // =================================================
+                // HIDE MESSAGE
+                // =================================================
 
-                showMessage(
-                    "Passwords do not match."
-                );
+                function hideMessage() {
 
-                return;
+                    messageElement.style.display =
+                        "none";
 
-            }
-
-
-            // -------------------------------------------------
-            // LOADING
-            // -------------------------------------------------
-
-            registerButton.disabled =
-                true;
-
-            registerButton.textContent =
-                "Creating Account...";
+                    messageElement.textContent =
+                        "";
+                }
 
 
-            try {
+                // =================================================
+                // PASSWORD SHOW / HIDE
+                // =================================================
 
-                // ---------------------------------------------
-                // API REQUEST
-                // ---------------------------------------------
+                window.togglePassword =
+                    function (
+                        inputId,
+                        button
+                    ) {
 
-                const response =
-                    await fetch(
-                        `${API_BASE_URL}/auth/register`,
-                        {
-                            method: "POST",
+                        const input =
+                            document.getElementById(
+                                inputId
+                            );
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
 
-                            body:
-                                JSON.stringify({
-
-                                    name,
-
-                                    email,
-
-                                    password,
-
-                                    phone,
-
-                                    city,
-
-                                    role
-
-                                })
+                        if (!input) {
+                            return;
                         }
-                    );
 
 
-                let data = {};
+                        if (
+                            input.type ===
+                            "password"
+                        ) {
 
-                try {
+                            input.type =
+                                "text";
 
-                    data =
-                        await response.json();
+                            button.textContent =
+                                "🙈";
 
-                } catch (error) {
+                            button.setAttribute(
+                                "aria-label",
+                                "Hide password"
+                            );
 
-                    data = {};
+                        } else {
 
+                            input.type =
+                                "password";
+
+                            button.textContent =
+                                "👁";
+
+                            button.setAttribute(
+                                "aria-label",
+                                "Show password"
+                            );
+                        }
+                    };
+
+
+                // =================================================
+                // PASSWORD RULES
+                // =================================================
+
+                function updatePasswordRules() {
+
+                    const password =
+                        passwordInput.value;
+
+                    const confirmation =
+                        confirmPasswordInput.value;
+
+
+                    // Password length
+
+                    if (
+                        password.length >= 6
+                    ) {
+
+                        ruleLength.textContent =
+                            "✓ 6+ characters";
+
+                        ruleLength.classList.add(
+                            "valid"
+                        );
+
+                    } else {
+
+                        ruleLength.textContent =
+                            "○ 6+ characters";
+
+                        ruleLength.classList.remove(
+                            "valid"
+                        );
+                    }
+
+
+                    // Password match
+
+                    if (
+                        confirmation &&
+                        password === confirmation
+                    ) {
+
+                        ruleMatch.textContent =
+                            "✓ Passwords match";
+
+                        ruleMatch.classList.add(
+                            "valid"
+                        );
+
+                    } else {
+
+                        ruleMatch.textContent =
+                            "○ Passwords must match";
+
+                        ruleMatch.classList.remove(
+                            "valid"
+                        );
+                    }
                 }
 
 
-                if (
-                    !response.ok
-                ) {
-
-                    throw new Error(
-                        data.message ||
-                        `Registration failed (${response.status}).`
-                    );
-
-                }
-
-
-                // ---------------------------------------------
-                // SAVE LOGIN SESSION
-                // ---------------------------------------------
-
-                if (
-                    data.token
-                ) {
-
-                    localStorage.setItem(
-                        "carecompanion_token",
-                        data.token
-                    );
-
-                }
-
-
-                if (
-                    data.user
-                ) {
-
-                    localStorage.setItem(
-                        "carecompanion_user",
-                        JSON.stringify(
-                            data.user
-                        )
-                    );
-
-                }
-
-
-                // ---------------------------------------------
-                // SUCCESS
-                // ---------------------------------------------
-
-                registerArea.style.display =
-                    "none";
-
-                successScreen.style.display =
-                    "block";
-
-
-                successText.textContent =
-                    data.message ||
-                    "Your CareCompanion account has been created successfully.";
-
-
-                if (
-                    role === "caregiver"
-                ) {
-
-                    successLink.href =
-                        "caregiver-dashboard.html";
-
-                    successLink.textContent =
-                        "Open Caregiver Dashboard →";
-
-                } else {
-
-                    successLink.href =
-                        "dashboard.html";
-
-                    successLink.textContent =
-                        "Open Customer Dashboard →";
-
-                }
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Registration Error:",
-                    error
+                passwordInput.addEventListener(
+                    "input",
+                    updatePasswordRules
                 );
 
 
-                const message =
-                    error.message ||
-                    "Unable to create your account.";
+                confirmPasswordInput.addEventListener(
+                    "input",
+                    updatePasswordRules
+                );
 
 
-                if (
-                    message
-                        .toLowerCase()
-                        .includes(
-                            "failed to fetch"
-                        )
-                ) {
+                // =================================================
+                // REGISTER
+                // =================================================
 
-                    showMessage(
-                        "Backend se connection nahi ho raha. Please make sure node server.js is running on port 5000."
-                    );
+                registerForm.addEventListener(
+                    "submit",
+                    async function (event) {
 
-                } else {
+                        event.preventDefault();
 
-                    showMessage(
-                        message
-                    );
+                        hideMessage();
 
-                }
+
+                        // =========================================
+                        // GET FORM VALUES
+                        // =========================================
+
+                        const name =
+                            document
+                                .getElementById("name")
+                                .value
+                                .trim();
+
+
+                        const email =
+                            document
+                                .getElementById("email")
+                                .value
+                                .trim()
+                                .toLowerCase();
+
+
+                        const phone =
+                            document
+                                .getElementById("phone")
+                                .value
+                                .trim();
+
+
+                        const city =
+                            document
+                                .getElementById("city")
+                                .value
+                                .trim();
+
+
+                        const role =
+                            document.querySelector(
+                                'input[name="role"]:checked'
+                            )?.value ||
+                            "customer";
+
+
+                        const password =
+                            passwordInput.value;
+
+
+                        const confirmPassword =
+                            confirmPasswordInput.value;
+
+
+                        const terms =
+                            document.getElementById(
+                                "terms"
+                            );
+
+
+                        // =========================================
+                        // FRONTEND VALIDATION
+                        // =========================================
+
+                        if (
+                            name.length < 2
+                        ) {
+
+                            showMessage(
+                                "Please enter your full name."
+                            );
+
+                            return;
+                        }
+
+
+                        if (
+                            !email ||
+                            !email.includes("@")
+                        ) {
+
+                            showMessage(
+                                "Please enter a valid email address."
+                            );
+
+                            return;
+                        }
+
+
+                        if (!city) {
+
+                            showMessage(
+                                "Please enter your city."
+                            );
+
+                            return;
+                        }
+
+
+                        if (
+                            password.length < 6
+                        ) {
+
+                            showMessage(
+                                "Password must be at least 6 characters."
+                            );
+
+                            return;
+                        }
+
+
+                        if (
+                            password !==
+                            confirmPassword
+                        ) {
+
+                            showMessage(
+                                "Passwords do not match."
+                            );
+
+                            return;
+                        }
+
+
+                        if (
+                            !terms.checked
+                        ) {
+
+                            showMessage(
+                                "Please accept the Terms of Service and Privacy Policy."
+                            );
+
+                            return;
+                        }
+
+
+                        // =========================================
+                        // LOADING
+                        // =========================================
+
+                        registerButton.disabled =
+                            true;
+
+                        registerButton.textContent =
+                            "Creating Account...";
+
+
+                        try {
+
+                            console.log(
+                                "Sending registration request..."
+                            );
+
+
+                            console.log(
+                                "API URL:",
+                                API_BASE_URL +
+                                "/auth/register"
+                            );
+
+
+                            // =====================================
+                            // API REQUEST
+                            // =====================================
+
+                            const response =
+                                await fetch(
+                                    API_BASE_URL +
+                                    "/auth/register",
+                                    {
+                                        method: "POST",
+
+                                        headers: {
+                                            "Content-Type":
+                                                "application/json"
+                                        },
+
+                                        body:
+                                            JSON.stringify({
+
+                                                name:
+                                                    name,
+
+                                                email:
+                                                    email,
+
+                                                password:
+                                                    password,
+
+                                                phone:
+                                                    phone,
+
+                                                city:
+                                                    city,
+
+                                                role:
+                                                    role
+
+                                            })
+                                    }
+                                );
+
+
+                            console.log(
+                                "Server response status:",
+                                response.status
+                            );
+
+
+                            // =====================================
+                            // RESPONSE
+                            // =====================================
+
+                            let data = {};
+
+
+                            try {
+
+                                data =
+                                    await response.json();
+
+                            } catch (
+                                jsonError
+                            ) {
+
+                                console.error(
+                                    "JSON response error:",
+                                    jsonError
+                                );
+
+                                data = {};
+                            }
+
+
+                            console.log(
+                                "Server response data:",
+                                data
+                            );
+
+
+                            // =====================================
+                            // SERVER ERROR
+                            // =====================================
+
+                            if (
+                                !response.ok
+                            ) {
+
+                                throw new Error(
+                                    data.message ||
+                                    data.error ||
+                                    "Registration failed (" +
+                                    response.status +
+                                    ")"
+                                );
+                            }
+
+
+                            // =====================================
+                            // SAVE TOKEN
+                            // =====================================
+
+                            if (
+                                data.token
+                            ) {
+
+                                localStorage.setItem(
+                                    "carecompanion_token",
+                                    data.token
+                                );
+
+                            }
+
+
+                            // =====================================
+                            // SAVE USER
+                            // =====================================
+
+                            if (
+                                data.user
+                            ) {
+
+                                localStorage.setItem(
+                                    "carecompanion_user",
+                                    JSON.stringify(
+                                        data.user
+                                    )
+                                );
+
+                            }
+
+
+                            // =====================================
+                            // SAVE ROLE
+                            // =====================================
+
+                            localStorage.setItem(
+                                "carecompanion_role",
+                                role
+                            );
+
+
+                            // =====================================
+                            // SUCCESS
+                            // =====================================
+
+                            console.log(
+                                "Account created successfully."
+                            );
+
+
+                            // =====================================
+                            // REDIRECT
+                            // =====================================
+
+                            if (
+                                role ===
+                                "caregiver"
+                            ) {
+
+                                window.location.href =
+                                    "caregiver-dashboard.html";
+
+                            } else {
+
+                                window.location.href =
+                                    "dashboard.html";
+                            }
+
+                        }
+
+
+                        // =========================================
+                        // ERROR
+                        // =========================================
+
+                        catch (error) {
+
+                            console.error(
+                                "Registration Error:",
+                                error
+                            );
+
+
+                            const errorMessage =
+                                error.message ||
+                                "";
+
+
+                            if (
+                                errorMessage
+                                    .toLowerCase()
+                                    .includes(
+                                        "failed to fetch"
+                                    )
+                            ) {
+
+                                showMessage(
+                                    "Backend se connection nahi ho raha. Make sure server.js port 5000 par running hai."
+                                );
+
+                            } else {
+
+                                showMessage(
+                                    errorMessage ||
+                                    "Unable to create your account."
+                                );
+                            }
+
+                        }
+
+
+                        // =========================================
+                        // RESET BUTTON
+                        // =========================================
+
+                        finally {
+
+                            registerButton.disabled =
+                                false;
+
+                            registerButton.textContent =
+                                "Create Account →";
+                        }
+
+                    }
+                );
 
             }
+        );
 
-            finally {
-
-                registerButton.disabled =
-                    false;
-
-                registerButton.textContent =
-                    "Create Account →";
-
-            }
-
-        }
-    );
-
-</script>
+    </script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -823,457 +823,6 @@
 
         }
 
-    
-        /* =====================================================
-           CUSTOMER PROFILE BUTTON
-        ===================================================== */
-
-        .customer-dashboard-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .edit-profile-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            padding: 10px 17px;
-            border-radius: 9px;
-            font-weight: 700;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .edit-profile-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 700px) {
-            .customer-dashboard-actions {
-                align-items: stretch;
-                flex-direction: column;
-            }
-
-            .edit-profile-btn {
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
-
-
-        /* =====================================================
-           CARECOMPANION PROFESSIONAL CUSTOMER NAVIGATION
-        ===================================================== */
-
-        body {
-            background:
-                linear-gradient(180deg, #f7fbfa 0%, #f2f7f6 100%);
-        }
-
-        .cc-navbar {
-            position: sticky;
-            top: 0;
-            z-index: 5000;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.96);
-            border-bottom: 1px solid #e3ecea;
-            box-shadow: 0 8px 28px rgba(24, 54, 66, 0.07);
-            backdrop-filter: blur(12px);
-        }
-
-        .cc-nav-inner {
-            width: min(1240px, calc(100% - 36px));
-            min-height: 78px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-        }
-
-        .cc-brand {
-            display: inline-flex !important;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none !important;
-            color: #183642 !important;
-            font-size: 23px !important;
-            font-weight: 800 !important;
-            letter-spacing: -0.4px;
-            white-space: nowrap;
-        }
-
-        .cc-brand-mark {
-            width: 38px;
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #08a88a, #0c8f78);
-            color: #ffffff;
-            font-size: 17px;
-            box-shadow: 0 8px 18px rgba(8, 168, 138, 0.22);
-        }
-
-        .cc-brand-accent {
-            color: #08a88a;
-        }
-
-        .cc-nav-links {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 7px;
-            flex-wrap: wrap;
-        }
-
-        .cc-nav-link {
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            min-height: 42px;
-            padding: 0 13px !important;
-            border-radius: 11px;
-            text-decoration: none !important;
-            color: #587078 !important;
-            font-size: 14px !important;
-            font-weight: 700 !important;
-            transition: all 0.2s ease;
-        }
-
-        .cc-nav-link:hover {
-            color: #0b806b !important;
-            background: #eef9f6 !important;
-            transform: translateY(-1px);
-        }
-
-        .cc-nav-link.active {
-            color: #087a66 !important;
-            background: #e9f8f4 !important;
-            box-shadow: inset 0 0 0 1px #ccefe7;
-        }
-
-        .cc-nav-icon {
-            font-size: 15px;
-            line-height: 1;
-        }
-
-        .cc-notification-wrapper {
-            margin-left: 2px !important;
-        }
-
-        .cc-notification-button {
-            width: 43px !important;
-            height: 43px !important;
-            border-radius: 12px !important;
-            border: 1px solid #dbe8e5 !important;
-            background: #ffffff !important;
-            box-shadow: 0 5px 15px rgba(24, 54, 66, 0.05);
-        }
-
-        .cc-notification-button:hover {
-            background: #effaf7 !important;
-            border-color: #bfe8df !important;
-            transform: translateY(-1px);
-        }
-
-        .cc-notification-button .notification-badge {
-            top: -5px !important;
-            right: -5px !important;
-        }
-
-        .cc-nav-profile {
-            display: inline-flex !important;
-            align-items: center;
-            gap: 9px;
-            min-height: 48px;
-            padding: 0 11px !important;
-            border-radius: 13px;
-            text-decoration: none !important;
-            color: #183642 !important;
-            border: 1px solid #dfe9e7;
-            background: #ffffff;
-            transition: all 0.2s ease;
-        }
-
-        .cc-nav-profile:hover {
-            border-color: #bfe4dd;
-            background: #f5fbf9;
-            transform: translateY(-1px);
-        }
-
-        .cc-avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #dff5ef;
-            color: #087a66;
-            font-weight: 800;
-            font-size: 14px;
-        }
-
-        .cc-nav-profile-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-
-        .cc-nav-profile-text small {
-            color: #84949a;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 3px;
-        }
-
-        .cc-nav-profile-text strong {
-            color: #183642;
-            font-size: 13px;
-            max-width: 120px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .cc-logout-btn {
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            min-height: 43px;
-            padding: 0 14px !important;
-            border-radius: 11px;
-            background: #183642 !important;
-            color: #ffffff !important;
-            text-decoration: none !important;
-            font-size: 13px !important;
-            font-weight: 800 !important;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 16px rgba(24, 54, 66, 0.14);
-        }
-
-        .cc-logout-btn:hover {
-            background: #0f2a33 !important;
-            transform: translateY(-1px);
-            box-shadow: 0 9px 20px rgba(24, 54, 66, 0.19);
-        }
-
-        .dashboard-wrapper {
-            width: min(1240px, calc(100% - 36px));
-            max-width: none !important;
-            margin: 0 auto !important;
-            padding: 34px 0 46px !important;
-        }
-
-        .welcome-box {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #e2ece9;
-            border-radius: 22px !important;
-            padding: 30px !important;
-            background: linear-gradient(135deg, #ffffff 0%, #f7fcfb 100%);
-            box-shadow: 0 14px 34px rgba(24, 54, 66, 0.07) !important;
-        }
-
-        .welcome-box::after {
-            content: "";
-            position: absolute;
-            width: 230px;
-            height: 230px;
-            right: -85px;
-            top: -100px;
-            border-radius: 50%;
-            background: rgba(8, 168, 138, 0.08);
-            pointer-events: none;
-        }
-
-        .welcome-box h1 {
-            position: relative;
-            z-index: 1;
-            font-size: clamp(28px, 4vw, 38px) !important;
-            letter-spacing: -0.7px;
-            margin-bottom: 7px !important;
-        }
-
-        .welcome-box p {
-            position: relative;
-            z-index: 1;
-        }
-
-        .customer-dashboard-actions {
-            position: relative;
-            z-index: 2;
-            display: flex !important;
-            justify-content: flex-end !important;
-            align-items: center !important;
-            margin-bottom: 18px;
-        }
-
-        .customer-dashboard-actions .logout-btn {
-            display: none !important;
-        }
-
-        .edit-profile-btn {
-            background: #08a88a !important;
-            border-radius: 11px !important;
-            padding: 11px 16px !important;
-            box-shadow: 0 7px 18px rgba(8, 168, 138, 0.20);
-        }
-
-        .dashboard-grid {
-            gap: 18px !important;
-        }
-
-        .stat-card {
-            border: 1px solid #e4edeb;
-            border-radius: 18px !important;
-            box-shadow: 0 10px 28px rgba(24, 54, 66, 0.055) !important;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 30px rgba(24, 54, 66, 0.08) !important;
-        }
-
-        .section {
-            border: 1px solid #e4edeb;
-            border-radius: 20px !important;
-            box-shadow: 0 10px 30px rgba(24, 54, 66, 0.055) !important;
-        }
-
-        .booking-card {
-            border-radius: 16px !important;
-            transition: all 0.2s ease;
-        }
-
-        .booking-card:hover {
-            border-color: #cfe5e0;
-            transform: translateY(-2px);
-            box-shadow: 0 9px 20px rgba(24, 54, 66, 0.05);
-        }
-
-        .filter-btn {
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn:hover {
-            border-color: #b9dbd5;
-            background: #f4fbf9;
-        }
-
-        .refresh-btn {
-            min-height: 42px;
-            border-radius: 10px !important;
-            transition: all 0.2s ease;
-        }
-
-        .refresh-btn:hover {
-            border-color: #b9dbd5;
-            background: #f4fbf9;
-            transform: translateY(-1px);
-        }
-
-        @media (max-width: 1050px) {
-            .cc-nav-inner {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 13px 0;
-            }
-
-            .cc-nav-links {
-                justify-content: flex-start;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .cc-nav-inner,
-            .dashboard-wrapper {
-                width: min(100% - 24px, 1240px);
-            }
-
-            .cc-brand {
-                font-size: 20px !important;
-            }
-
-            .cc-nav-links {
-                gap: 6px;
-            }
-
-            .cc-nav-link {
-                min-height: 40px;
-                padding: 0 10px !important;
-            }
-
-            .cc-nav-link span:last-child {
-                display: none;
-            }
-
-            .cc-nav-profile-text {
-                display: none;
-            }
-
-            .cc-nav-profile {
-                min-height: 42px;
-                padding: 0 7px !important;
-            }
-
-            .cc-logout-btn {
-                min-height: 40px;
-                padding: 0 11px !important;
-            }
-
-            .cc-logout-btn span:last-child {
-                display: none;
-            }
-
-            .customer-dashboard-actions {
-                justify-content: flex-start !important;
-            }
-
-            .edit-profile-btn {
-                width: auto !important;
-            }
-
-            .notification-dropdown {
-                right: -105px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cc-brand-mark {
-                width: 34px;
-                height: 34px;
-            }
-
-            .cc-nav-inner {
-                padding: 10px 0;
-            }
-
-            .cc-nav-links {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .cc-nav-link,
-            .cc-logout-btn {
-                flex: 1;
-            }
-        }
-
     </style>
 
 </head>
@@ -1286,89 +835,93 @@
          NAVBAR
     ========================== -->
 
-    <nav class="cc-navbar">
+    <nav>
 
-    <div class="cc-nav-inner">
+        <div class="container">
 
-        <a href="index.html" class="cc-brand">
-            <span class="cc-brand-mark">❤</span>
-            <span>Care<span class="cc-brand-accent">Companion</span></span>
-        </a>
-
-        <div class="cc-nav-links">
-
-            <a href="index.html" class="cc-nav-link">
-                <span class="cc-nav-icon">⌂</span>
-                <span>Home</span>
+            <a
+                href="index.html"
+                class="logo"
+            >
+                Care<span>Companion</span>
             </a>
 
-            <a href="caregivers.html" class="cc-nav-link">
-                <span class="cc-nav-icon">👩‍⚕️</span>
-                <span>Find Caregivers</span>
-            </a>
 
-            <a href="dashboard.html" class="cc-nav-link active">
-                <span class="cc-nav-icon">▦</span>
-                <span>Dashboard</span>
-            </a>
+            <div class="nav-links">
 
-            <div class="notification-wrapper cc-notification-wrapper" id="notificationWrapper">
+                <a href="index.html">
+                    Home
+                </a>
 
-                <button
-                    id="notificationButton"
-                    class="notification-button cc-notification-button"
-                    type="button"
-                    aria-label="Notifications"
-                    title="Notifications"
+                <a href="caregivers.html">
+                    Find Caregivers
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+
+                <!-- NOTIFICATIONS -->
+                <div
+                    class="notification-wrapper"
+                    id="notificationWrapper"
                 >
-                    <span>🔔</span>
-                    <span id="notificationBadge" class="notification-badge">0</span>
-                </button>
+                    <button
+                        id="notificationButton"
+                        class="notification-button"
+                        type="button"
+                        aria-label="Notifications"
+                    >
+                        🔔
+                        <span
+                            id="notificationBadge"
+                            class="notification-badge"
+                        >0</span>
+                    </button>
 
-                <div id="notificationDropdown" class="notification-dropdown">
+                    <div
+                        id="notificationDropdown"
+                        class="notification-dropdown"
+                    >
+                        <div class="notification-header">
+                            <h3>Notifications</h3>
 
-                    <div class="notification-header">
-                        <h3>Notifications</h3>
+                            <button
+                                id="markAllNotifications"
+                                class="mark-all-btn"
+                                type="button"
+                            >
+                                Mark all as read
+                            </button>
+                        </div>
 
-                        <button
-                            id="markAllNotifications"
-                            class="mark-all-btn"
-                            type="button"
+                        <div
+                            id="notificationList"
+                            class="notification-list"
                         >
-                            Mark all as read
-                        </button>
+                            <div class="notification-loading">
+                                Loading...
+                            </div>
+                        </div>
                     </div>
-
-                    <div id="notificationList" class="notification-list">
-                        <div class="notification-loading">Loading...</div>
-                    </div>
-
                 </div>
+
+                <a
+                    href="#"
+                    onclick="
+                        logoutUser();
+                        return false;
+                    "
+                >
+                    Logout
+                </a>
 
             </div>
 
-            <a href="customer-edit-profile.html" class="cc-nav-profile">
-                <span class="cc-avatar" id="navCustomerInitial">U</span>
-                <span class="cc-nav-profile-text">
-                    <small>My Account</small>
-                    <strong id="navCustomerName">Customer</strong>
-                </span>
-            </a>
-
-            <a
-                href="#"
-                class="cc-logout-btn"
-                onclick="logoutUser(); return false;"
-            >
-                <span>↪</span>
-                <span>Logout</span>
-            </a>
-
         </div>
 
-    </div>
-
-</nav>
+    </nav>
 
 
 
@@ -1383,23 +936,12 @@
 
         <div class="welcome-box">
 
-            <div class="customer-dashboard-actions">
-
-                <a
-                    href="customer-edit-profile.html"
-                    class="edit-profile-btn"
-                >
-                    ✏️ Edit Profile
-                </a>
-
-                <button
-                    class="logout-btn"
-                    onclick="logoutUser()"
-                >
-                    Logout
-                </button>
-
-            </div>
+            <button
+                class="logout-btn"
+                onclick="logoutUser()"
+            >
+                Logout
+            </button>
 
 
             <h1 id="welcomeMessage">
@@ -1565,37 +1107,7 @@
             </div>
 
 
-            <div class="advanced-filters">
-
-                <input
-                    type="search"
-                    id="bookingSearch"
-                    class="booking-search"
-                    placeholder="🔎 Search caregiver or service..."
-                    autocomplete="off"
-                >
-
-                <input
-                    type="date"
-                    id="bookingDateFilter"
-                    class="booking-date-filter"
-                    title="Filter by booking date"
-                >
-
-                <button
-                    type="button"
-                    id="clearBookingFilters"
-                    class="clear-filters-btn"
-                >
-                    Clear Filters
-                </button>
-
-            </div>
-
-            <div
-                id="bookingResultsCount"
-                class="results-count"
-            ></div>
+            <br>
 
 
             <div id="bookingsContainer">
@@ -1752,6 +1264,39 @@
         let selectedRating = 0;
         let notifications = [];
 
+        // =====================================================
+        // NOTIFICATION ELEMENTS
+        // =====================================================
+
+        const notificationButton =
+            document.getElementById(
+                "notificationButton"
+            );
+
+        const notificationBadge =
+            document.getElementById(
+                "notificationBadge"
+            );
+
+        const notificationDropdown =
+            document.getElementById(
+                "notificationDropdown"
+            );
+
+        const notificationList =
+            document.getElementById(
+                "notificationList"
+            );
+
+        const markAllNotificationsButton =
+            document.getElementById(
+                "markAllNotifications"
+            );
+
+        const notificationWrapper =
+            document.getElementById(
+                "notificationWrapper"
+            );
 
 
 
@@ -1955,7 +1500,9 @@
 
 
                 customerBookings =
-                    result.bookings || [];
+                    Array.isArray(result)
+                        ? result
+                        : (result?.bookings || []);
 
                 await loadReviewStatus();
 
@@ -2372,123 +1919,22 @@
                 );
 
 
-            const searchInput =
-                document.getElementById(
-                    "bookingSearch"
-                );
-
-            const dateInput =
-                document.getElementById(
-                    "bookingDateFilter"
-                );
-
-            const searchTerm =
-                searchInput
-                    ? searchInput.value.trim().toLowerCase()
-                    : "";
-
-            const selectedDate =
-                dateInput
-                    ? dateInput.value
-                    : "";
-
             let filteredBookings =
-                customerBookings.filter(
-                    booking => {
-
-                        /* STATUS FILTER */
-
-                        if (
-                            currentFilter !== "all" &&
-                            booking.status !== currentFilter
-                        ) {
-                            return false;
-                        }
+                customerBookings;
 
 
-                        /* SEARCH FILTER */
+            if (
+                currentFilter !== "all"
+            ) {
 
-                        if (searchTerm) {
+                filteredBookings =
+                    customerBookings.filter(
+                        booking =>
+                            booking.status ===
+                            currentFilter
+                    );
 
-                            const caregiverName =
-                                booking.caregiver &&
-                                typeof booking.caregiver === "object"
-                                    ? booking.caregiver.name || ""
-                                    : "";
-
-                            const service =
-                                booking.service || "";
-
-                            const searchableText =
-                                `${caregiverName} ${service}`
-                                    .toLowerCase();
-
-                            if (
-                                !searchableText.includes(
-                                    searchTerm
-                                )
-                            ) {
-                                return false;
-                            }
-
-                        }
-
-
-                        /* DATE FILTER */
-
-                        if (selectedDate) {
-
-                            if (!booking.bookingDate) {
-                                return false;
-                            }
-
-                            const bookingDate =
-                                new Date(
-                                    booking.bookingDate
-                                );
-
-                            if (
-                                Number.isNaN(
-                                    bookingDate.getTime()
-                                )
-                            ) {
-                                return false;
-                            }
-
-                            const year =
-                                bookingDate.getFullYear();
-
-                            const month =
-                                String(
-                                    bookingDate.getMonth() + 1
-                                ).padStart(2, "0");
-
-                            const day =
-                                String(
-                                    bookingDate.getDate()
-                                ).padStart(2, "0");
-
-                            const localDate =
-                                `${year}-${month}-${day}`;
-
-                            if (
-                                localDate !== selectedDate
-                            ) {
-                                return false;
-                            }
-
-                        }
-
-
-                        return true;
-
-                    }
-                );
-
-
-            updateBookingResultsCount(
-                filteredBookings.length
-            );
+            }
 
 
             if (
@@ -2553,108 +1999,6 @@
 
         }
 
-
-
-        // =====================================================
-        // BOOKING RESULTS COUNT
-        // =====================================================
-
-        function updateBookingResultsCount(count) {
-
-            const countElement =
-                document.getElementById(
-                    "bookingResultsCount"
-                );
-
-            if (!countElement) {
-                return;
-            }
-
-            if (count === 0) {
-
-                countElement.textContent =
-                    "No bookings match the current filters.";
-
-                return;
-
-            }
-
-            countElement.textContent =
-                `Showing ${count} booking${
-                    count === 1 ? "" : "s"
-                }`;
-
-        }
-
-
-        // =====================================================
-        // ADVANCED BOOKING FILTERS
-        // =====================================================
-
-        const bookingSearchInput =
-            document.getElementById(
-                "bookingSearch"
-            );
-
-        const bookingDateFilter =
-            document.getElementById(
-                "bookingDateFilter"
-            );
-
-        const clearBookingFiltersButton =
-            document.getElementById(
-                "clearBookingFilters"
-            );
-
-
-        if (bookingSearchInput) {
-
-            bookingSearchInput.addEventListener(
-                "input",
-                function () {
-
-                    renderBookings();
-
-                }
-            );
-
-        }
-
-
-        if (bookingDateFilter) {
-
-            bookingDateFilter.addEventListener(
-                "change",
-                function () {
-
-                    renderBookings();
-
-                }
-            );
-
-        }
-
-
-        if (clearBookingFiltersButton) {
-
-            clearBookingFiltersButton.addEventListener(
-                "click",
-                function () {
-
-                    if (bookingSearchInput) {
-                        bookingSearchInput.value = "";
-                    }
-
-                    if (bookingDateFilter) {
-                        bookingDateFilter.value = "";
-                    }
-
-                    renderBookings();
-
-                }
-            );
-
-        }
 
 
         // =====================================================
@@ -3061,30 +2405,33 @@
                     error
                 );
 
-                notificationList.innerHTML = `
+                if (notificationList) {
+                    notificationList.innerHTML = `
                     <div class="notification-empty">
                         <div class="notification-empty-icon">⚠️</div>
                         <p>Unable to load notifications.</p>
                     </div>
                 `;
+                }
             }
         }
 
 
         function updateNotificationBadge(count) {
 
+            if (!notificationBadge) {
+                return;
+            }
+
             const safeCount = Number(count) || 0;
 
             if (safeCount <= 0) {
-
                 notificationBadge.style.display = "none";
                 notificationBadge.textContent = "0";
                 return;
-
             }
 
             notificationBadge.style.display = "flex";
-
             notificationBadge.textContent =
                 safeCount > 99 ? "99+" : safeCount;
         }
@@ -3092,15 +2439,17 @@
 
         function renderNotifications() {
 
-            if (notifications.length === 0) {
+            if (!notificationList) {
+                return;
+            }
 
+            if (notifications.length === 0) {
                 notificationList.innerHTML = `
                     <div class="notification-empty">
                         <div class="notification-empty-icon">🔔</div>
                         <p>No notifications yet.</p>
                     </div>
                 `;
-
                 return;
             }
 
@@ -3368,9 +2717,10 @@
         // NOTIFICATION DROPDOWN
         // =====================================================
 
-        notificationButton.addEventListener(
-            "click",
-            async function(event) {
+        if (notificationButton && notificationDropdown) {
+            notificationButton.addEventListener(
+                "click",
+                async function(event) {
 
                 event.stopPropagation();
 
@@ -3386,31 +2736,38 @@
                     await loadNotifications();
                 }
             }
-        );
+            );
+        }
 
 
-        notificationDropdown.addEventListener(
-            "click",
-            function(event) {
+        if (notificationDropdown) {
+            notificationDropdown.addEventListener(
+                "click",
+                function(event) {
                 event.stopPropagation();
             }
-        );
+            );
+        }
 
 
         document.addEventListener(
             "click",
             function() {
-                notificationDropdown.classList.remove(
-                    "show"
-                );
+                if (notificationDropdown) {
+                    notificationDropdown.classList.remove(
+                        "show"
+                    );
+                }
             }
         );
 
 
-        markAllNotificationsButton.addEventListener(
-            "click",
-            handleMarkAllNotifications
-        );
+        if (markAllNotificationsButton) {
+            markAllNotificationsButton.addEventListener(
+                "click",
+                handleMarkAllNotifications
+            );
+        }
 
 
         // =====================================================
@@ -3631,29 +2988,6 @@
                         user.name ||
                         "User"
                     } 👋`;
-
-                const navName =
-                    document.getElementById(
-                        "navCustomerName"
-                    );
-
-                const navInitial =
-                    document.getElementById(
-                        "navCustomerInitial"
-                    );
-
-                if (navName) {
-                    navName.textContent =
-                        user.name || "Customer";
-                }
-
-                if (navInitial) {
-                    navInitial.textContent =
-                        (user.name || "Customer")
-                            .trim()
-                            .charAt(0)
-                            .toUpperCase();
-                }
 
             }
 
